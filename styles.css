@@ -439,7 +439,8 @@ img {
   border-radius: 16px;
   padding: 24px;
 }
-@media (min-width: 900px) {
+/* Desktop notice SOLO en pantallas grandes con mouse (laptop/desktop) */
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
   .app {
     display: none !important;
   }
@@ -447,6 +448,7 @@ img {
     display: flex;
   }
 }
+
 /* Líneas inferiores equilibradas (1px y 2px con pequeña separación) */
 .news-header {
   border-top: 1px solid #000; /* línea delgada arriba */

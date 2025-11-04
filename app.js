@@ -1,42 +1,102 @@
-// === Cuenta regresiva (ajusta fecha/hora local) ===
-const EVENT_DATE = new Date("2025-08-09T18:00:00");
+// ========= CONFIG =========
+/**
+ * Si tu evento es a las 6:00 pm en Ciudad de México, usa -06:00 (ya no hay DST).
+ * Ajusta la zona si aplica a otra ciudad.
+ */
+const EVENT_DATE = new Date("2025-08-09T18:00:00-06:00");
 
-const byId = (id) => document.getElementById(id);
-const pad = (n) => String(n).padStart(2, "0");
-
-function tick() {
-  const now = new Date();
-  const diff = Math.max(0, EVENT_DATE - now);
-  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const h = Math.floor(diff / (1000 * 60 * 60)) % 24;
-  const m = Math.floor(diff / (1000 * 60)) % 60;
-  const s = Math.floor(diff / 1000) % 60;
-  byId("d").textContent = pad(d);
-  byId("h").textContent = pad(h);
-  byId("m").textContent = pad(m);
-  byId("s").textContent = pad(s);
-  setTimeout(tick, 1000);
-}
-tick();
-
-// === WhatsApp RSVP: cambia por tu número (13 dígitos, ej. 5255...) ===
+// Número de WhatsApp (solo dígitos, 52 + lada + número).
 const WHATS_NUMBER = "52XXXXXXXXXX";
-(function () {
-  const btn = document.getElementById("btnRSVP");
-  if (!btn) return;
-  try {
-    const url = new URL(btn.href);
-    url.pathname = "/" + WHATS_NUMBER;
-    btn.href = url.toString();
-  } catch (e) {}
+
+// ========= UTIL =========
+const $id = (id) => document.getElementById(id);
+const pad2 = (n) => String(n).padStart(2, "0");
+
+// ========= DESKTOP NOTICE GUARD =========
+// Evita que se muestre el aviso en móviles aunque el navegador esté en “ver como escritorio”.
+(function ensureMobileAppVisible() {
+  const isDesktop =
+    window.matchMedia("(min-width: 900px)").matches &&
+    window.matchMedia("(hover: hover)").matches &&
+    window.matchMedia("(pointer: fine)").matches;
+  if (isDesktop) {
+    document
+      .querySelector(".app")
+      ?.setAttribute("style", "display:none!important");
+    document
+      .querySelector(".desktop-notice")
+      ?.setAttribute("style", "display:flex!important;min-height:100dvh");
+  } else {
+    document
+      .querySelector(".desktop-notice")
+      ?.setAttribute("style", "display:none!important");
+    document
+      .querySelector(".app")
+      ?.setAttribute("style", "display:block!important");
+  }
 })();
 
-// === ?reservados=2 en la URL ===
-(function () {
+// ========= COUNTDOWN =========
+(function startCountdown() {
+  function render() {
+    const now = Date.now();
+    const diff = Math.max(0, EVENT_DATE.getTime() - now);
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor(diff / (1000 * 60 * 60)) % 24;
+    const m = Math.floor(diff / (1000 * 60)) % 60;
+    const s = Math.floor(diff / 1000) % 60;
+
+    $id("d") && ($id("d").textContent = pad2(d));
+    $id("h") && ($id("h").textContent = pad2(h));
+    $id("m") && ($id("m").textContent = pad2(m));
+    $id("s") && ($id("s").textContent = pad2(s));
+  }
+
+  render();
+  // setInterval tiene menos deriva que llamar recursivo a setTimeout.
+  const iv = setInterval(() => {
+    render();
+    // Para cuando llegue a cero exacto:
+    if (EVENT_DATE.getTime() - Date.now() <= 0) clearInterval(iv);
+  }, 1000);
+})();
+
+// ========= WHATSAPP RSVP =========
+(function fixWhatsLink() {
+  const btn = document.getElementById("btnRSVP");
+  if (!btn || !btn.href) return;
+
+  // Limpia el número a solo dígitos
+  const digits = String(WHATS_NUMBER).replace(/\D/g, "");
+
+  // Recomendado: 12 o 13 dígitos (ej. 52 + 10 dígitos)
+  if (!/^\d{12,13}$/.test(digits)) {
+    console.warn("WHATS_NUMBER parece inválido:", WHATS_NUMBER);
+  }
+
+  try {
+    const url = new URL(btn.href);
+    // Fuerza formato correcto wa.me/<numero>
+    url.protocol = "https:";
+    url.hostname = "wa.me";
+    url.pathname = "/" + digits;
+    // Conserva el texto si ya venía en el href
+    btn.href = url.toString();
+  } catch (e) {
+    // Si hay un href raro, lo reconstruimos
+    const current = new URL(window.location.href);
+    const params = new URLSearchParams();
+    params.set("text", "Hola, confirmo mi asistencia a su boda 💍");
+    btn.href = `https://wa.me/${digits}?${params.toString()}`;
+  }
+})();
+
+// ========= ?reservados=2 =========
+(function reservedFromQuery() {
+  const el = document.getElementById("rsv");
+  if (!el) return;
   const params = new URLSearchParams(location.search);
   const r = parseInt(params.get("reservados"), 10);
-  if (!isNaN(r) && r > 0 && r <= 20) {
-    const el = document.getElementById("rsv");
-    if (el) el.textContent = r;
-  }
+  if (!isNaN(r) && r > 0 && r <= 20) el.textContent = String(r);
 })();
