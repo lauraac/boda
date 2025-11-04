@@ -1,18 +1,21 @@
 :root {
-  --paper: #f4f4f4;
+  --paper: #f7f7f7;
   --ink: #121212;
   --muted: #6b6b6b;
-  --line: #dcdcdc;
-  --soft: #f8f8f8;
-  --max: 760px;
+  --line: #e3e3e3;
+  --soft: #fbfbfb;
+  --max: 640px;
   --r: 16px;
   --shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
 }
 
-/* Base */
+/* =========================
+   Base móvil
+   ========================= */
 * {
   box-sizing: border-box;
 }
+
 html,
 body {
   margin: 0;
@@ -21,15 +24,24 @@ body {
   color: var(--ink);
   font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
     Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
-  padding: clamp(14px, 3.2vw, 22px);
+  padding: 18px;
 }
-img {
-  max-width: 100%;
-  display: block;
+
+.section {
+  margin: 22px 0;
 }
 .center {
   text-align: center;
@@ -42,17 +54,14 @@ img {
   color: #8a8a8a;
 }
 
-/* Titulares */
-.headline {
+/* =========================
+   Titulares
+   ========================= */
+.section-title,
+.card-title {
   font-family: "Playfair Display", serif;
-  font-weight: 900;
-  letter-spacing: 0.02em;
-  font-size: clamp(34px, 12vw, 72px);
-  text-align: center;
-  margin: 10px 0 8px;
 }
 .section-title {
-  font-family: "Playfair Display", serif;
   font-weight: 900;
   letter-spacing: 0.02em;
   text-align: center;
@@ -63,79 +72,104 @@ img {
   font-weight: 700;
   font-style: italic;
 }
+.card-title {
+  margin: 0.2rem 0 0.6rem;
+  font-size: 1.1rem;
+}
 
-/* Masthead */
+/* =========================
+   Contenedor de portada (tarjeta)
+   ========================= */
 .masthead {
   background: #fff;
   border-radius: 20px;
   box-shadow: var(--shadow);
-  padding: 12px 12px 18px;
+  padding: 16px;
   border: 1px solid #eee;
 }
-.masthead__top {
+
+/* =========================
+   Encabezado estilo periódico
+   ========================= */
+.news-header {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  gap: 8px;
   align-items: center;
-  border-bottom: 2px solid #000;
-  padding-bottom: 8px;
+  background: #fff;
+  position: relative;
 }
-.mh-block {
+.news-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: #000; /* delgada pegada a la gruesa */
+}
+.news-cell {
+  padding: 8px 10px;
   font-size: 12px;
-  color: #5a5a5a;
-}
-.mh-right {
-  text-align: right;
-}
-.mh-center {
+  color: #333;
   text-align: center;
 }
-.mh-label {
-  display: inline-block;
-  border: 1px solid #000;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 12px;
+.news-cell + .news-cell {
+  border-left: 1px solid #000;
+} /* separadores finos */
+.news-cell.left {
+  text-align: left;
+}
+.news-cell.right {
+  text-align: right;
 }
 
-.date-ribbon {
-  margin: 6px auto 8px;
+.news-banner {
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* Imagen grande “NOS CASAMOS” (es imagen, no texto) */
+.headline-img {
+  width: 100%;
+  height: auto;
+  margin: 10px 0 0;
+  display: block;
+}
+
+/* Cinta de fecha con doble línea (gruesa arriba / delgada abajo) */
+.news-date {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
   padding: 8px 0;
   background: #fff;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+
+  margin-top: 2px;
 }
 
-/* Portada / foto */
+/* =========================
+   Foto principal
+   ========================= */
 .feature-photo {
-  margin: 12px 0 2px;
+  margin: 14px 0 2px;
 }
 .feature-photo img {
+  width: 100%;
   border-radius: 14px;
   border: 1px solid var(--line);
   background: #fff;
   box-shadow: var(--shadow);
   object-fit: cover;
-  width: 100%;
-  height: auto;
 }
 
-/* Main sections */
-.section {
-  margin: 22px 0;
-}
-.main {
-  padding-top: 0;
-}
-
-/* Programa */
+/* =========================
+   Programa
+   ========================= */
 .program {
   display: grid;
   gap: 16px;
@@ -151,11 +185,10 @@ img {
   padding: 16px;
   box-shadow: var(--shadow);
 }
-.card-title {
-  font-family: "Playfair Display", serif;
-  margin: 0.2rem 0 0.6rem;
-  font-size: 1.1rem;
-}
+
+/* =========================
+   Botones
+   ========================= */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -174,12 +207,10 @@ img {
 .btn-dark:hover {
   filter: brightness(1.05);
 }
-.muted b {
-  font-weight: 800;
-  color: #222;
-}
 
-/* Timeline */
+/* =========================
+   Timeline
+   ========================= */
 .timeline {
   background: #fff;
   border: 1px solid var(--line);
@@ -215,36 +246,9 @@ img {
   width: 82px;
 }
 
-/* En pantallas medianas, pónlo en columnas */
-@media (min-width: 720px) {
-  .program {
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: start;
-  }
-}
-
-/* Texto general */
-.text {
-  line-height: 1.7;
-  color: #2b2b2b;
-}
-
-/* Bendición / chips */
-.blessing {
-  display: flex;
-  justify-content: center;
-  margin: 12px 0;
-}
-.chip {
-  display: inline-block;
-  border: 1px solid #000;
-  border-radius: 999px;
-  padding: 8px 14px;
-  font-weight: 700;
-  background: #fff;
-}
-
-/* Familias */
+/* =========================
+   Familias
+   ========================= */
 .families {
   display: grid;
   gap: 12px;
@@ -270,23 +274,14 @@ img {
   font-weight: 900;
   font-size: 28px;
 }
-@media (min-width: 680px) {
-  .families {
-    grid-template-columns: 1fr auto 1fr;
-  }
-}
 
-/* Padrinos */
-.padrinos {
-  margin-top: 8px;
-  text-align: center;
+/* =========================
+   Historia / Galería
+   ========================= */
+.grid-2 {
+  display: grid;
+  gap: 14px;
 }
-.padrinos h4 {
-  margin: 0.2rem 0 0.4rem;
-  font-family: "Playfair Display", serif;
-}
-
-/* Historia */
 .story {
   display: grid;
   gap: 16px;
@@ -320,18 +315,9 @@ img {
   }
 }
 
-/* Grid 2 */
-.grid-2 {
-  display: grid;
-  gap: 14px;
-}
-@media (min-width: 720px) {
-  .grid-2 {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-/* Countdown */
+/* =========================
+   Countdown + Banner simple
+   ========================= */
 .countdown {
   display: flex;
   justify-content: center;
@@ -359,21 +345,28 @@ img {
   color: #444;
 }
 
+/* Banner de 1px arriba/abajo (se usa en secciones internas) */
 .date-banner {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
   padding: 10px 12px;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
   background: #fff;
   font-weight: 800;
   letter-spacing: 0.06em;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
   margin: 8px 0 4px;
 }
 
-/* Reservación/RSVP */
+/* =========================
+   RSVP
+   ========================= */
+.text {
+  line-height: 1.7;
+  color: #2b2b2b;
+}
 .reservation {
   display: flex;
   justify-content: center;
@@ -391,7 +384,9 @@ img {
   min-width: 240px;
 }
 
-/* Footer */
+/* =========================
+   Footer
+   ========================= */
 .footer {
   padding-bottom: 70px;
   text-align: center;
@@ -406,4 +401,199 @@ img {
   border: 1px solid #000;
   background: #fff;
   font-weight: 800;
+}
+
+/* =========================
+   Márgenes laterales parejos
+   ========================= */
+.main,
+.footer,
+.section,
+.timeline,
+.card.soft,
+.story-text,
+.families,
+.feature-photo,
+.grid-2,
+.story {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* =========================
+   Bloqueo de escritorio
+   ========================= */
+.desktop-notice {
+  display: none;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  background: #fff;
+  color: #111;
+}
+.desktop-notice .box {
+  max-width: 680px;
+  border: 1px dashed #bbb;
+  border-radius: 16px;
+  padding: 24px;
+}
+@media (min-width: 900px) {
+  .app {
+    display: none !important;
+  }
+  .desktop-notice {
+    display: flex;
+  }
+}
+/* Líneas inferiores equilibradas (1px y 2px con pequeña separación) */
+.news-header {
+  border-top: 1px solid #000; /* línea delgada arriba */
+  border-bottom: 2px solid #000; /* primera línea inferior (fina) */
+  position: relative;
+}
+
+.news-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px; /* separación visual de 3px aprox */
+  height: 1px; /* grosor de la segunda línea */
+  background: #000;
+}
+/* Doble línea debajo de la imagen "NOS CASAMOS" */
+.headline-lines {
+  border-bottom: 2px solid #000; /* línea gruesa */
+  position: relative;
+  margin-top: 4px; /* pequeño respiro visual */
+}
+
+.headline-lines::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px; /* separación entre líneas */
+  height: 1px; /* línea más delgada */
+  background: #000;
+}
+/* Corazones con colores */
+.hearts {
+  display: inline-flex;
+  gap: 2px; /* espacio entre corazones */
+}
+
+.heart {
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+.heart.black {
+  color: #000; /* negro */
+}
+
+.heart.gray {
+  color: #888; /* gris suave */
+}
+
+/* ===== Sección "Han sido flechados" ===== */
+.love-announcement {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 20px 16px;
+  margin-top: 24px;
+  text-align: center;
+}
+
+.couple-names {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(20px, 8vw, 30px);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.love-phrase {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.2rem;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  display: inline-block;
+  padding: 4px 10px;
+  margin-bottom: 16px;
+}
+
+.love-text {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* ===== Padres ===== */
+.parents-title {
+  background: #000;
+  color: #fff;
+  font-weight: 800;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.parents-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.parents-block h4 {
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.parents-block p {
+  margin: 0;
+  color: #444;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 600px) {
+  .parents-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ===== Padrinos ===== */
+.padrinos-title {
+  margin-top: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 6px 0;
+}
+
+.padrinos-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.padrinos-list h4 {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.padrinos-list p {
+  margin: 0;
+  color: #444;
+  font-size: 0.9rem;
 }
