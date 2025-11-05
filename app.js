@@ -3,7 +3,7 @@
  * Si tu evento es a las 6:00 pm en Ciudad de México, usa -06:00 (ya no hay DST).
  * Ajusta la zona si aplica a otra ciudad.
  */
-const EVENT_DATE = new Date("2025-08-09T18:00:00-06:00");
+const EVENT_DATE = new Date("2026-04-11T18:00:00-06:00");
 
 // Número de WhatsApp (solo dígitos, 52 + lada + número).
 const WHATS_NUMBER = "52XXXXXXXXXX";
@@ -36,30 +36,43 @@ const pad2 = (n) => String(n).padStart(2, "0");
   }
 })();
 
-// ========= COUNTDOWN =========
-(function startCountdown() {
+(function countdown() {
+  const write = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  };
+  const pad2 = (n) => String(n).padStart(2, "0");
+
   function render() {
     const now = Date.now();
     const diff = Math.max(0, EVENT_DATE.getTime() - now);
 
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor(diff / (1000 * 60 * 60)) % 24;
-    const m = Math.floor(diff / (1000 * 60)) % 60;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor(diff / 3600000) % 24;
+    const m = Math.floor(diff / 60000) % 60;
     const s = Math.floor(diff / 1000) % 60;
 
-    $id("d") && ($id("d").textContent = pad2(d));
-    $id("h") && ($id("h").textContent = pad2(h));
-    $id("m") && ($id("m").textContent = pad2(m));
-    $id("s") && ($id("s").textContent = pad2(s));
+    // contador viejo (si existe)
+    write("d", d);
+    write("h", pad2(h));
+    write("m", pad2(m));
+    write("s", pad2(s));
+
+    // contador “Faltan” (si existe)
+    write("cdD", d);
+    write("cdH", pad2(h));
+    write("cdM", pad2(m));
+    write("cdS", pad2(s));
+
+    // Ajuste de ancho si DÍAS tiene 3 dígitos
+    const box = document.querySelector("#faltan .count-box");
+    if (box) box.classList.toggle("three-digits", d >= 100);
+
+    if (diff === 0) clearInterval(iv);
   }
 
   render();
-  // setInterval tiene menos deriva que llamar recursivo a setTimeout.
-  const iv = setInterval(() => {
-    render();
-    // Para cuando llegue a cero exacto:
-    if (EVENT_DATE.getTime() - Date.now() <= 0) clearInterval(iv);
-  }, 1000);
+  const iv = setInterval(render, 1000);
 })();
 
 // ========= WHATSAPP RSVP =========

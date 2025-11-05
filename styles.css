@@ -1181,3 +1181,535 @@ img {
     bottom: 76px;
   }
 }
+/* 1) El main no debe achicar el contenido */
+.wrap.main {
+  max-width: 100%;
+  padding: 0; /* ← quita los 18px laterales */
+}
+
+/* 2) Programa con el MISMO ancho que .history-section */
+.prog {
+  width: min(92%, 720px); /* igual que .history-section */
+  margin: 38px auto; /* centrado y mismas separaciones */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 22px 18px;
+  overflow: hidden;
+}
+
+/* Título imagen con línea detrás (igual que historia) */
+.prog-title-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0 24px;
+}
+
+/* La línea va DETRÁS (z-index:0) */
+.prog-title-wrap::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: #000;
+  z-index: 0; /* detrás */
+}
+
+/* La imagen va ENCIMA (z-index:1) */
+.prog-title-img {
+  width: min(360px, 82%);
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 1; /* delante de la línea */
+  background: #fff; /* opcional: tapa la línea bajo letras transparentes */
+  padding: 0 10px; /* opcional: deja “bocados” blancos a los lados */
+  border-radius: 6px; /* opcional: suaviza los bordes del parche */
+}
+/* Disposición: tarjetas izq y timeline der (como en tu ejemplo) */
+.prog-grid {
+  display: grid;
+  grid-template-columns: 5fr 4fr; /* proporción visual */
+  gap: 14px;
+  align-items: start;
+}
+
+/* Tarjetas */
+.prog-cards {
+  display: grid;
+  gap: 12px;
+}
+.prog-card {
+  background: #fff;
+  border: 1px solid var(--line, #e1e1e1);
+  border-radius: 10px;
+  padding: 12px 12px 14px;
+  box-shadow: var(--shadow, 0 10px 28px rgba(0, 0, 0, 0.06));
+}
+.prog-card-title {
+  margin: 0 0 8px;
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-size: 1.02rem;
+  text-align: center;
+  border: 1px solid #bdbdbd;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: linear-gradient(#efefef, #e7e7e7);
+}
+.prog-card-body {
+  margin: 8px 0 12px;
+  text-align: center;
+  color: #444;
+}
+.prog-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #6c6c6c;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  border: 1px solid #505050;
+}
+.prog-btn:active {
+  transform: translateY(1px);
+}
+
+/* ==== TIMELINE AJUSTADO (con espacio/gutter) ==== */
+.prog-timeline {
+  position: relative;
+  background: #fff;
+  border: 1px solid #d6d6d6;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+  /* controla separación y posición de la línea */
+  --div-x: 42%; /* posición de la línea vertical (más a la izq) */
+  --gut: 14px; /* espacio entre línea y texto/hora */
+  --tick: 12px; /* largo de la rayita horizontal por lado */
+}
+
+/* Línea vertical que recorre todo */
+.prog-timeline::before {
+  content: "";
+  position: absolute;
+  left: var(--div-x);
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: #000;
+  z-index: 0;
+}
+
+/* Fila */
+.prog-tl-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto; /* hora | texto | icono */
+  align-items: center;
+  gap: 8px;
+  padding: 14px 0;
+}
+
+/* Rayita corta que no invade el texto */
+.prog-tl-row::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(var(--div-x) - var(--tick));
+  width: calc(var(--tick) * 2); /* 12px a cada lado de la línea */
+  height: 1px;
+  background: #000;
+  transform: translateY(-50%);
+  border-radius: 1px;
+  z-index: 1;
+}
+
+/* Hora y texto con “aire” respecto a la línea */
+.prog-tl-row time {
+  font-weight: 800;
+  font-size: 0.96rem;
+  text-align: right;
+  padding-right: var(--gut);
+}
+.prog-tl-text {
+  font-size: 0.96rem;
+  padding-left: var(--gut);
+}
+
+/* Ícono */
+.prog-ico {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  margin-left: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Móvil: línea fija a la izquierda y mismo gutter */
+@media (max-width: 520px) {
+  .prog-timeline {
+    --div-x: 92px;
+    --gut: 12px;
+    --tick: 10px;
+  }
+  .prog-tl-row {
+    grid-template-columns: 76px 1fr auto;
+  }
+  .prog-tl-row time {
+    text-align: left;
+  }
+}
+/* ===== Tarjetas blancas (mismo ancho que Historia/Programa) ===== */
+.info-section {
+  width: min(92%, 720px);
+  margin: 38px auto;
+  display: grid;
+  gap: 18px;
+}
+.info-card {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 18px 16px 22px;
+  overflow: hidden;
+}
+
+/* Título con línea por detrás */
+.title-line-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 6px 0 14px;
+}
+.title-line-wrap::before {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 50%;
+  height: 2px;
+  background: #000;
+  z-index: 0; /* ← detrás */
+}
+.title-img {
+  width: min(340px, 80%);
+  height: auto;
+  position: relative;
+  z-index: 1; /* ← delante */
+  background: #fff; /* “corta” la línea */
+  padding: 0 10px;
+  border-radius: 6px;
+}
+
+/* Cuerpo */
+.info-body {
+  padding: 6px 8px 4px;
+}
+.info-ico {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  margin: 2px auto 10px;
+}
+.info-lead {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+.info-row {
+  margin: 2px 0 8px;
+  font-size: 0.95rem;
+}
+.info-note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+}
+
+/* Regalo */
+.gift-name {
+  margin: 8px 0 0;
+  font-weight: 700;
+}
+.gift-data {
+  margin: 2px 0 0;
+  color: #333;
+  font-weight: 600;
+}
+
+/* En móviles muy chicos, respirito lateral */
+@media (max-width: 420px) {
+  .title-line-wrap::before {
+    left: 4%;
+    right: 4%;
+  }
+  .info-ico {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* ===== Sección RSVP con contenedor blanco ===== */
+.rsvp-section {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.rsvp-container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  padding: 24px 20px;
+  width: min(92%, 720px); /* mismo ancho que Historia y Programa */
+  margin: 0 auto;
+}
+
+/* Imagen principal */
+.feature-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Franja de fecha con doble línea */
+.date-banner--double {
+  position: relative;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  padding: 8px 0;
+  text-align: center;
+  margin: 14px auto 18px;
+  font-weight: 600;
+  background: #fff;
+}
+
+.date-banner--double::before,
+.date-banner--double::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #000;
+}
+
+.date-banner--double::before {
+  top: -6px;
+}
+.date-banner--double::after {
+  bottom: -6px;
+}
+
+/* Corazones */
+.hearts {
+  display: inline-flex;
+  gap: 4px;
+  vertical-align: middle;
+}
+.heart.black {
+  color: #000;
+}
+.heart.gray {
+  color: #aaa;
+}
+
+/* Texto y botón */
+.text.center {
+  text-align: justify;
+  font-size: 0.96rem;
+  line-height: 1.6;
+  margin: 0 auto 16px;
+  width: 90%;
+  color: #222;
+}
+
+.reserve-box {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 500;
+  width: 90%;
+  margin: 0 auto 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ✨ Animación de corazones que aparecen y desaparecen alternadamente */
+@keyframes heartBlink {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Corazones animados con desfaces */
+.heart.black {
+  color: #000;
+  animation: heartBlink 1.8s infinite ease-in-out;
+}
+
+.heart.gray {
+  color: #aaa;
+  animation: heartBlink 1.8s infinite ease-in-out;
+  animation-delay: 0.9s; /* 🔹 empieza medio ciclo después */
+}
+
+/* ===== Botón CONFIRMAR ASISTENCIA (borde negro, sin relleno) ===== */
+.btn.btn-outline {
+  display: inline-block;
+  padding: 12px 26px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: 2px solid #000;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+/* Hover: efecto elegante negro */
+.btn.btn-outline:hover {
+  background: #000;
+  color: #fff;
+  transform: scale(1.02);
+}
+
+/* ===== Imagen de las iniciales ===== */
+.signature-wrap {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.signature-img {
+  max-width: 120px;
+  height: auto;
+  opacity: 0.9;
+  display: inline-block;
+}
+
+/* ====== CONTADOR en tarjeta blanca ====== */
+.counter-section {
+  width: min(92%, 720px);
+  margin: 38px auto;
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 20px 14px 22px;
+  overflow: hidden;
+}
+
+/* Título imagen con línea por detrás */
+.counter-title-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4px 0 16px;
+  padding: 6px 0;
+}
+.counter-title-wrap::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: #000;
+  transform: translateY(-50%);
+}
+.counter-title-img {
+  max-width: 46%;
+  height: auto;
+  background: #fff;
+  padding: 0 10px;
+  border-radius: 6px;
+  position: relative;
+  z-index: 1; /* la línea queda atrás */
+}
+
+/* Caja del contador */
+.count-box {
+  display: flex; /* mejor reparto */
+  align-items: center;
+  justify-content: space-between; /* no empuja fuera de la caja */
+  gap: clamp(8px, 2.2vw, 22px); /* gap adaptable */
+  padding: 16px 14px; /* menos padding lateral */
+  border: 1px solid #111;
+  border-radius: 18px;
+  background: linear-gradient(#fff, #f3f3f3);
+}
+
+/* importante: que los hijos puedan encogerse */
+.count-box > * {
+  min-width: 0;
+}
+
+.count-item {
+  display: grid;
+  justify-items: center;
+  min-width: fit-content;
+}
+
+.count-item .num {
+  font-family: "Bodoni Moda", serif;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  font-size: clamp(34px, 8.4vw, 64px); /* un pelín más chico */
+}
+
+.colon {
+  line-height: 1;
+  font-size: clamp(28px, 7.4vw, 56px);
+}
+
+.count-item small {
+  margin-top: 6px;
+  letter-spacing: 0.28em;
+  font-weight: 700;
+}
+
+/* Cuando DÍAS tiene 3 dígitos, aprieta un poco más */
+.count-box.three-digits {
+  gap: clamp(6px, 1.8vw, 16px);
+}
+.count-box.three-digits .num {
+  font-size: clamp(30px, 7.2vw, 56px);
+}
+
+/* Extra por si la pantalla es muy angosta */
+@media (max-width: 420px) {
+  .count-box {
+    padding: 14px 12px;
+  }
+  .count-item .num {
+    font-size: clamp(30px, 7.6vw, 56px);
+  }
+}
