@@ -25,12 +25,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@600;700&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="styles.css?v=2025-11-03">
-
+  <link rel="stylesheet" href="styles.css?v=2025-11-05">
 </head>
 
 <body>
-  <!-- AVISO SOLO ESCRITORIO -->
+  <!-- SOLO ESCRITORIO -->
   <div id="desktopNotice" class="desktop-notice" hidden aria-live="polite">
     <div class="dn-card">
       <img src="./img/uri.png" alt="" class="dn-icon" aria-hidden="true">
@@ -47,68 +46,50 @@
 
       <div class="dn-actions">
         <button id="dnCopy" class="btn btn-light btn-sm">Copiar enlace</button>
-        <a id="dnWhats" class="btn btn-outline-light btn-sm" target="_blank" rel="noopener">
-          Enviarme por WhatsApp
-        </a>
+        <a id="dnWhats" class="btn btn-outline-light btn-sm" target="_blank" rel="noopener">Enviarme por WhatsApp</a>
       </div>
     </div>
   </div>
 
   <!-- App móvil -->
   <div id="app" class="app" hidden>
-
-    <!-- ===== Primera vista (masthead estilo periódico) ===== -->
+    <!-- Portada estilo periódico -->
     <header class="wrap masthead">
       <div class="news-header">
-        <div class="news-cell left">
-          Laura Silvia &amp; Salvador
-        </div>
+        <div class="news-cell left">Laura Silvia &amp; Salvador</div>
 
-        <!-- Imagen del título -->
         <div class="news-cell center">
           <img src="./img/noticiadeultimahora.png" alt="Noticia de última hora" class="news-banner" width="640"
             height="80" loading="eager">
         </div>
 
-        <div class="news-cell right">
-          Sábado,<br>11 Abril 2026
-        </div>
+        <div class="news-cell right">Sábado,<br>11 Abril 2026</div>
       </div>
 
-      <!-- Imagen NOS CASAMOS -->
       <img src="./img/noscasamos.png" alt="NOS CASAMOS" class="headline-img" width="1200" height="280" loading="eager">
-
       <div class="headline-lines"></div>
-      <!-- Cinta de fecha -->
+
       <div class="news-date">
-        <span class="hearts">
-          <span class="heart black">♥</span>
-          <span class="heart gray">♥</span>
-        </span>
-
+        <span class="hearts"><span class="heart black">♥</span><span class="heart gray">♥</span></span>
         <strong>SÁBADO, 11 Abril 2026</strong>
-
-        <span class="hearts">
-          <span class="heart black">♥</span>
-          <span class="heart gray">♥</span>
-        </span>
-
+        <span class="hearts"><span class="heart black">♥</span><span class="heart gray">♥</span></span>
       </div>
+
       <div class="headline-lines"></div>
 
-      <!-- Foto principal -->
       <figure class="feature-photo">
         <img src="./img/img1.png" alt="Foto de los novios" loading="lazy">
       </figure>
     </header>
 
-    <!-- ===== Sección Anuncio Principal ===== -->
-    <section class="section love-announcement">
+    <!-- Anuncio principal -->
+    <section class="section love-announcement wrap">
       <img src="./img/lauraTexto.png" alt="Laura Silvia y Salvador" class="names-img">
 
       <div class="phrase-wrapper">
         <img src="./img/flechados.png" alt="Han sido flechados" class="phrase-img">
       </div>
+
       <p class="love-text">
         Con gran alegría, nos complace anunciar que hemos decidido unir nuestras vidas en matrimonio.
         Este día especial marca el inicio de un nuevo capítulo en nuestra historia, un capítulo que
@@ -118,27 +99,16 @@
       <div class="parents-title skinny">CON LA BENDICIÓN DE NUESTROS PADRES</div>
 
       <div class="parents-split">
-        <!-- Padres del novio -->
         <div class="parents-col">
           <h4 class="mini-title">PADRES DEL NOVIO</h4>
-          <p>
-            Dominga Sandoval García<br>
-            Modesto Sánchez Cruz (†)
-          </p>
+          <p>Dominga Sandoval García<br>Modesto Sánchez Cruz (†)</p>
         </div>
 
-        <!-- Separador vertical con corazón -->
-        <div class="parents-sep" aria-hidden="true">
-          <span class="sep-heart">♥</span>
-        </div>
+        <div class="parents-sep" aria-hidden="true"><span class="sep-heart">♥</span></div>
 
-        <!-- Padres de la novia -->
         <div class="parents-col">
           <h4 class="mini-title">PADRES DE LA NOVIA</h4>
-          <p>
-            Rosa Reyna Roldán Cantellano<br>
-            Encarnación Montiel Fernández
-          </p>
+          <p>Rosa Reyna Roldán Cantellano<br>Encarnación Montiel Fernández</p>
         </div>
       </div>
 
@@ -148,26 +118,15 @@
 
       <div class="padrinos-wrapper">
         <section class="gp">
-
-          <!-- Ahora los Padrinos de Velación van arriba -->
-          <p class="gp-lead">
-            <strong>Padrinos de Velación</strong><br>
-            Catalina Sánchez Sandoval<br>
-            Rogelio Morales Morales
-          </p>
-
-          <!-- Regla doble tipo periódico -->
+          <p class="gp-lead"><strong>Padrinos de Velación</strong><br>Catalina Sánchez Sandoval<br>Rogelio Morales
+            Morales</p>
           <div class="gp-rule"></div>
 
-          <!-- Nota en columnas -->
           <div class="gp-grid">
             <article class="gp-item">
               <h5>Padrinos de Anillos</h5>
               <p>Montiel<br>Montiel</p>
             </article>
-
-
-
 
             <article class="gp-item">
               <h5>Padrinos de Arras</h5>
@@ -178,7 +137,8 @@
               <h5>Padrinos de Lazo</h5>
               <p>Rogelio Fuentes Rodríguez<br>Sandy Esquivel García</p>
             </article>
-            <article class="gp-item">
+
+            <article class="gp-item gp-span2">
               <h5>Madrina de Ramo</h5>
               <p>Janet López Meraz</p>
             </article>
@@ -186,27 +146,22 @@
         </section>
       </div>
 
-      <!-- ===== SECCIÓN TITULAR DE NOTICIA ===== -->
+      <!-- Titular de noticia -->
       <section class="news-headline">
         <h2>¡LLEGA LA BODA MÁS ESPERADA!</h2>
-        <div class="headline-rule"></div>
-
         <figure class="headline-photo">
           <img src="./img/boda1.jpg" alt="Llega la boda más esperada" loading="lazy">
         </figure>
       </section>
-
-
     </section>
+
+    <!-- Nuestra historia -->
     <section class="history-section" id="historia">
-      <!-- Título con línea detrás -->
       <div class="history-title-wrap">
         <img src="./img/nuestraHistoria.png" alt="Nuestra Historia" class="history-title-img">
       </div>
 
-      <!-- Texto largo + 3 fotos en columna -->
       <div class="history-body">
-        <!-- Columna texto -->
         <div class="history-text">
           <p>
             Nos conocimos en el trabajo, sin imaginar que entre reuniones, tareas y refrigerios
@@ -222,36 +177,23 @@
           </p>
         </div>
 
-        <!-- Columna fotos (tres tarjetas apiladas) -->
         <div class="history-photos">
-          <figure class="hp-card">
-            <img src="./img/novios-historia.jpg" alt="Novios 1">
-          </figure>
-          <figure class="hp-card">
-            <img src="./img/img2.jpg" alt="Novios 2">
-          </figure>
-          <figure class="hp-card">
-            <img src="./img/img3.jpg" alt="Novios 3">
-          </figure>
+          <figure class="hp-card"><img src="./img/novios-historia.jpg" alt="Novios 1"></figure>
+          <figure class="hp-card"><img src="./img/img2.jpg" alt="Novios 2"></figure>
+          <figure class="hp-card"><img src="./img/img3.jpg" alt="Novios 3"></figure>
         </div>
       </div>
     </section>
 
-
-
+    <!-- Programa -->
     <main class="wrap main">
-      <!-- ===== PROGRAMA DE BODA ===== -->
       <section class="section prog" id="programa">
         <div class="prog-container">
-
-          <!-- 🩷 Título en imagen con línea detrás -->
           <div class="prog-title-wrap">
             <img src="./img/programaboda.png" alt="Programa de boda" class="prog-title-img">
           </div>
 
-          <!-- 🩷 Contenido -->
           <div class="prog-grid">
-            <!-- Columna IZQ -->
             <div class="prog-cards">
               <article class="prog-card">
                 <h3 class="prog-card-title">Ceremonia Religiosa</h3>
@@ -274,208 +216,138 @@
               </article>
             </div>
 
-            <!-- Columna DER -->
             <div class="prog-timeline" aria-label="Itinerario">
               <div class="prog-tl-row">
-                <time>05:00 pm</time>
-                <span class="prog-tl-text">Ceremonia Religiosa</span>
+                <time>05:00 pm</time><span class="prog-tl-text">Ceremonia Religiosa</span>
                 <img class="prog-ico" src="./img/iglesia.png" alt="" aria-hidden="true">
               </div>
               <div class="prog-tl-row">
-                <time>07:00 pm</time>
-                <span class="prog-tl-text">Recepción</span>
+                <time>07:00 pm</time><span class="prog-tl-text">Recepción</span>
                 <img class="prog-ico" src="./img/anillos.png" alt="" aria-hidden="true">
               </div>
               <div class="prog-tl-row">
-                <time>08:00 pm</time>
-                <span class="prog-tl-text">Vals</span>
+                <time>08:00 pm</time><span class="prog-tl-text">Vals</span>
                 <img class="prog-ico" src="./img/bals.png" alt="" aria-hidden="true">
               </div>
               <div class="prog-tl-row">
-                <time>08:30 pm</time>
-                <span class="prog-tl-text">Cena</span>
+                <time>08:30 pm</time><span class="prog-tl-text">Cena</span>
                 <img class="prog-ico" src="./img/comida.png" alt="" aria-hidden="true">
               </div>
               <div class="prog-tl-row">
-                <time>09:30 pm</time>
-                <span class="prog-tl-text">Fiesta</span>
+                <time>09:30 pm</time><span class="prog-tl-text">Fiesta</span>
                 <img class="prog-ico" src="./img/fiesta.png" alt="" aria-hidden="true">
               </div>
             </div>
           </div>
         </div>
       </section>
+    </main>
 
-  </div>
-  </div>
-  </section>
-  <!-- ===== DRESS CODE + SUGERENCIA (tarjetas blancas) ===== -->
-  <section class="info-section" id="info-cards">
-    <!-- Card: Dress code -->
-    <article class="info-card">
-      <!-- Título imagen con línea detrás -->
-      <div class="title-line-wrap">
-        <img src="./img/codigoVestimenta.png" alt="Dress code" class="title-img">
+    <!-- Dress code + Sugerencia -->
+    <section class="info-section" id="info-cards">
+      <article class="info-card">
+        <div class="title-line-wrap">
+          <img src="./img/codigoVestimenta.png" alt="Dress code" class="title-img">
+        </div>
+
+        <div class="info-body center">
+          <img src="./img/codigo.png" alt="" class="info-ico" aria-hidden="true">
+          <p class="info-lead"><strong>Elegante – Formal</strong></p>
+          <p class="info-row"><b>Ellas:</b> Vestido largo &nbsp;&nbsp; <b>Ellos:</b> Traje y corbata</p>
+          <p class="info-note">(Se reserva el color blanco para la Novia)</p>
+        </div>
+      </article>
+
+      <article class="info-card">
+        <div class="title-line-wrap">
+          <img src="./img/sugerenciaRegalo.png" alt="Sugerencia de regalo" class="title-img">
+        </div>
+
+        <div class="info-body center">
+          <img src="./img/regalo.png" alt="" class="info-ico" aria-hidden="true">
+          <p class="info-lead"><strong>¡Que nos acompañes es lo más importante!</strong></p>
+          <p class="info-text">Si está en tu disposición, realizar una muestra de cariño estaremos muy agradecidos.</p>
+          <p class="gift-name">Salvador</p>
+          <p class="gift-data">BBVA: 1111 1111 0123456789</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Contador -->
+    <section class="counter-section" id="faltan">
+      <div class="counter-title-wrap">
+        <img src="./img/faltan.png" alt="Faltan" class="counter-title-img">
       </div>
 
-      <!-- Cuerpo -->
-      <div class="info-body center">
-        <!-- icono / imagen -->
-        <img src="./img/codigo.png" alt="" class="info-ico" aria-hidden="true">
+      <div class="count-box" aria-live="polite">
+        <div class="count-item"><span id="cdD" class="num">000</span><small>DÍAS</small></div>
+        <span class="colon">:</span>
+        <div class="count-item"><span id="cdH" class="num">00</span><small>HORAS</small></div>
+        <span class="colon">:</span>
+        <div class="count-item"><span id="cdM" class="num">00</span><small>MINUTOS</small></div>
+        <span class="colon">:</span>
+        <div class="count-item"><span id="cdS" class="num">00</span><small>SEGUNDOS</small></div>
+      </div>
+    </section>
 
-        <!-- texto -->
-        <p class="info-lead"><strong>Elegante – Formal</strong></p>
-        <p class="info-row">
-          <b>Ellas:</b> Vestido largo &nbsp;&nbsp; <b>Ellos:</b> Traje y corbata
+    <!-- RSVP -->
+    <section class="rsvp-section" id="rsvp">
+      <div class="rsvp-container">
+        <figure class="feature-photo">
+          <img src="./img/novios-historia.jpg" alt="Foto de los novios" loading="lazy">
+        </figure>
+
+        <div class="date-banner date-banner--double">
+          <span class="hearts"><span class="heart black">♥</span><span class="heart gray">♥</span></span>
+          <strong>SÁBADO, 11 ABRIL 2026</strong>
+          <span class="hearts"><span class="heart black">♥</span><span class="heart gray">♥</span></span>
+        </div>
+
+        <p class="text center">
+          Es un honor y un privilegio invitarlos a ser parte de este día tan significativo para nosotros.
+          Su presencia hará de nuestra boda un evento aún más inolvidable y lleno de felicidad.
+          Por favor confírmanos tu asistencia antes del <strong>11 de Abril, 2026</strong>.
         </p>
-        <p class="info-note">(Se reserva el color blanco para la Novia)</p>
+
+        <div class="reservation">
+          <div class="reserve-box">Hemos reservado <span id="rsv">2</span> lugares en tu honor</div>
+        </div>
+
+        <div class="rsvp center">
+          <a id="btnRSVP" class="btn btn-outline" target="_blank" rel="noopener"
+            href="https://wa.me/52XXXXXXXXXX?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20su%20boda%20%F0%9F%92%8D">
+            CONFIRMAR ASISTENCIA
+          </a>
+        </div>
+
+        <div class="signature-wrap">
+          <img src="./img/LyS.png" alt="Iniciales L & S" class="signature-img">
+        </div>
       </div>
-    </article>
+    </section>
 
-    <!-- Card: Sugerencia de regalo -->
-    <article class="info-card">
-      <!-- Título imagen con línea detrás -->
-      <div class="title-line-wrap">
-        <img src="./img/sugerenciaRegalo.png" alt="Sugerencia de regalo" class="title-img">
-      </div>
-
-      <!-- Cuerpo -->
-      <div class="info-body center">
-        <!-- imagen (puede ser icono de regalo) -->
-        <img src="./img/regalo.png" alt="" class="info-ico" aria-hidden="true">
-
-        <!-- texto -->
-        <p class="info-lead"><strong>¡Que nos acompañes es lo más importante!</strong></p>
-        <p class="info-text">
-          Si está en tu disposición, realizar una muestra de cariño estaremos muy agradecidos.
-        </p>
-
-        <!-- ejemplo de datos -->
-        <p class="gift-name">Salvador</p>
-        <p class="gift-data">BBVA: 1111 1111 0123456789</p>
-        <!-- agrega más líneas si quieres -->
-      </div>
-    </article>
-  </section>
-  <!-- Título imagen con línea detrás -->
-  <!-- ===== CONTADOR + RSVP (en contenedor blanco) ===== -->
-  <section class="counter-section" id="faltan">
-    <!-- Título imagen con línea detrás -->
-    <div class="counter-title-wrap">
-      <img src="./img/faltan.png" alt="Faltan" class="counter-title-img">
-    </div>
-
-    <!-- Caja del contador -->
-    <div class="count-box" aria-live="polite">
-      <div class="count-item">
-        <span id="cdD" class="num">000</span>
-        <small>DÍAS</small>
-      </div>
-
-      <span class="colon">:</span>
-
-      <div class="count-item">
-        <span id="cdH" class="num">00</span>
-        <small>HORAS</small>
-      </div>
-
-      <span class="colon">:</span>
-
-      <div class="count-item">
-        <span id="cdM" class="num">00</span>
-        <small>MINUTOS</small>
-      </div>
-
-      <span class="colon">:</span>
-
-      <div class="count-item">
-        <span id="cdS" class="num">00</span>
-        <small>SEGUNDOS</small>
-      </div>
-    </div>
-
-  </section>
-
-
-  <!-- ===== CONTADOR + RSVP (en contenedor blanco) ===== -->
-  <!-- ===== CONTADOR + RSVP (en contenedor blanco) ===== -->
-  <section class="rsvp-section" id="rsvp">
-    <div class="rsvp-container">
-
-      <!-- Imagen principal -->
-      <figure class="feature-photo">
-        <img src="./img/novios-historia.jpg" alt="Foto de los novios" loading="lazy">
-      </figure>
-
-      <!-- Franja con corazones y líneas dobles -->
-      <div class="date-banner date-banner--double">
-        <span class="hearts">
-          <span class="heart black">♥</span>
-          <span class="heart gray">♥</span>
-        </span>
-
-        <strong>SÁBADO, 11 ABRIL 2026</strong>
-
-        <span class="hearts">
-          <span class="heart black">♥</span>
-          <span class="heart gray">♥</span>
-        </span>
-      </div>
-
-      <!-- Texto principal -->
-      <p class="text center">
-        Es un honor y un privilegio invitarlos a ser parte de este día tan significativo para nosotros.
-        Su presencia hará de nuestra boda un evento aún más inolvidable y lleno de felicidad.
-        Por favor confírmanos tu asistencia antes del <strong>11 de Abril, 2026</strong>.
-      </p>
-
-      <!-- Reservación -->
-      <div class="reservation">
-        <div class="reserve-box">Hemos reservado <span id="rsv">2</span> lugares en tu honor</div>
-      </div>
-
-      <!-- Botón sin relleno -->
-      <!-- Botón de Confirmar asistencia -->
-      <div class="rsvp center">
-        <a id="btnRSVP" class="btn btn-outline" target="_blank" rel="noopener"
-          href="https://wa.me/52XXXXXXXXXX?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20su%20boda%20%F0%9F%92%8D">
-          CONFIRMAR ASISTENCIA
-        </a>
-      </div>
-      <!-- Imagen de iniciales -->
-      <div class="signature-wrap">
-        <img src="./img/LyS.png" alt="Iniciales B & A" class="signature-img">
-      </div>
-
-    </div>
-  </section>
-
-
-
-
-  <footer class="wrap footer">
-    <small>© 2025 • Hecho por <strong>LAC</strong> — Invitaciones digitales</small><br>
-    <a class="wa-chip" target="_blank" rel="noopener"
-      href="https://wa.me/52XXXXXXXXXX?text=Hola%20Laura%2C%20quiero%20mi%20invitaci%C3%B3n%20tipo%20peri%C3%B3dico%20%F0%9F%93%B0">
-      💬 Contáctame por WhatsApp
-    </a>
-  </footer>
+    <footer class="wrap footer">
+      <small>© 2025 • Hecho por <strong>LAC</strong> — Invitaciones digitales</small><br>
+      <a class="wa-chip" target="_blank" rel="noopener"
+        href="https://wa.me/52XXXXXXXXXX?text=Hola%20Laura%2C%20quiero%20mi%20invitaci%C3%B3n%20tipo%20peri%C3%B3dico%20%F0%9F%93%B0">
+        💬 Contáctame por WhatsApp
+      </a>
+    </footer>
   </div>
-  <!-- Música de fondo -->
+
+  <!-- Música -->
   <audio id="bgAudio" src="./img/boda.mp3" preload="auto" loop></audio>
 
-  <!-- Botón flotante -->
+  <!-- FAB audio -->
   <button id="audioFab" class="audio-fab" type="button" aria-label="Pausar música" title="Pausar música">
     <span class="audio-pulse" aria-hidden="true"></span>
-    <!-- Ícono inline para no depender de imágenes -->
     <svg id="audioIcon" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <!-- Estado: “sonando” (icono de pausa) -->
       <rect x="6" y="5" width="4" height="14" rx="1"></rect>
       <rect x="14" y="5" width="4" height="14" rx="1"></rect>
     </svg>
   </button>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=2025-11-05"></script>
 </body>
 
 </html>

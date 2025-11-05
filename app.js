@@ -1,47 +1,53 @@
 // ========= CONFIG =========
-/**
- * Si tu evento es a las 6:00 pm en Ciudad de México, usa -06:00 (ya no hay DST).
- * Ajusta la zona si aplica a otra ciudad.
- */
-const EVENT_DATE = new Date("2026-04-11T18:00:00-06:00");
+const EVENT_DATE = new Date("2026-04-11T18:00:00-06:00"); // hora local MX
+const WHATS_NUMBER = "52XXXXXXXXXX"; // solo dígitos
 
-// Número de WhatsApp (solo dígitos, 52 + lada + número).
-const WHATS_NUMBER = "52XXXXXXXXXX";
-
-// ========= UTIL =========
+// ========= HELPERS =========
 const $id = (id) => document.getElementById(id);
 const pad2 = (n) => String(n).padStart(2, "0");
 
-// ========= DESKTOP NOTICE GUARD =========
-// Evita que se muestre el aviso en móviles aunque el navegador esté en “ver como escritorio”.
-(function ensureMobileAppVisible() {
-  const isDesktop =
-    window.matchMedia("(min-width: 900px)").matches &&
-    window.matchMedia("(hover: hover)").matches &&
-    window.matchMedia("(pointer: fine)").matches;
-  if (isDesktop) {
-    document
-      .querySelector(".app")
-      ?.setAttribute("style", "display:none!important");
-    document
-      .querySelector(".desktop-notice")
-      ?.setAttribute("style", "display:flex!important;min-height:100dvh");
+// ========= SOLO MÓVIL + AVISO ESCRITORIO =========
+(function initDesktopNotice() {
+  const notice = $id("desktopNotice");
+  const app = $id("app");
+  const qr = $id("dnQr");
+  const copyBtn = $id("dnCopy");
+  const waBtn = $id("dnWhats");
+
+  const url = window.location.href;
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  // QR + Whats link
+  const qrBase =
+    "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=";
+  if (qr) qr.src = qrBase + encodeURIComponent(url);
+  if (waBtn)
+    waBtn.href =
+      "https://wa.me/?text=" +
+      encodeURIComponent("Hola, ábrelo en mi celular: " + url);
+  if (copyBtn)
+    copyBtn.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(url);
+      copyBtn.textContent = "¡Copiado!";
+      setTimeout(() => (copyBtn.textContent = "Copiar enlace"), 1500);
+    });
+
+  // Toggle vistas
+  if (!isMobile) {
+    if (notice) notice.hidden = false;
+    if (app) app.hidden = true;
   } else {
-    document
-      .querySelector(".desktop-notice")
-      ?.setAttribute("style", "display:none!important");
-    document
-      .querySelector(".app")
-      ?.setAttribute("style", "display:block!important");
+    if (notice) notice.hidden = true;
+    if (app) app.hidden = false;
   }
 })();
 
+// ========= COUNTDOWN =========
 (function countdown() {
   const write = (id, val) => {
-    const el = document.getElementById(id);
+    const el = $id(id);
     if (el) el.textContent = val;
   };
-  const pad2 = (n) => String(n).padStart(2, "0");
 
   function render() {
     const now = Date.now();
@@ -52,19 +58,11 @@ const pad2 = (n) => String(n).padStart(2, "0");
     const m = Math.floor(diff / 60000) % 60;
     const s = Math.floor(diff / 1000) % 60;
 
-    // contador viejo (si existe)
-    write("d", d);
-    write("h", pad2(h));
-    write("m", pad2(m));
-    write("s", pad2(s));
-
-    // contador “Faltan” (si existe)
     write("cdD", d);
     write("cdH", pad2(h));
     write("cdM", pad2(m));
     write("cdS", pad2(s));
 
-    // Ajuste de ancho si DÍAS tiene 3 dígitos
     const box = document.querySelector("#faltan .count-box");
     if (box) box.classList.toggle("three-digits", d >= 100);
 
@@ -75,20 +73,16 @@ const pad2 = (n) => String(n).padStart(2, "0");
   const iv = setInterval(render, 1000);
 })();
 
-// === RSVP con Google Forms ===
-// Pega aquí la URL base de tu formulario (la normal, NO la de respuestas)
+// ========= RSVP: Google Forms (prefill opcional) =========
 const FORM_URL =
   "https://docs.google.com/forms/d/e/XXXXXXXXXXXX/viewform?usp=pp_url";
-
-// Mapea tus preguntas a sus entry IDs reales:
 const FORM_ENTRIES = {
-  nombre: "entry.1111111111", // Nombre completo
-  puedeAsistir: "entry.2222222222", // ¿Puedes asistir? (texto EXACTO de la opción)
-  lugares: "entry.3333333333", // Número de lugares
-  mensaje: "entry.4444444444", // Mensaje (opcional)
+  nombre: "entry.1111111111",
+  puedeAsistir: "entry.2222222222",
+  lugares: "entry.3333333333",
+  mensaje: "entry.4444444444",
 };
 
-// Opcional: toma “reservados” del query para prellenar lugares
 function getReservados() {
   const r = parseInt(
     new URLSearchParams(location.search).get("reservados"),
@@ -98,79 +92,32 @@ function getReservados() {
 }
 
 (function setFormLink() {
-  const btn = document.getElementById("btnRSVP");
+  const btn = $id("btnRSVP");
   if (!btn) return;
 
-  // Valores iniciales que queremos prellenar
   const prefill = new URLSearchParams();
-  // Ejemplos de cómo rellenar:
-  // Nombre (si tienes el nombre en el query ?nombre=)
   const qp = new URLSearchParams(location.search);
   const nombre = qp.get("nombre") || "";
   if (nombre) prefill.set(FORM_ENTRIES.nombre, nombre);
 
-  // ¿Puedes asistir? — Debe coincidir EXACTAMENTE con la opción del formulario
-  // (puedes dejarlo vacío y que lo elijan)
-  // prefill.set(FORM_ENTRIES.puedeAsistir, "Sí, ahí estaré");
-
-  // Lugares (desde ?reservados=2 si lo mandas en tus links)
   const lugares = getReservados();
   if (lugares) prefill.set(FORM_ENTRIES.lugares, lugares);
 
-  // Mensaje opcional
-  // prefill.set(FORM_ENTRIES.mensaje, "¡Nos vemos!");
-
-  // Construimos la URL final con prefill
   const url = new URL(FORM_URL);
-  // Google usa 'usp=pp_url' + los entry.*; respetamos lo que ya trae y añadimos
   for (const [k, v] of prefill.entries()) url.searchParams.set(k, v);
-
   btn.href = url.toString();
 })();
 
-// ========= ?reservados=2 =========
+// Mostrar número reservado desde query
 (function reservedFromQuery() {
-  const el = document.getElementById("rsv");
+  const el = $id("rsv");
   if (!el) return;
   const params = new URLSearchParams(location.search);
   const r = parseInt(params.get("reservados"), 10);
   if (!isNaN(r) && r > 0 && r <= 20) el.textContent = String(r);
 })();
 
-(function () {
-  const notice = document.getElementById("desktopNotice");
-  const app = document.getElementById("app");
-  const qr = document.getElementById("dnQr");
-  const copyBtn = document.getElementById("dnCopy");
-  const waBtn = document.getElementById("dnWhats");
-
-  const url = window.location.href;
-
-  const qrBase =
-    "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=";
-  qr.src = qrBase + encodeURIComponent(url);
-
-  waBtn.href =
-    "https://wa.me/?text=" +
-    encodeURIComponent("Hola, ábrelo en mi celular: " + url);
-
-  copyBtn.addEventListener("click", async () => {
-    await navigator.clipboard.writeText(url);
-    copyBtn.textContent = "¡Copiado!";
-    setTimeout(() => (copyBtn.textContent = "Copiar enlace"), 1500);
-  });
-
-  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  if (!isMobile) {
-    notice.hidden = false;
-    app.hidden = true;
-  } else {
-    notice.hidden = true;
-    app.hidden = false;
-  }
-})();
-
-// Espera a que el <audio> tenga metadatos para poder hacer seek con seguridad
+// ========= Audio con autoplay suave + FAB =========
 function waitForMetadata(audio) {
   return new Promise((resolve) => {
     if (audio.readyState >= 1) return resolve();
@@ -178,17 +125,16 @@ function waitForMetadata(audio) {
   });
 }
 
-// ===== Música de fondo con autoplay + fade =====
-(function () {
-  const audio = document.getElementById("bgAudio");
-  const fab = document.getElementById("audioFab");
-  const icon = document.getElementById("audioIcon");
+(function audioPlayer() {
+  const audio = $id("bgAudio");
+  const fab = $id("audioFab");
+  const icon = $id("audioIcon");
   if (!audio || !fab || !icon) return;
 
   const INITIAL_VOL = 0.06;
   const TARGET_VOL = 0.18;
   const FADE_MS = 1800;
-  const START_AT = 5; // ⏱️ queremos iniciar en 0:36
+  const START_AT = 5;
 
   function setPauseIcon(paused) {
     icon.innerHTML = paused
@@ -216,18 +162,17 @@ function waitForMetadata(audio) {
 
   async function primeAndPlay(fromSec = START_AT) {
     audio.volume = INITIAL_VOL;
-    await waitForMetadata(audio); // 👈 garantiza metadatos
-    audio.currentTime = fromSec; // 👈 fija 0:36 SIEMPRE
-    await audio.play(); // intenta reproducir
+    await waitForMetadata(audio);
+    audio.currentTime = fromSec;
+    await audio.play();
     fadeTo(TARGET_VOL, FADE_MS);
     setPauseIcon(false);
   }
 
   async function tryAutoplay() {
     try {
-      await primeAndPlay(START_AT); // 👈 también aquí
+      await primeAndPlay(START_AT);
     } catch {
-      // Bloqueado: esperamos primer gesto del usuario
       setPauseIcon(true);
       const unlock = async () => {
         try {
@@ -246,7 +191,6 @@ function waitForMetadata(audio) {
     }
   }
 
-  // Botón flotante
   fab.addEventListener("click", async () => {
     if (audio.paused) {
       try {
@@ -258,7 +202,6 @@ function waitForMetadata(audio) {
     }
   });
 
-  // Arranque
   if (
     document.readyState === "complete" ||
     document.readyState === "interactive"

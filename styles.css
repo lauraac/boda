@@ -9,13 +9,10 @@
   --shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
 }
 
-/* =========================
-   Base móvil
-   ========================= */
+/* Base móvil */
 * {
   box-sizing: border-box;
 }
-
 html,
 body {
   margin: 0;
@@ -27,59 +24,24 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
-
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
   padding: 18px;
 }
-
 .section {
   margin: 22px 0;
 }
 .center {
   text-align: center;
 }
-.muted {
-  color: var(--muted);
-}
-.note {
-  font-size: 0.9rem;
-  color: #8a8a8a;
-}
 
-/* =========================
-   Titulares
-   ========================= */
-.section-title,
-.card-title {
-  font-family: "Playfair Display", serif;
-}
-.section-title {
-  font-weight: 900;
-  letter-spacing: 0.02em;
-  text-align: center;
-  margin: 10px 0 6px;
-  font-size: clamp(20px, 7vw, 28px);
-}
-.section-title.script {
-  font-weight: 700;
-  font-style: italic;
-}
-.card-title {
-  margin: 0.2rem 0 0.6rem;
-  font-size: 1.1rem;
-}
-
-/* =========================
-   Contenedor de portada (tarjeta)
-   ========================= */
+/* Portada / periódico */
 .masthead {
   background: #fff;
   border-radius: 20px;
@@ -87,25 +49,23 @@ img {
   padding: 16px;
   border: 1px solid #eee;
 }
-
-/* =========================
-   Encabezado estilo periódico
-   ========================= */
 .news-header {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   background: #fff;
   position: relative;
+  border-top: 1px solid #000;
+  border-bottom: 2px solid #000;
 }
 .news-header::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -3px;
+  bottom: -6px;
   height: 1px;
-  background: #000; /* delgada pegada a la gruesa */
+  background: #000;
 }
 .news-cell {
   padding: 8px 10px;
@@ -115,30 +75,37 @@ img {
 }
 .news-cell + .news-cell {
   border-left: 1px solid #000;
-} /* separadores finos */
+}
 .news-cell.left {
   text-align: left;
 }
 .news-cell.right {
   text-align: right;
 }
-
 .news-banner {
   max-width: 260px;
   width: 100%;
-  height: auto;
   margin: 0 auto;
 }
-
-/* Imagen grande “NOS CASAMOS” (es imagen, no texto) */
 .headline-img {
   width: 100%;
-  height: auto;
   margin: 10px 0 0;
   display: block;
 }
-
-/* Cinta de fecha con doble línea (gruesa arriba / delgada abajo) */
+.headline-lines {
+  border-bottom: 2px solid #000;
+  position: relative;
+  margin-top: 4px;
+}
+.headline-lines::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 1px;
+  background: #000;
+}
 .news-date {
   display: flex;
   align-items: center;
@@ -148,13 +115,10 @@ img {
   background: #fff;
   font-weight: 800;
   letter-spacing: 0.06em;
-
   margin-top: 2px;
 }
 
-/* =========================
-   Foto principal
-   ========================= */
+/* Foto destacada */
 .feature-photo {
   margin: 14px 0 2px;
 }
@@ -167,331 +131,37 @@ img {
   object-fit: cover;
 }
 
-/* =========================
-   Programa
-   ========================= */
-.program {
-  display: grid;
-  gap: 16px;
-}
-.program__cards {
-  display: grid;
-  gap: 14px;
-}
-.card.soft {
-  background: var(--soft);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  padding: 16px;
-  box-shadow: var(--shadow);
-}
-
-/* =========================
-   Botones
-   ========================= */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 16px;
-  border-radius: 999px;
-  font-weight: 800;
-  text-decoration: none;
-}
-.btn-dark {
-  background: #222;
-  color: #fff;
-  border: 1px solid #000;
-}
-.btn-dark:hover {
-  filter: brightness(1.05);
-}
-
-/* =========================
-   Timeline
-   ========================= */
-.timeline {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  padding: 12px;
-  box-shadow: var(--shadow);
-}
-.tl-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  border-left: 2px solid #000;
-  padding: 10px 10px 10px 12px;
-  position: relative;
-}
-.tl-row::before {
-  content: "";
-  position: absolute;
-  left: -6px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
-  border: 2px solid #000;
-  border-radius: 50%;
-  background: #fff;
-}
-.tl-row + .tl-row {
-  margin-top: 6px;
-}
-.tl-row time {
-  font-weight: 800;
-  width: 82px;
-}
-
-/* =========================
-   Familias
-   ========================= */
-.families {
-  display: grid;
-  gap: 12px;
-  align-items: start;
-  margin: 12px 0;
-}
-.fam-col {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  padding: 14px;
-  box-shadow: var(--shadow);
-  text-align: center;
-}
-.fam-col h3 {
-  margin: 0.2rem 0 0.4rem;
-  font-family: "Playfair Display", serif;
-}
-.amp {
-  display: grid;
-  place-items: center;
-  font-family: "Playfair Display", serif;
-  font-weight: 900;
-  font-size: 28px;
-}
-
-/* =========================
-   Historia / Galería
-   ========================= */
-.grid-2 {
-  display: grid;
-  gap: 14px;
-}
-.story {
-  display: grid;
-  gap: 16px;
-}
-.story-text {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  padding: 14px;
-  box-shadow: var(--shadow);
-}
-.story-photos {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(3, 1fr);
-}
-.story-img {
-  border-radius: 12px;
-  border: 1px solid var(--line);
-  background: #fff;
-  object-fit: cover;
-  width: 100%;
-  aspect-ratio: 1/1;
-}
-@media (max-width: 480px) {
-  .story-photos {
-    grid-template-columns: 1fr 1fr;
-  }
-  .story-photos .story-img:last-child {
-    grid-column: 1/-1;
-  }
-}
-
-/* =========================
-   Countdown + Banner simple
-   ========================= */
-.countdown {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin: 8px 0 14px;
-}
-.cd {
-  display: grid;
-  gap: 6px;
-  justify-items: center;
-}
-.cd div {
-  min-width: 74px;
-  text-align: center;
-  font-weight: 900;
-  border: 1px solid #000;
-  border-radius: 12px;
-  padding: 10px 8px;
-  background: #fff;
-  font-size: 1.25rem;
-}
-.cd small {
-  letter-spacing: 0.14em;
-  color: #444;
-}
-
-/* Banner de 1px arriba/abajo (se usa en secciones internas) */
-.date-banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  background: #fff;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
-  margin: 8px 0 4px;
-}
-
-/* =========================
-   RSVP
-   ========================= */
-.text {
-  line-height: 1.7;
-  color: #2b2b2b;
-}
-.reservation {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0;
-}
-.reserve-box {
-  background: linear-gradient(#e9e9e9, #dcdcdc);
-  border: 1px solid #bdbdbd;
-  border-radius: 12px;
-  padding: 10px 14px;
-  font-weight: 700;
-  box-shadow: var(--shadow);
-}
-.rsvp .btn {
-  min-width: 240px;
-}
-
-/* =========================
-   Footer
-   ========================= */
-.footer {
-  padding-bottom: 70px;
-  text-align: center;
-  color: #666;
-}
-.wa-chip {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  padding: 10px 14px;
-  border-radius: 999px;
-  border: 1px solid #000;
-  background: #fff;
-  font-weight: 800;
-}
-
-/* =========================
-   Márgenes laterales parejos
-   ========================= */
-.main,
-.footer,
-.section,
-.timeline,
-.card.soft,
-.story-text,
-.families,
-.feature-photo,
-.grid-2,
-.story {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-/* =========================
-   Bloqueo de escritorio
-   ========================= */
-.desktop-notice {
-  display: none;
-  min-height: 100dvh;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  text-align: center;
-  background: #fff;
-  color: #111;
-}
-.desktop-notice .box {
-  max-width: 680px;
-  border: 1px dashed #bbb;
-  border-radius: 16px;
-  padding: 24px;
-}
-
-/* Líneas inferiores equilibradas (1px y 2px con pequeña separación) */
-.news-header {
-  border-top: 1px solid #000; /* línea delgada arriba */
-  border-bottom: 2px solid #000; /* primera línea inferior (fina) */
-  position: relative;
-}
-
-.news-header::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -6px; /* separación visual de 3px aprox */
-  height: 1px; /* grosor de la segunda línea */
-  background: #000;
-}
-/* Doble línea debajo de la imagen "NOS CASAMOS" */
-.headline-lines {
-  border-bottom: 2px solid #000; /* línea gruesa */
-  position: relative;
-  margin-top: 4px; /* pequeño respiro visual */
-}
-
-.headline-lines::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -6px; /* separación entre líneas */
-  height: 1px; /* línea más delgada */
-  background: #000;
-}
-/* Corazones con colores */
+/* Corazones reutilizables */
 .hearts {
   display: inline-flex;
-  gap: 2px; /* espacio entre corazones */
+  gap: 2px;
 }
-
 .heart {
   font-size: 1.2em;
   line-height: 1;
 }
-
 .heart.black {
-  color: #000; /* negro */
+  color: #000;
+  animation: heartBlink 1.8s infinite ease-in-out;
 }
-
 .heart.gray {
-  color: #888; /* gris suave */
+  color: #888;
+  animation: heartBlink 1.8s infinite ease-in-out;
+  animation-delay: 0.9s;
+}
+@keyframes heartBlink {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
 }
 
-/* ===== Sección "Han sido flechados" ===== */
+/* Love announcement */
 .love-announcement {
   background: #fff;
   border: 1px solid #ddd;
@@ -501,131 +171,21 @@ img {
   margin-top: 24px;
   text-align: center;
 }
-
-.couple-names {
-  font-family: "Playfair Display", serif;
-  font-size: clamp(20px, 8vw, 30px);
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  margin-bottom: 4px;
-}
-
-.love-phrase {
-  font-family: "Playfair Display", serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: 1.2rem;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
-  display: inline-block;
-  padding: 4px 10px;
-  margin-bottom: 16px;
-}
-
-.love-text {
-  font-size: 0.95rem;
-  color: #333;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-/* ===== Padres ===== */
-.parents-title {
-  background: #000;
-  color: #fff;
-  font-weight: 800;
-  padding: 8px 12px;
-  border-radius: 6px;
-  margin-bottom: 16px;
-}
-
-.parents-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-
-.parents-block h4 {
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-
-.parents-block p {
-  margin: 0;
-  color: #444;
-  font-size: 0.9rem;
-}
-
-@media (min-width: 600px) {
-  .parents-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-/* ===== Padrinos ===== */
-.padrinos-title {
-  margin-top: 24px;
-  font-weight: 900;
-  text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 0.05em;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
-  padding: 6px 0;
-}
-
-.padrinos-list {
-  display: grid;
-  gap: 12px;
-  margin-top: 14px;
-}
-
-.padrinos-list h4 {
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.padrinos-list p {
-  margin: 0;
-  color: #444;
-  font-size: 0.9rem;
-}
-
-.love-announcement {
-  padding: 30px 15px;
-}
-
-.names-img,
-.phrase-img {
-  max-width: 50%;
-  height: auto;
-  display: block;
-  margin: 0 auto 15px;
-}
-/* === Alineación perfecta de líneas entre nombres y frase === */
-
-/* Imagen de los nombres ("Laura Silvia & Salvador") */
 .names-img {
-  max-width: 90%; /* 🔹 ajusta al ancho deseado */
-  display: block;
-  margin: 0 auto 20px;
-  border-top: 2px solid #000; /* 🔹 mismo grosor que las líneas de la frase */
-  border-radius: 0;
-  padding-top: 8px;
+  max-width: 95%;
+  margin: 0 auto 0;
+  border-top: 1px solid #000;
+  padding-top: 1px;
 }
-
-/* Contenedor de la frase "Han sido flechados" */
-/* === Alineación fija y centrada de la frase "Han sido flechados" === */
 .phrase-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   margin: 12px auto 20px;
-  width: 95%; /* 🔹 igual que el ancho de los nombres */
+  width: 95%;
   position: relative;
 }
-
 .phrase-wrapper::before,
 .phrase-wrapper::after {
   content: "";
@@ -633,37 +193,22 @@ img {
   height: 1px;
   background: #000;
   position: relative;
-  top: 1px; /* 🔹 pequeño ajuste visual para centrar líneas */
+  top: 1px;
 }
-
 .phrase-img {
-  display: block;
-  max-width: 50%; /* 🔹 tu tamaño deseado */
-  height: auto;
+  max-width: 50%;
   position: relative;
-  top: 10px; /* 🔹 corrige leve desalineo vertical */
+  top: 10px;
 }
-
-/* Imagen de los nombres */
-.names-img {
-  display: block;
-  max-width: 95%;
-  margin: 0 auto 0px;
-  border-top: 1px solid #000;
-  padding-top: 1px;
-}
-
-/* Texto del anuncio justificado */
 .love-text {
-  text-align: justify; /* 🔹 alinea el texto a ambos lados */
+  text-align: justify;
   font-size: 0.95rem;
   color: #333;
   line-height: 1.7;
   margin-bottom: 20px;
-  hyphens: auto; /* 🔹 mejora el corte de palabras en móviles */
 }
 
-/* Chip del título: versión delgada */
+/* Padres + separador con corazón */
 .parents-title,
 .padrinos-title {
   background: #000;
@@ -675,22 +220,17 @@ img {
 }
 .parents-title.skinny,
 .padrinos-title.skinny {
-  font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
-    Arial;
-  font-weight: 400; /* delgada */
+  font-weight: 400;
   letter-spacing: 0.08em;
   font-size: 0.95rem;
 }
-
-/* Layout de tres columnas con separador */
 .parents-split {
   display: grid;
-  grid-template-columns: 1fr 36px 1fr; /* izq | separador | der */
+  grid-template-columns: 1fr 36px 1fr;
   align-items: start;
   gap: 16px;
   margin: 10px 0 8px;
 }
-
 .parents-col {
   text-align: center;
 }
@@ -704,8 +244,6 @@ img {
   line-height: 1.6;
   color: #333;
 }
-
-/* Separador vertical con corazón centrado */
 .parents-sep {
   position: relative;
   width: 36px;
@@ -713,7 +251,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  isolation: isolate; /* asegura que el corazón quede delante */
+  isolation: isolate;
 }
 .parents-sep::before,
 .parents-sep::after {
@@ -737,12 +275,22 @@ img {
   z-index: 1;
   font-size: 18px;
   line-height: 1;
-  background: #fff; /* “corta” visualmente la línea detrás del corazón */
+  background: #fff;
   padding: 0 6px;
   border-radius: 999px;
+  animation: heartFade 2.5s infinite ease-in-out;
 }
-
-/* & centrado */
+@keyframes heartFade {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
 .ampersand {
   text-align: center;
   font-family: "Playfair Display", serif;
@@ -751,26 +299,15 @@ img {
   margin: 6px 0 2px;
 }
 
-/* Padrinos centrados */
-.padrinos-center {
-  text-align: center;
-}
-.padrinos-center p {
-  margin: 8px 0 0;
-  line-height: 1.6;
-}
-
-/* Responsivo: en pantallas muy pequeñas, apilar */
 @media (max-width: 420px) {
   .parents-split {
-    grid-template-columns: 1fr; /* apila */
+    grid-template-columns: 1fr;
     gap: 10px;
   }
   .parents-sep {
     height: 24px;
     width: 100%;
   }
-  /* En móvil, convierte el separador a horizontal para que se vea bonito */
   .parents-sep::before,
   .parents-sep::after {
     height: 2px;
@@ -787,43 +324,17 @@ img {
     left: 52%;
   }
 }
-/* ✨ Animación del corazón que aparece y desaparece */
-@keyframes heartFade {
-  0%,
-  100% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-}
 
-.sep-heart {
-  position: relative;
-  z-index: 1;
-  font-size: 18px;
-  line-height: 1;
-  background: #fff;
-  padding: 0 6px;
-  border-radius: 999px;
-  color: #000; /* color del corazón */
-  animation: heartFade 2.5s infinite ease-in-out; /* 💓 animación */
-}
-
-/* ===== Padrinos estilo periódico (scopeado) ===== */
+/* Padrinos (nota estilo periódico) */
 .love-announcement .gp {
-  text-align: center;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 16px;
   box-shadow: var(--shadow);
   padding: 20px 16px;
   margin-top: 10px;
+  text-align: center;
 }
-
-/* Bajada principal */
 .love-announcement .gp-lead {
   font-family: "Playfair Display", serif;
   font-weight: 600;
@@ -831,8 +342,6 @@ img {
   line-height: 1.6;
   margin: 4px 0 10px;
 }
-
-/* Regla doble editorial */
 .love-announcement .gp-rule {
   position: relative;
   height: 2px;
@@ -849,16 +358,12 @@ img {
   height: 1px;
   background: #000;
 }
-
-/* Grid tipo nota */
 .love-announcement .gp-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
   position: relative;
 }
-
-/* Ítems */
 .love-announcement .gp-item {
   padding: 6px 8px;
   background: var(--soft);
@@ -879,8 +384,6 @@ img {
   font-size: 0.92rem;
   text-align: center;
 }
-
-/* 2 columnas con regla central sutil */
 @media (min-width: 560px) {
   .love-announcement .gp-grid {
     grid-template-columns: 1fr 1fr;
@@ -899,111 +402,17 @@ img {
     pointer-events: none;
   }
   .love-announcement .gp-span2 {
-    grid-column: 1 / -1; /* la “Madrina de Ramo” ocupa ancho completo */
+    grid-column: 1 / -1;
   }
 }
 
-/* ===== AVISO SOLO VERSIÓN ESCRITORIO ===== */
-.desktop-notice {
-  position: fixed;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #b3e5fc, #f8bbd0);
-  z-index: 9999;
-  padding: 24px;
-}
-
-.dn-card {
-  width: min(420px, 92vw);
-  background: linear-gradient(180deg, #9bbdfc 0%, #5f5ce6 100%);
-  color: #fff;
-  border-radius: 18px;
-  padding: 30px 22px;
-  text-align: center;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(8px);
-}
-
-.dn-icon {
-  width: 110px;
-  height: auto;
-  display: block;
-  margin: 0 auto 10px;
-}
-
-.dn-text {
-  margin: 6px 0 14px;
-  line-height: 1.45;
-  font-size: 1.05rem;
-}
-
-.dn-qr-wrap {
-  display: grid;
-  place-items: center;
-  gap: 6px;
-  margin: 14px 0 18px;
-}
-
-.dn-qr-wrap img {
-  width: 180px;
-  height: 180px;
-  border-radius: 12px;
-  background: #fff;
-  padding: 8px;
-}
-
-.dn-qr-wrap small {
-  color: #fff;
-  font-size: 0.85rem;
-  opacity: 0.9;
-}
-
-.dn-qr-wrap a {
-  color: #fff;
-  text-decoration: underline;
-  font-size: 0.9rem;
-}
-
-.dn-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn {
-  border-radius: 999px;
-  padding: 8px 14px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.btn-light {
-  background: #fff;
-  color: #333;
-  border: none;
-}
-
-.btn-outline-light {
-  background: transparent;
-  color: #fff;
-  border: 1.8px solid #fff;
-}
-
-.btn:hover {
-  transform: scale(1.05);
-}
-
-/* ===== SECCIÓN TITULAR DE NOTICIA ===== */
+/* Titular noticia */
 .news-headline {
   text-align: center;
   margin: 10px auto 30px;
   width: min(90%, 720px);
   font-family: "Playfair Display", serif;
 }
-
 .news-headline h2 {
   font-size: clamp(1.4rem, 5vw, 1.8rem);
   text-transform: uppercase;
@@ -1013,7 +422,6 @@ img {
   padding: 8px 16px;
   margin-bottom: 18px;
 }
-
 .headline-photo {
   margin: 0 auto;
   display: block;
@@ -1023,7 +431,6 @@ img {
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-
 .headline-photo img {
   display: block;
   width: 100%;
@@ -1031,18 +438,16 @@ img {
   object-fit: cover;
 }
 
-/* ===== Nuestra Historia: tarjeta blanca tipo periódico ===== */
+/* Nuestra historia */
 .history-section {
   width: min(92%, 720px);
   margin: 38px auto;
-  background: #fff; /* fondo blanco para fundir imágenes con fondo blanco */
+  background: #fff;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   padding: 22px 18px;
   overflow: hidden;
 }
-
-/* Título con línea negra detrás */
 .history-title-wrap {
   position: relative;
   display: flex;
@@ -1064,17 +469,15 @@ img {
 .history-title-img {
   max-width: 60%;
   height: auto;
-  background: #fff; /* asegura continuidad blanca */
+  background: #fff;
   padding: 0 10px;
   border-radius: 6px;
   position: relative;
   z-index: 1;
 }
-
-/* Layout: texto a la izquierda, 3 fotos a la derecha */
 .history-body {
   display: grid;
-  grid-template-columns: 1.35fr 0.85fr; /* texto más ancho */
+  grid-template-columns: 1.35fr 0.85fr;
   gap: 16px;
   align-items: start;
 }
@@ -1083,8 +486,6 @@ img {
     grid-template-columns: 1fr;
   }
 }
-
-/* Texto largo justificado */
 .history-text p {
   margin: 0 0 12px 0;
   text-align: justify;
@@ -1092,113 +493,47 @@ img {
   color: #2a2a2a;
   font-size: 0.98rem;
 }
-
-/* Columna de fotos apiladas */
-/* Ajuste: imágenes más pequeñas y completas */
 .history-photos {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  justify-content: flex-start;
   align-items: center;
 }
-
 .hp-card {
   margin: 0;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 120px; /* 🔹 tamaño controlado */
+  max-width: 120px;
   background: #fff;
 }
-
 .hp-card img {
-  display: block;
   width: 100%;
-  height: auto; /* 🔹 mantiene proporción */
-  object-fit: contain; /* 🔹 se ven completas */
-  background-color: #fff; /* por si hay bordes transparentes */
+  height: auto;
+  object-fit: contain;
+  background: #fff;
 }
-
-/* En móviles: centra las imágenes */
 @media (max-width: 640px) {
   .hp-card {
     max-width: 260px;
   }
 }
 
-.audio-fab {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  width: 56px;
-  height: 56px;
-  border: 0;
-  border-radius: 50%;
-  background: #ffffff;
-  color: #111;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  z-index: 1600;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease;
-}
-.audio-fab:hover {
-  transform: translateY(-1px);
-}
-
-.audio-pulse {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(17, 17, 17, 0.25);
-  animation: audioPulse 1.8s ease-out infinite;
-  opacity: 0.9;
-  pointer-events: none;
-}
-@keyframes audioPulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(17, 17, 17, 0.25);
-  }
-  70% {
-    box-shadow: 0 0 0 16px rgba(17, 17, 17, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(17, 17, 17, 0);
-  }
-}
-
-/* Cuando está en pausa, quitamos el pulso */
-.audio-fab.paused .audio-pulse {
-  display: none;
-}
-
-/* Opcional: sube el botón en móviles para no tapar UI */
-@media (max-width: 576px) {
-  .audio-fab {
-    bottom: 76px;
-  }
-}
-/* 1) El main no debe achicar el contenido */
+/* Main ancho completo y Programa */
 .wrap.main {
   max-width: 100%;
-  padding: 0; /* ← quita los 18px laterales */
+  padding: 0;
 }
-
-/* 2) Programa con el MISMO ancho que .history-section */
 .prog {
-  width: min(92%, 720px); /* igual que .history-section */
-  margin: 38px auto; /* centrado y mismas separaciones */
+  width: min(92%, 720px);
+  margin: 38px auto;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   padding: 22px 18px;
   overflow: hidden;
 }
-
-/* Título imagen con línea detrás (igual que historia) */
 .prog-title-wrap {
   position: relative;
   display: flex;
@@ -1206,8 +541,6 @@ img {
   align-items: center;
   margin: 12px 0 24px;
 }
-
-/* La línea va DETRÁS (z-index:0) */
 .prog-title-wrap::before {
   content: "";
   position: absolute;
@@ -1216,39 +549,32 @@ img {
   right: 5%;
   height: 2px;
   background: #000;
-  z-index: 0; /* detrás */
+  z-index: 0;
 }
-
-/* La imagen va ENCIMA (z-index:1) */
 .prog-title-img {
   width: min(360px, 82%);
-  height: auto;
-  display: block;
   position: relative;
-  z-index: 1; /* delante de la línea */
-  background: #fff; /* opcional: tapa la línea bajo letras transparentes */
-  padding: 0 10px; /* opcional: deja “bocados” blancos a los lados */
-  border-radius: 6px; /* opcional: suaviza los bordes del parche */
+  z-index: 1;
+  background: #fff;
+  padding: 0 10px;
+  border-radius: 6px;
 }
-/* Disposición: tarjetas izq y timeline der (como en tu ejemplo) */
 .prog-grid {
   display: grid;
-  grid-template-columns: 5fr 4fr; /* proporción visual */
+  grid-template-columns: 5fr 4fr;
   gap: 14px;
   align-items: start;
 }
-
-/* Tarjetas */
 .prog-cards {
   display: grid;
   gap: 12px;
 }
 .prog-card {
   background: #fff;
-  border: 1px solid var(--line, #e1e1e1);
+  border: 1px solid var(--line);
   border-radius: 10px;
   padding: 12px 12px 14px;
-  box-shadow: var(--shadow, 0 10px 28px rgba(0, 0, 0, 0.06));
+  box-shadow: var(--shadow);
 }
 .prog-card-title {
   margin: 0 0 8px;
@@ -1281,8 +607,6 @@ img {
 .prog-btn:active {
   transform: translateY(1px);
 }
-
-/* ==== TIMELINE AJUSTADO (con espacio/gutter) ==== */
 .prog-timeline {
   position: relative;
   background: #fff;
@@ -1290,14 +614,10 @@ img {
   border-radius: 12px;
   padding: 12px 14px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-
-  /* controla separación y posición de la línea */
-  --div-x: 42%; /* posición de la línea vertical (más a la izq) */
-  --gut: 14px; /* espacio entre línea y texto/hora */
-  --tick: 12px; /* largo de la rayita horizontal por lado */
+  --div-x: 42%;
+  --gut: 14px;
+  --tick: 12px;
 }
-
-/* Línea vertical que recorre todo */
 .prog-timeline::before {
   content: "";
   position: absolute;
@@ -1308,32 +628,26 @@ img {
   background: #000;
   z-index: 0;
 }
-
-/* Fila */
 .prog-tl-row {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr auto; /* hora | texto | icono */
+  grid-template-columns: 1fr 1fr auto;
   align-items: center;
   gap: 8px;
   padding: 14px 0;
 }
-
-/* Rayita corta que no invade el texto */
 .prog-tl-row::after {
   content: "";
   position: absolute;
   top: 50%;
   left: calc(var(--div-x) - var(--tick));
-  width: calc(var(--tick) * 2); /* 12px a cada lado de la línea */
+  width: calc(var(--tick) * 2);
   height: 1px;
   background: #000;
   transform: translateY(-50%);
   border-radius: 1px;
   z-index: 1;
 }
-
-/* Hora y texto con “aire” respecto a la línea */
 .prog-tl-row time {
   font-weight: 800;
   font-size: 0.96rem;
@@ -1343,9 +657,8 @@ img {
 .prog-tl-text {
   font-size: 0.96rem;
   padding-left: var(--gut);
+  overflow-wrap: anywhere;
 }
-
-/* Ícono */
 .prog-ico {
   width: 28px;
   height: 28px;
@@ -1355,22 +668,42 @@ img {
   position: relative;
   z-index: 2;
 }
-
-/* Móvil: línea fija a la izquierda y mismo gutter */
 @media (max-width: 520px) {
   .prog-timeline {
     --div-x: 92px;
     --gut: 12px;
     --tick: 10px;
+    padding: 10px 10px;
   }
   .prog-tl-row {
     grid-template-columns: 76px 1fr auto;
+    padding: 10px 0;
   }
   .prog-tl-row time {
     text-align: left;
+    font-size: 0.92rem;
+  }
+  .prog-tl-text {
+    font-size: 0.92rem;
+    word-break: break-word;
+  }
+  .prog-ico {
+    width: 22px;
+    height: 22px;
+    margin-left: 6px;
   }
 }
-/* ===== Tarjetas blancas (mismo ancho que Historia/Programa) ===== */
+@media (max-width: 430px) {
+  .prog {
+    padding: 18px 12px;
+  }
+  .prog-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* Tarjetas info */
 .info-section {
   width: min(92%, 720px);
   margin: 38px auto;
@@ -1385,8 +718,6 @@ img {
   padding: 18px 16px 22px;
   overflow: hidden;
 }
-
-/* Título con línea por detrás */
 .title-line-wrap {
   position: relative;
   display: flex;
@@ -1402,21 +733,21 @@ img {
   top: 50%;
   height: 2px;
   background: #000;
-  z-index: 0; /* ← detrás */
+  z-index: 0;
 }
 .title-img {
   width: min(340px, 80%);
-  height: auto;
   position: relative;
-  z-index: 1; /* ← delante */
-  background: #fff; /* “corta” la línea */
+  z-index: 1;
+  background: #fff;
   padding: 0 10px;
   border-radius: 6px;
 }
-
-/* Cuerpo */
 .info-body {
   padding: 6px 8px 4px;
+}
+.center {
+  text-align: center;
 }
 .info-ico {
   width: 46px;
@@ -1439,8 +770,6 @@ img {
   color: #666;
   font-style: italic;
 }
-
-/* Regalo */
 .gift-name {
   margin: 8px 0 0;
   font-weight: 700;
@@ -1450,8 +779,6 @@ img {
   color: #333;
   font-weight: 600;
 }
-
-/* En móviles muy chicos, respirito lateral */
 @media (max-width: 420px) {
   .title-line-wrap::before {
     left: 4%;
@@ -1463,156 +790,7 @@ img {
   }
 }
 
-/* ===== Sección RSVP con contenedor blanco ===== */
-.rsvp-section {
-  display: flex;
-  justify-content: center;
-  padding: 30px 0;
-}
-
-.rsvp-container {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-  padding: 24px 20px;
-  width: min(92%, 720px); /* mismo ancho que Historia y Programa */
-  margin: 0 auto;
-}
-
-/* Imagen principal */
-.feature-photo img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  display: block;
-  margin: 0 auto 18px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-}
-
-/* Franja de fecha con doble línea */
-.date-banner--double {
-  position: relative;
-  border-top: 2px solid #000;
-  border-bottom: 2px solid #000;
-  padding: 8px 0;
-  text-align: center;
-  margin: 14px auto 18px;
-  font-weight: 600;
-  background: #fff;
-}
-
-.date-banner--double::before,
-.date-banner--double::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: #000;
-}
-
-.date-banner--double::before {
-  top: -6px;
-}
-.date-banner--double::after {
-  bottom: -6px;
-}
-
-/* Corazones */
-.hearts {
-  display: inline-flex;
-  gap: 4px;
-  vertical-align: middle;
-}
-.heart.black {
-  color: #000;
-}
-.heart.gray {
-  color: #aaa;
-}
-
-/* Texto y botón */
-.text.center {
-  text-align: justify;
-  font-size: 0.96rem;
-  line-height: 1.6;
-  margin: 0 auto 16px;
-  width: 90%;
-  color: #222;
-}
-
-.reserve-box {
-  background: #f5f5f5;
-  border-radius: 8px;
-  padding: 10px;
-  font-weight: 500;
-  width: 90%;
-  margin: 0 auto 14px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* ✨ Animación de corazones que aparecen y desaparecen alternadamente */
-@keyframes heartBlink {
-  0%,
-  100% {
-    opacity: 0.2;
-    transform: scale(0.9);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-}
-
-/* Corazones animados con desfaces */
-.heart.black {
-  color: #000;
-  animation: heartBlink 1.8s infinite ease-in-out;
-}
-
-.heart.gray {
-  color: #aaa;
-  animation: heartBlink 1.8s infinite ease-in-out;
-  animation-delay: 0.9s; /* 🔹 empieza medio ciclo después */
-}
-
-/* ===== Botón CONFIRMAR ASISTENCIA (borde negro, sin relleno) ===== */
-.btn.btn-outline {
-  display: inline-block;
-  padding: 12px 26px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  border: 2px solid #000;
-  border-radius: 8px;
-  background: transparent;
-  color: #000;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.25s ease-in-out;
-}
-
-/* Hover: efecto elegante negro */
-.btn.btn-outline:hover {
-  background: #000;
-  color: #fff;
-  transform: scale(1.02);
-}
-
-/* ===== Imagen de las iniciales ===== */
-.signature-wrap {
-  text-align: center;
-  margin-top: 24px;
-}
-
-.signature-img {
-  max-width: 120px;
-  height: auto;
-  opacity: 0.9;
-  display: inline-block;
-}
-
-/* ====== CONTADOR en tarjeta blanca ====== */
+/* Contador */
 .counter-section {
   width: min(92%, 720px);
   margin: 38px auto;
@@ -1623,8 +801,6 @@ img {
   padding: 20px 14px 22px;
   overflow: hidden;
 }
-
-/* Título imagen con línea por detrás */
 .counter-title-wrap {
   position: relative;
   display: flex;
@@ -1645,145 +821,59 @@ img {
 }
 .counter-title-img {
   max-width: 46%;
-  height: auto;
   background: #fff;
   padding: 0 10px;
   border-radius: 6px;
   position: relative;
-  z-index: 1; /* la línea queda atrás */
+  z-index: 1;
 }
-
-/* Caja del contador */
 .count-box {
-  display: flex; /* mejor reparto */
+  display: flex;
   align-items: center;
-  justify-content: space-between; /* no empuja fuera de la caja */
-  gap: clamp(8px, 2.2vw, 22px); /* gap adaptable */
-  padding: 16px 14px; /* menos padding lateral */
+  justify-content: space-between;
+  gap: clamp(8px, 2.2vw, 22px);
+  padding: 16px 14px;
   border: 1px solid #111;
   border-radius: 18px;
   background: linear-gradient(#fff, #f3f3f3);
 }
-
-/* importante: que los hijos puedan encogerse */
 .count-box > * {
   min-width: 0;
 }
-
 .count-item {
   display: grid;
   justify-items: center;
-  min-width: fit-content;
+  min-width: 0;
 }
-
 .count-item .num {
   font-family: "Bodoni Moda", serif;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.02em;
   white-space: nowrap;
-  font-size: clamp(34px, 8.4vw, 64px); /* un pelín más chico */
+  font-size: clamp(34px, 8.4vw, 64px);
 }
-
 .colon {
   line-height: 1;
   font-size: clamp(28px, 7.4vw, 56px);
 }
-
 .count-item small {
   margin-top: 6px;
   letter-spacing: 0.28em;
   font-weight: 700;
 }
-
-/* Cuando DÍAS tiene 3 dígitos, aprieta un poco más */
 .count-box.three-digits {
-  gap: clamp(6px, 1.8vw, 16px);
+  gap: clamp(6px, 1.6vw, 14px);
 }
 .count-box.three-digits .num {
-  font-size: clamp(30px, 7.2vw, 56px);
+  font-size: clamp(24px, 7vw, 36px);
 }
-
-/* Extra por si la pantalla es muy angosta */
 @media (max-width: 420px) {
   .count-box {
     padding: 14px 12px;
   }
   .count-item .num {
     font-size: clamp(30px, 7.6vw, 56px);
-  }
-}
-/* === FIX iPhone 12 / móviles angostos para Programa de boda === */
-@media (max-width: 430px) {
-  /* Contenedor con menos padding para ganar ancho útil */
-  .prog {
-    padding: 18px 12px;
-  }
-
-  /* Apilar: primero tarjetas, luego timeline */
-  .prog-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  /* Timeline más compacto y sin cortes */
-  .prog-timeline {
-    --div-x: 78px; /* línea vertical más a la izquierda */
-    --gut: 10px; /* aire entre la línea y texto/hora */
-    --tick: 8px; /* rayita horizontal más corta */
-    padding: 10px 10px;
-  }
-  .prog-tl-row {
-    grid-template-columns: 64px 1fr auto; /* hora | texto | icono */
-    padding: 10px 0;
-  }
-  .prog-tl-row time {
-    font-size: 0.92rem;
-    padding-right: var(--gut);
-    text-align: left; /* mejora lectura en móvil */
-  }
-  .prog-tl-text {
-    font-size: 0.92rem;
-    padding-left: var(--gut);
-    word-break: break-word; /* evita que se salga */
-  }
-  .prog-ico {
-    width: 22px;
-    height: 22px;
-    margin-left: 6px;
-  }
-
-  /* Tarjetas: tipografías un toquecito más chicas */
-  .prog-card-title {
-    font-size: 0.95rem;
-    padding: 7px 8px;
-  }
-  .prog-card-body {
-    font-size: 0.9rem;
-  }
-}
-
-/* Por si algún texto largo empuja el ancho en cualquier tamaño */
-.prog-tl-text {
-  overflow-wrap: anywhere;
-}
-
-/* Fix overflow del contador en pantallas angostas */
-.count-box > * {
-  min-width: 0;
-} /* ya lo tienes, lo reforzamos */
-.count-item {
-  min-width: 0;
-} /* ← reemplaza el fit-content */
-
-/* Además, compactamos tipografías y espacios en móviles chicos */
-@media (max-width: 380px) {
-  .count-box {
-    gap: 8px;
-    padding: 12px 10px;
-  }
-  .count-item .num {
-    font-size: clamp(26px, 9.6vw, 40px);
   }
   .colon {
     font-size: clamp(22px, 8.8vw, 34px);
@@ -1794,26 +884,249 @@ img {
   }
 }
 
-@media (max-width: 330px) {
-  .count-box {
-    gap: 6px;
+/* RSVP */
+.rsvp-section {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+}
+.rsvp-container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  padding: 24px 20px;
+  width: min(92%, 720px);
+  margin: 0 auto;
+}
+.date-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #fff;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  margin: 8px 0 4px;
+}
+.date-banner--double {
+  position: relative;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  padding: 8px 0;
+  text-align: center;
+  margin: 14px auto 18px;
+  background: #fff;
+}
+.date-banner--double::before,
+.date-banner--double::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #000;
+}
+.date-banner--double::before {
+  top: -6px;
+}
+.date-banner--double::after {
+  bottom: -6px;
+}
+.text.center {
+  text-align: justify;
+  font-size: 0.96rem;
+  line-height: 1.6;
+  margin: 0 auto 16px;
+  width: 90%;
+  color: #222;
+}
+.reservation {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+.reserve-box {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 500;
+  width: 90%;
+  margin: 0 auto 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.btn.btn-outline {
+  display: inline-block;
+  padding: 12px 26px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: 2px solid #000;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.btn.btn-outline:hover {
+  background: #000;
+  color: #fff;
+  transform: scale(1.02);
+}
+.signature-wrap {
+  text-align: center;
+  margin-top: 24px;
+}
+.signature-img {
+  max-width: 120px;
+  height: auto;
+  opacity: 0.9;
+  display: inline-block;
+}
+
+/* Footer */
+.footer {
+  padding-bottom: 70px;
+  text-align: center;
+  color: #666;
+}
+.wa-chip {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #000;
+  background: #fff;
+  font-weight: 800;
+}
+
+/* FAB audio */
+.audio-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 1600;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+}
+.audio-fab:hover {
+  transform: translateY(-1px);
+}
+.audio-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(17, 17, 17, 0.25);
+  animation: audioPulse 1.8s ease-out infinite;
+  opacity: 0.9;
+  pointer-events: none;
+}
+@keyframes audioPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(17, 17, 17, 0.25);
   }
-  .count-item .num {
-    font-size: 24px;
+  70% {
+    box-shadow: 0 0 0 16px rgba(17, 17, 17, 0);
   }
-  .colon {
-    font-size: 22px;
+  100% {
+    box-shadow: 0 0 0 0 rgba(17, 17, 17, 0);
   }
-  .count-item small {
-    letter-spacing: 0.12em;
-    font-size: 0.66rem;
+}
+.audio-fab.paused .audio-pulse {
+  display: none;
+}
+@media (max-width: 576px) {
+  .audio-fab {
+    bottom: 76px;
   }
 }
 
-/* Cuando DÍAS tiene 3 dígitos, apretamos un poco más */
-.count-box.three-digits {
-  gap: clamp(6px, 1.6vw, 14px);
+/* Aviso solo escritorio */
+.desktop-notice {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #b3e5fc, #f8bbd0);
+  z-index: 9999;
+  padding: 24px;
 }
-.count-box.three-digits .num {
-  font-size: clamp(24px, 7vw, 36px);
+.dn-card {
+  width: min(420px, 92vw);
+  background: linear-gradient(180deg, #9bbdfc 0%, #5f5ce6 100%);
+  color: #fff;
+  border-radius: 18px;
+  padding: 30px 22px;
+  text-align: center;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+}
+.dn-icon {
+  width: 110px;
+  margin: 0 auto 10px;
+}
+.dn-text {
+  margin: 6px 0 14px;
+  line-height: 1.45;
+  font-size: 1.05rem;
+}
+.dn-qr-wrap {
+  display: grid;
+  place-items: center;
+  gap: 6px;
+  margin: 14px 0 18px;
+}
+.dn-qr-wrap img {
+  width: 180px;
+  height: 180px;
+  border-radius: 12px;
+  background: #fff;
+  padding: 8px;
+}
+.dn-qr-wrap small {
+  color: #fff;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+.dn-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn {
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-sm {
+  font-size: 0.9rem;
+}
+.btn-light {
+  background: #fff;
+  color: #333;
+  border: none;
+}
+.btn-outline-light {
+  background: transparent;
+  color: #fff;
+  border: 1.8px solid #fff;
+}
+.btn:hover {
+  transform: scale(1.05);
 }
