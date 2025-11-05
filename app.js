@@ -75,34 +75,57 @@ const pad2 = (n) => String(n).padStart(2, "0");
   const iv = setInterval(render, 1000);
 })();
 
-// ========= WHATSAPP RSVP =========
-(function fixWhatsLink() {
+// === RSVP con Google Forms ===
+// Pega aquí la URL base de tu formulario (la normal, NO la de respuestas)
+const FORM_URL =
+  "https://docs.google.com/forms/d/e/XXXXXXXXXXXX/viewform?usp=pp_url";
+
+// Mapea tus preguntas a sus entry IDs reales:
+const FORM_ENTRIES = {
+  nombre: "entry.1111111111", // Nombre completo
+  puedeAsistir: "entry.2222222222", // ¿Puedes asistir? (texto EXACTO de la opción)
+  lugares: "entry.3333333333", // Número de lugares
+  mensaje: "entry.4444444444", // Mensaje (opcional)
+};
+
+// Opcional: toma “reservados” del query para prellenar lugares
+function getReservados() {
+  const r = parseInt(
+    new URLSearchParams(location.search).get("reservados"),
+    10
+  );
+  return !isNaN(r) && r > 0 && r <= 20 ? String(r) : "";
+}
+
+(function setFormLink() {
   const btn = document.getElementById("btnRSVP");
-  if (!btn || !btn.href) return;
+  if (!btn) return;
 
-  // Limpia el número a solo dígitos
-  const digits = String(WHATS_NUMBER).replace(/\D/g, "");
+  // Valores iniciales que queremos prellenar
+  const prefill = new URLSearchParams();
+  // Ejemplos de cómo rellenar:
+  // Nombre (si tienes el nombre en el query ?nombre=)
+  const qp = new URLSearchParams(location.search);
+  const nombre = qp.get("nombre") || "";
+  if (nombre) prefill.set(FORM_ENTRIES.nombre, nombre);
 
-  // Recomendado: 12 o 13 dígitos (ej. 52 + 10 dígitos)
-  if (!/^\d{12,13}$/.test(digits)) {
-    console.warn("WHATS_NUMBER parece inválido:", WHATS_NUMBER);
-  }
+  // ¿Puedes asistir? — Debe coincidir EXACTAMENTE con la opción del formulario
+  // (puedes dejarlo vacío y que lo elijan)
+  // prefill.set(FORM_ENTRIES.puedeAsistir, "Sí, ahí estaré");
 
-  try {
-    const url = new URL(btn.href);
-    // Fuerza formato correcto wa.me/<numero>
-    url.protocol = "https:";
-    url.hostname = "wa.me";
-    url.pathname = "/" + digits;
-    // Conserva el texto si ya venía en el href
-    btn.href = url.toString();
-  } catch (e) {
-    // Si hay un href raro, lo reconstruimos
-    const current = new URL(window.location.href);
-    const params = new URLSearchParams();
-    params.set("text", "Hola, confirmo mi asistencia a su boda 💍");
-    btn.href = `https://wa.me/${digits}?${params.toString()}`;
-  }
+  // Lugares (desde ?reservados=2 si lo mandas en tus links)
+  const lugares = getReservados();
+  if (lugares) prefill.set(FORM_ENTRIES.lugares, lugares);
+
+  // Mensaje opcional
+  // prefill.set(FORM_ENTRIES.mensaje, "¡Nos vemos!");
+
+  // Construimos la URL final con prefill
+  const url = new URL(FORM_URL);
+  // Google usa 'usp=pp_url' + los entry.*; respetamos lo que ya trae y añadimos
+  for (const [k, v] of prefill.entries()) url.searchParams.set(k, v);
+
+  btn.href = url.toString();
 })();
 
 // ========= ?reservados=2 =========

@@ -1713,3 +1713,107 @@ img {
     font-size: clamp(30px, 7.6vw, 56px);
   }
 }
+/* === FIX iPhone 12 / móviles angostos para Programa de boda === */
+@media (max-width: 430px) {
+  /* Contenedor con menos padding para ganar ancho útil */
+  .prog {
+    padding: 18px 12px;
+  }
+
+  /* Apilar: primero tarjetas, luego timeline */
+  .prog-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* Timeline más compacto y sin cortes */
+  .prog-timeline {
+    --div-x: 78px; /* línea vertical más a la izquierda */
+    --gut: 10px; /* aire entre la línea y texto/hora */
+    --tick: 8px; /* rayita horizontal más corta */
+    padding: 10px 10px;
+  }
+  .prog-tl-row {
+    grid-template-columns: 64px 1fr auto; /* hora | texto | icono */
+    padding: 10px 0;
+  }
+  .prog-tl-row time {
+    font-size: 0.92rem;
+    padding-right: var(--gut);
+    text-align: left; /* mejora lectura en móvil */
+  }
+  .prog-tl-text {
+    font-size: 0.92rem;
+    padding-left: var(--gut);
+    word-break: break-word; /* evita que se salga */
+  }
+  .prog-ico {
+    width: 22px;
+    height: 22px;
+    margin-left: 6px;
+  }
+
+  /* Tarjetas: tipografías un toquecito más chicas */
+  .prog-card-title {
+    font-size: 0.95rem;
+    padding: 7px 8px;
+  }
+  .prog-card-body {
+    font-size: 0.9rem;
+  }
+}
+
+/* Por si algún texto largo empuja el ancho en cualquier tamaño */
+.prog-tl-text {
+  overflow-wrap: anywhere;
+}
+
+/* Fix overflow del contador en pantallas angostas */
+.count-box > * {
+  min-width: 0;
+} /* ya lo tienes, lo reforzamos */
+.count-item {
+  min-width: 0;
+} /* ← reemplaza el fit-content */
+
+/* Además, compactamos tipografías y espacios en móviles chicos */
+@media (max-width: 380px) {
+  .count-box {
+    gap: 8px;
+    padding: 12px 10px;
+  }
+  .count-item .num {
+    font-size: clamp(26px, 9.6vw, 40px);
+  }
+  .colon {
+    font-size: clamp(22px, 8.8vw, 34px);
+  }
+  .count-item small {
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 330px) {
+  .count-box {
+    gap: 6px;
+  }
+  .count-item .num {
+    font-size: 24px;
+  }
+  .colon {
+    font-size: 22px;
+  }
+  .count-item small {
+    letter-spacing: 0.12em;
+    font-size: 0.66rem;
+  }
+}
+
+/* Cuando DÍAS tiene 3 dígitos, apretamos un poco más */
+.count-box.three-digits {
+  gap: clamp(6px, 1.6vw, 14px);
+}
+.count-box.three-digits .num {
+  font-size: clamp(24px, 7vw, 36px);
+}
