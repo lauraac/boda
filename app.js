@@ -152,7 +152,7 @@ function waitForMetadata(audio) {
   const INITIAL_VOL = 0.06;
   const TARGET_VOL = 0.18;
   const FADE_MS = 1800;
-  const START_AT = 36; // ⏱️ queremos iniciar en 0:36
+  const START_AT = 5; // ⏱️ queremos iniciar en 0:36
 
   function setPauseIcon(paused) {
     icon.innerHTML = paused
