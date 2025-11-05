@@ -599,3 +599,315 @@ img {
   color: #444;
   font-size: 0.9rem;
 }
+
+.love-announcement {
+  padding: 30px 15px;
+}
+
+.names-img,
+.phrase-img {
+  max-width: 50%;
+  height: auto;
+  display: block;
+  margin: 0 auto 15px;
+}
+/* === Alineación perfecta de líneas entre nombres y frase === */
+
+/* Imagen de los nombres ("Laura Silvia & Salvador") */
+.names-img {
+  max-width: 90%; /* 🔹 ajusta al ancho deseado */
+  display: block;
+  margin: 0 auto 20px;
+  border-top: 2px solid #000; /* 🔹 mismo grosor que las líneas de la frase */
+  border-radius: 0;
+  padding-top: 8px;
+}
+
+/* Contenedor de la frase "Han sido flechados" */
+/* === Alineación fija y centrada de la frase "Han sido flechados" === */
+.phrase-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px auto 20px;
+  width: 95%; /* 🔹 igual que el ancho de los nombres */
+  position: relative;
+}
+
+.phrase-wrapper::before,
+.phrase-wrapper::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #000;
+  position: relative;
+  top: 1px; /* 🔹 pequeño ajuste visual para centrar líneas */
+}
+
+.phrase-img {
+  display: block;
+  max-width: 50%; /* 🔹 tu tamaño deseado */
+  height: auto;
+  position: relative;
+  top: 10px; /* 🔹 corrige leve desalineo vertical */
+}
+
+/* Imagen de los nombres */
+.names-img {
+  display: block;
+  max-width: 95%;
+  margin: 0 auto 0px;
+  border-top: 1px solid #000;
+  padding-top: 1px;
+}
+
+/* Texto del anuncio justificado */
+.love-text {
+  text-align: justify; /* 🔹 alinea el texto a ambos lados */
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  hyphens: auto; /* 🔹 mejora el corte de palabras en móviles */
+}
+
+/* Chip del título: versión delgada */
+.parents-title,
+.padrinos-title {
+  background: #000;
+  color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  padding: 8px 12px;
+  margin: 18px auto 16px;
+}
+.parents-title.skinny,
+.padrinos-title.skinny {
+  font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+    Arial;
+  font-weight: 400; /* delgada */
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+}
+
+/* Layout de tres columnas con separador */
+.parents-split {
+  display: grid;
+  grid-template-columns: 1fr 36px 1fr; /* izq | separador | der */
+  align-items: start;
+  gap: 16px;
+  margin: 10px 0 8px;
+}
+
+.parents-col {
+  text-align: center;
+}
+.mini-title {
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin: 0 0 6px;
+}
+.parents-col p {
+  margin: 0;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Separador vertical con corazón centrado */
+.parents-sep {
+  position: relative;
+  width: 36px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate; /* asegura que el corazón quede delante */
+}
+.parents-sep::before,
+.parents-sep::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: #000;
+}
+.parents-sep::before {
+  top: 0;
+  bottom: 50%;
+}
+.parents-sep::after {
+  top: 50%;
+  bottom: 0;
+}
+.sep-heart {
+  position: relative;
+  z-index: 1;
+  font-size: 18px;
+  line-height: 1;
+  background: #fff; /* “corta” visualmente la línea detrás del corazón */
+  padding: 0 6px;
+  border-radius: 999px;
+}
+
+/* & centrado */
+.ampersand {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-size: 26px;
+  margin: 6px 0 2px;
+}
+
+/* Padrinos centrados */
+.padrinos-center {
+  text-align: center;
+}
+.padrinos-center p {
+  margin: 8px 0 0;
+  line-height: 1.6;
+}
+
+/* Responsivo: en pantallas muy pequeñas, apilar */
+@media (max-width: 420px) {
+  .parents-split {
+    grid-template-columns: 1fr; /* apila */
+    gap: 10px;
+  }
+  .parents-sep {
+    height: 24px;
+    width: 100%;
+  }
+  /* En móvil, convierte el separador a horizontal para que se vea bonito */
+  .parents-sep::before,
+  .parents-sep::after {
+    height: 2px;
+    width: 44%;
+    left: auto;
+    transform: none;
+    top: 50%;
+    bottom: auto;
+  }
+  .parents-sep::before {
+    right: 52%;
+  }
+  .parents-sep::after {
+    left: 52%;
+  }
+}
+/* ✨ Animación del corazón que aparece y desaparece */
+@keyframes heartFade {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.sep-heart {
+  position: relative;
+  z-index: 1;
+  font-size: 18px;
+  line-height: 1;
+  background: #fff;
+  padding: 0 6px;
+  border-radius: 999px;
+  color: #000; /* color del corazón */
+  animation: heartFade 2.5s infinite ease-in-out; /* 💓 animación */
+}
+
+/* ===== Padrinos estilo periódico (scopeado) ===== */
+.love-announcement .gp {
+  text-align: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 20px 16px;
+  margin-top: 10px;
+}
+
+/* Bajada principal */
+.love-announcement .gp-lead {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  font-size: 1.06rem;
+  line-height: 1.6;
+  margin: 4px 0 10px;
+}
+
+/* Regla doble editorial */
+.love-announcement .gp-rule {
+  position: relative;
+  height: 2px;
+  background: #000;
+  max-width: 520px;
+  margin: 8px auto 14px;
+}
+.love-announcement .gp-rule::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 1px;
+  background: #000;
+}
+
+/* Grid tipo nota */
+.love-announcement .gp-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  position: relative;
+}
+
+/* Ítems */
+.love-announcement .gp-item {
+  padding: 6px 8px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.love-announcement .gp-item h5 {
+  margin: 0 0 4px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.92rem;
+}
+.love-announcement .gp-item p {
+  margin: 0;
+  color: #333;
+  line-height: 1.55;
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+/* 2 columnas con regla central sutil */
+@media (min-width: 560px) {
+  .love-announcement .gp-grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 22px;
+  }
+  .love-announcement .gp-grid::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: #000;
+    opacity: 0.18;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .love-announcement .gp-span2 {
+    grid-column: 1 / -1; /* la “Madrina de Ramo” ocupa ancho completo */
+  }
+}
