@@ -25,11 +25,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@600;700&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="styles.css?v=2025-11-05">
+  <link rel="stylesheet" href="styles.css?v=2025-11-05b">
 </head>
 
 <body>
-  <!-- SOLO ESCRITORIO -->
+  <!-- Aviso para escritorio -->
   <div id="desktopNotice" class="desktop-notice" hidden aria-live="polite">
     <div class="dn-card">
       <img src="./img/uri.png" alt="" class="dn-icon" aria-hidden="true">
@@ -83,7 +83,8 @@
     </header>
 
     <!-- Anuncio principal -->
-    <section class="section love-announcement wrap">
+    <section class="section love-announcement like-history" id="anuncio">
+
       <img src="./img/lauraTexto.png" alt="Laura Silvia y Salvador" class="names-img">
 
       <div class="phrase-wrapper">
@@ -327,10 +328,21 @@
     </section>
 
     <footer class="wrap footer">
-      <small>© 2025 • Hecho por <strong>LAC</strong> — Invitaciones digitales</small><br>
+      <small>
+        © 2025 • Hecho por
+        <strong class="footer-brand">
+          <img src="./img/girasol.png" alt="Girasol" class="footer-icon">
+          LAC
+          <img src="./img/girasol.png" alt="Girasol" class="footer-icon">
+        </strong>
+        — Invitaciones digitales
+      </small>
+      <br>
+
       <a class="wa-chip" target="_blank" rel="noopener"
         href="https://wa.me/52XXXXXXXXXX?text=Hola%20Laura%2C%20quiero%20mi%20invitaci%C3%B3n%20tipo%20peri%C3%B3dico%20%F0%9F%93%B0">
-        💬 Contáctame por WhatsApp
+        <img src="./img/whatsapp.png" alt="WhatsApp" class="wa-icon">
+        Contáctame por WhatsApp
       </a>
     </footer>
   </div>
@@ -347,7 +359,8 @@
     </svg>
   </button>
 
-  <script src="app.js?v=2025-11-05"></script>
+  <!-- JS -->
+  <script src="app.js?v=2025-11-05b"></script>
 </body>
 
 </html>

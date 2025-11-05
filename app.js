@@ -7,38 +7,118 @@ const $id = (id) => document.getElementById(id);
 const pad2 = (n) => String(n).padStart(2, "0");
 
 // ========= SOLO MÓVIL + AVISO ESCRITORIO =========
+// ========= SOLO MÓVIL + AVISO ESCRITORIO (con resize y overrides) =========
 (function initDesktopNotice() {
-  const notice = $id("desktopNotice");
-  const app = $id("app");
-  const qr = $id("dnQr");
-  const copyBtn = $id("dnCopy");
-  const waBtn = $id("dnWhats");
+  const notice = document.getElementById("desktopNotice");
+  const app = document.getElementById("app");
+  const qr = document.getElementById("dnQr");
+  const copyBtn = document.getElementById("dnCopy");
+  const waBtn = document.getElementById("dnWhats");
 
+  // Helpers
   const url = window.location.href;
-  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const setVisible = (showApp) => {
+    if (!notice || !app) return;
+    notice.hidden = showApp; // si muestro app, oculto aviso
+    app.hidden = !showApp; // si NO muestro app, muestro aviso
+  };
 
-  // QR + Whats link
-  const qrBase =
-    "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=";
-  if (qr) qr.src = qrBase + encodeURIComponent(url);
-  if (waBtn)
+  // Desktop-like: ancho grande + mouse + puntero fino
+  const isDesktopLike = () =>
+    window.matchMedia("(min-width: 900px)").matches &&
+    window.matchMedia("(hover: hover)").matches &&
+    window.matchMedia("(pointer: fine)").matches;
+
+  // Overrides por query o memoria (para probar en desktop)
+  const qsMode = new URLSearchParams(location.search).get("mode"); // "mobile" | "desktop"
+  if (qsMode === "mobile" || qsMode === "desktop") {
+    localStorage.setItem("previewMode", qsMode);
+  }
+  const savedMode = localStorage.getItem("previewMode"); // puede ser null
+  const forceMobile = savedMode === "mobile";
+  const forceDesktop = savedMode === "desktop";
+
+  // Arma QR / Whats / Copiar
+  if (qr) {
+    const qrBase =
+      "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=";
+    qr.src = qrBase + encodeURIComponent(url);
+  }
+  if (waBtn) {
     waBtn.href =
       "https://wa.me/?text=" +
       encodeURIComponent("Hola, ábrelo en mi celular: " + url);
-  if (copyBtn)
+  }
+  if (copyBtn) {
     copyBtn.addEventListener("click", async () => {
       await navigator.clipboard.writeText(url);
       copyBtn.textContent = "¡Copiado!";
       setTimeout(() => (copyBtn.textContent = "Copiar enlace"), 1500);
     });
+  }
 
-  // Toggle vistas
-  if (!isMobile) {
-    if (notice) notice.hidden = false;
-    if (app) app.hidden = true;
-  } else {
-    if (notice) notice.hidden = true;
-    if (app) app.hidden = false;
+  // Decide qué mostrar (y re-evalúa en cada resize)
+  function evaluate() {
+    // Regla:
+    // - Si forceMobile => siempre APP (para probar en desktop)
+    // - Si forceDesktop => siempre AVISO
+    // - Si NO overrides:
+    //     * Si isDesktopLike() => AVISO
+    //     * Si NO => APP (por ejemplo, al reducir la ventana)
+    let showApp;
+    if (forceMobile) showApp = true;
+    else if (forceDesktop) showApp = false;
+    else showApp = !isDesktopLike();
+
+    setVisible(showApp);
+  }
+
+  evaluate();
+
+  // Recalcula al cambiar el tamaño de la ventana (permite probar reduciendo la web)
+  let rid;
+  window.addEventListener("resize", () => {
+    cancelAnimationFrame(rid);
+    rid = requestAnimationFrame(evaluate);
+  });
+
+  // Botón/atajo para alternar modo en desktop (opcional y útil)
+  // Agrega un pequeño toggle en esquina para forzar modo mobile/desktop.
+  if (!document.getElementById("modeToggle")) {
+    const t = document.createElement("button");
+    t.id = "modeToggle";
+    t.type = "button";
+    t.textContent =
+      savedMode === "mobile"
+        ? "Salir de simulación móvil"
+        : savedMode === "desktop"
+        ? "Salir de modo escritorio"
+        : "Forzar vista móvil";
+    Object.assign(t.style, {
+      position: "fixed",
+      right: "12px",
+      top: "12px",
+      zIndex: "10000",
+      padding: "8px 10px",
+      borderRadius: "999px",
+      border: "1px solid #000",
+      background: "#fff",
+      fontWeight: "700",
+      fontSize: "12px",
+      cursor: "pointer",
+      boxShadow: "0 6px 16px rgba(0,0,0,.15)",
+    });
+    document.body.appendChild(t);
+
+    t.addEventListener("click", () => {
+      const cur = localStorage.getItem("previewMode");
+      if (!cur) {
+        localStorage.setItem("previewMode", "mobile");
+      } else {
+        localStorage.removeItem("previewMode");
+      }
+      location.reload();
+    });
   }
 })();
 

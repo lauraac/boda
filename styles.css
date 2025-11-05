@@ -4,12 +4,12 @@
   --muted: #6b6b6b;
   --line: #e3e3e3;
   --soft: #fbfbfb;
-  --max: 640px;
+  --max: 720px; /* 🔗 ancho único para TODA la app */
   --r: 16px;
   --shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
 }
 
-/* Base móvil */
+/* Tipografía uniforme */
 * {
   box-sizing: border-box;
 }
@@ -19,8 +19,8 @@ body {
   padding: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
-    Arial;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -29,6 +29,28 @@ img {
   height: auto;
   display: block;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+b,
+.section-title,
+.mini-title,
+.parents-title,
+.padrinos-title,
+.prog-card-title,
+.info-lead,
+.btn,
+.count-item .num {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
@@ -41,7 +63,7 @@ img {
   text-align: center;
 }
 
-/* Portada / periódico */
+/* Portada */
 .masthead {
   background: #fff;
   border-radius: 20px;
@@ -131,7 +153,7 @@ img {
   object-fit: cover;
 }
 
-/* Corazones reutilizables */
+/* Corazones */
 .hearts {
   display: inline-flex;
   gap: 2px;
@@ -162,15 +184,23 @@ img {
 }
 
 /* Love announcement */
-.love-announcement {
+/* ===== Love announcement con el MISMO contenedor que history-section ===== */
+.love-announcement.like-history {
+  /* mismo “box” que .history-section */
+  width: min(92%, var(--max));
+  margin: 38px auto;
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  padding: 20px 16px;
-  margin-top: 24px;
-  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 22px 18px;
+  overflow: hidden;
+
+  /* neutraliza padding/estilos previos del “wrap” y del bloque antiguo */
+  border: 1px solid #e3e3e3; /* igual que otras tarjetas */
 }
+
+/* Mantén el resto de sus hijos como ya los tienes (names-img, phrase-wrapper, etc.) */
+
 .names-img {
   max-width: 95%;
   margin: 0 auto 0;
@@ -208,7 +238,7 @@ img {
   margin-bottom: 20px;
 }
 
-/* Padres + separador con corazón */
+/* Padres + separador */
 .parents-title,
 .padrinos-title {
   background: #000;
@@ -325,7 +355,7 @@ img {
   }
 }
 
-/* Padrinos (nota estilo periódico) */
+/* Padrinos */
 .love-announcement .gp {
   background: #fff;
   border: 1px solid var(--line);
@@ -410,7 +440,7 @@ img {
 .news-headline {
   text-align: center;
   margin: 10px auto 30px;
-  width: min(90%, 720px);
+  width: min(90%, var(--max));
   font-family: "Playfair Display", serif;
 }
 .news-headline h2 {
@@ -438,9 +468,9 @@ img {
   object-fit: cover;
 }
 
-/* Nuestra historia */
+/* Nuestra historia (🔗 ancho unificado) */
 .history-section {
-  width: min(92%, 720px);
+  width: min(92%, var(--max));
   margin: 38px auto;
   background: #fff;
   border-radius: 12px;
@@ -526,7 +556,7 @@ img {
   padding: 0;
 }
 .prog {
-  width: min(92%, 720px);
+  width: min(92%, var(--max));
   margin: 38px auto;
   background: #fff;
   border-radius: 12px;
@@ -703,9 +733,9 @@ img {
   }
 }
 
-/* Tarjetas info */
+/* Info cards (🔗 ancho unificado) */
 .info-section {
-  width: min(92%, 720px);
+  width: min(92%, var(--max));
   margin: 38px auto;
   display: grid;
   gap: 18px;
@@ -745,9 +775,6 @@ img {
 }
 .info-body {
   padding: 6px 8px 4px;
-}
-.center {
-  text-align: center;
 }
 .info-ico {
   width: 46px;
@@ -790,9 +817,9 @@ img {
   }
 }
 
-/* Contador */
+/* Contador (🔗 ancho unificado) */
 .counter-section {
-  width: min(92%, 720px);
+  width: min(92%, var(--max));
   margin: 38px auto;
   background: #fff;
   border: 1px solid #e1e1e1;
@@ -884,7 +911,7 @@ img {
   }
 }
 
-/* RSVP */
+/* RSVP (🔗 ancho unificado) */
 .rsvp-section {
   display: flex;
   justify-content: center;
@@ -895,7 +922,7 @@ img {
   border-radius: 16px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
   padding: 24px 20px;
-  width: min(92%, 720px);
+  width: min(92%, var(--max));
   margin: 0 auto;
 }
 .date-banner {
@@ -987,21 +1014,47 @@ img {
   display: inline-block;
 }
 
-/* Footer */
+/* Footer + Whats */
 .footer {
-  padding-bottom: 70px;
   text-align: center;
-  color: #666;
+  color: #444;
+  padding-bottom: 70px;
+  font-size: 0.9rem;
+}
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.footer-icon {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
 }
 .wa-chip {
   display: inline-flex;
-  gap: 8px;
   align-items: center;
-  padding: 10px 14px;
+  gap: 6px;
+  padding: 10px 16px;
   border-radius: 999px;
-  border: 1px solid #000;
+  border: 2px solid #2c2a2a;
   background: #fff;
-  font-weight: 800;
+  color: #4d504e;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: 0.2s;
+}
+.wa-chip:hover {
+  background: #121312;
+  color: #fff;
+  transform: scale(1.03);
+}
+.wa-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
 }
 
 /* FAB audio */
@@ -1129,4 +1182,8 @@ img {
 }
 .btn:hover {
   transform: scale(1.05);
+}
+#app[hidden],
+#desktopNotice[hidden] {
+  display: none !important;
 }
