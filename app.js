@@ -133,3 +133,102 @@ const pad2 = (n) => String(n).padStart(2, "0");
     app.hidden = false;
   }
 })();
+
+// Espera a que el <audio> tenga metadatos para poder hacer seek con seguridad
+function waitForMetadata(audio) {
+  return new Promise((resolve) => {
+    if (audio.readyState >= 1) return resolve();
+    audio.addEventListener("loadedmetadata", resolve, { once: true });
+  });
+}
+
+// ===== Música de fondo con autoplay + fade =====
+(function () {
+  const audio = document.getElementById("bgAudio");
+  const fab = document.getElementById("audioFab");
+  const icon = document.getElementById("audioIcon");
+  if (!audio || !fab || !icon) return;
+
+  const INITIAL_VOL = 0.06;
+  const TARGET_VOL = 0.18;
+  const FADE_MS = 1800;
+  const START_AT = 36; // ⏱️ queremos iniciar en 0:36
+
+  function setPauseIcon(paused) {
+    icon.innerHTML = paused
+      ? '<path d="M8 5v14l11-7-11-7z"></path>'
+      : '<rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect>';
+    fab.classList.toggle("paused", paused);
+    fab.setAttribute(
+      "aria-label",
+      paused ? "Reproducir música" : "Pausar música"
+    );
+    fab.title = paused ? "Reproducir música" : "Pausar música";
+  }
+
+  function fadeTo(target = TARGET_VOL, ms = FADE_MS) {
+    const start = audio.volume;
+    const delta = target - start;
+    const t0 = performance.now();
+    function step(t) {
+      const k = Math.min(1, (t - t0) / ms);
+      audio.volume = Math.max(0, Math.min(1, start + delta * k));
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  async function primeAndPlay(fromSec = START_AT) {
+    audio.volume = INITIAL_VOL;
+    await waitForMetadata(audio); // 👈 garantiza metadatos
+    audio.currentTime = fromSec; // 👈 fija 0:36 SIEMPRE
+    await audio.play(); // intenta reproducir
+    fadeTo(TARGET_VOL, FADE_MS);
+    setPauseIcon(false);
+  }
+
+  async function tryAutoplay() {
+    try {
+      await primeAndPlay(START_AT); // 👈 también aquí
+    } catch {
+      // Bloqueado: esperamos primer gesto del usuario
+      setPauseIcon(true);
+      const unlock = async () => {
+        try {
+          await primeAndPlay(START_AT);
+        } catch {}
+        window.removeEventListener("touchstart", unlock, { once: true });
+        window.removeEventListener("click", unlock, { once: true });
+        window.removeEventListener("keydown", unlock, { once: true });
+      };
+      window.addEventListener("touchstart", unlock, {
+        once: true,
+        passive: true,
+      });
+      window.addEventListener("click", unlock, { once: true });
+      window.addEventListener("keydown", unlock, { once: true });
+    }
+  }
+
+  // Botón flotante
+  fab.addEventListener("click", async () => {
+    if (audio.paused) {
+      try {
+        await primeAndPlay(START_AT);
+      } catch {}
+    } else {
+      audio.pause();
+      setPauseIcon(true);
+    }
+  });
+
+  // Arranque
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    tryAutoplay();
+  } else {
+    document.addEventListener("DOMContentLoaded", tryAutoplay, { once: true });
+  }
+})();

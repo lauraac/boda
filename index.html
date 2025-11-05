@@ -367,6 +367,19 @@
       </a>
     </footer>
   </div>
+  <!-- Música de fondo -->
+  <audio id="bgAudio" src="./img/boda.mp3" preload="auto" loop></audio>
+
+  <!-- Botón flotante -->
+  <button id="audioFab" class="audio-fab" type="button" aria-label="Pausar música" title="Pausar música">
+    <span class="audio-pulse" aria-hidden="true"></span>
+    <!-- Ícono inline para no depender de imágenes -->
+    <svg id="audioIcon" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <!-- Estado: “sonando” (icono de pausa) -->
+      <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+      <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+    </svg>
+  </button>
 
   <script src="app.js"></script>
 </body>

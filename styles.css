@@ -1036,7 +1036,6 @@ img {
   width: min(92%, 720px);
   margin: 38px auto;
   background: #fff; /* fondo blanco para fundir imágenes con fondo blanco */
-  border: 1px solid #000; /* borde fino periódico (opcional, quítalo si no lo quieres) */
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   padding: 22px 18px;
@@ -1106,7 +1105,7 @@ img {
 
 .hp-card {
   margin: 0;
-
+  border: 1.2px solid #000;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
@@ -1127,5 +1126,59 @@ img {
 @media (max-width: 640px) {
   .hp-card {
     max-width: 260px;
+  }
+}
+
+.audio-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #111;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 1600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease;
+}
+.audio-fab:hover {
+  transform: translateY(-1px);
+}
+
+.audio-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(17, 17, 17, 0.25);
+  animation: audioPulse 1.8s ease-out infinite;
+  opacity: 0.9;
+  pointer-events: none;
+}
+@keyframes audioPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(17, 17, 17, 0.25);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(17, 17, 17, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(17, 17, 17, 0);
+  }
+}
+
+/* Cuando está en pausa, quitamos el pulso */
+.audio-fab.paused .audio-pulse {
+  display: none;
+}
+
+/* Opcional: sube el botón en móviles para no tapar UI */
+@media (max-width: 576px) {
+  .audio-fab {
+    bottom: 76px;
   }
 }
