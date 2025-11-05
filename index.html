@@ -29,19 +29,33 @@
 </head>
 
 <body>
-
-  <!-- Aviso para escritorio -->
-  <div class="desktop-notice" aria-live="polite" data-nosnippet>
-    <div class="box">
-      <h1>👋 Hola</h1>
-      <p>Esta invitación está pensada para <strong>versión móvil</strong>. Ábrela desde tu teléfono para verla perfecta.
+  <!-- AVISO SOLO ESCRITORIO -->
+  <div id="desktopNotice" class="desktop-notice" hidden aria-live="polite">
+    <div class="dn-card">
+      <img src="./img/uri.png" alt="" class="dn-icon" aria-hidden="true">
+      <h2>¡Hola! 👋</h2>
+      <p class="dn-text">
+        Nuestras invitaciones están <strong>diseñadas para verse en celular</strong>.
+        Te invitamos a abrir este enlace en tu teléfono ✨
       </p>
-      <p class="note">Si necesitas una versión web te la preparo también.</p>
+
+      <div class="dn-qr-wrap">
+        <img id="dnQr" alt="Escanea este código para abrir en tu celular">
+        <small>Escanéalo con la cámara de tu celular</small>
+      </div>
+
+      <div class="dn-actions">
+        <button id="dnCopy" class="btn btn-light btn-sm">Copiar enlace</button>
+        <a id="dnWhats" class="btn btn-outline-light btn-sm" target="_blank" rel="noopener">
+          Enviarme por WhatsApp
+        </a>
+      </div>
     </div>
   </div>
 
   <!-- App móvil -->
-  <div class="app">
+  <div id="app" class="app" hidden>
+
     <!-- ===== Primera vista (masthead estilo periódico) ===== -->
     <header class="wrap masthead">
       <div class="news-header">
@@ -171,9 +185,57 @@
         </section>
       </div>
 
+      <!-- ===== SECCIÓN TITULAR DE NOTICIA ===== -->
+      <section class="news-headline">
+        <h2>¡LLEGA LA BODA MÁS ESPERADA!</h2>
+        <div class="headline-rule"></div>
+
+        <figure class="headline-photo">
+          <img src="./img/boda1.jpg" alt="Llega la boda más esperada" loading="lazy">
+        </figure>
+      </section>
 
 
     </section>
+    <section class="history-section" id="historia">
+      <!-- Título con línea detrás -->
+      <div class="history-title-wrap">
+        <img src="./img/nuestraHistoria.png" alt="Nuestra Historia" class="history-title-img">
+      </div>
+
+      <!-- Texto largo + 3 fotos en columna -->
+      <div class="history-body">
+        <!-- Columna texto -->
+        <div class="history-text">
+          <p>
+            Nos conocimos en el trabajo, sin imaginar que entre reuniones, tareas y refrigerios
+            apurados encontraríamos algo mucho más importante: el uno al otro. Desde aquel 2 de enero
+            del 2019 hemos reído, madurado, llorado un poquito (pero siempre juntos), y aprendimos que
+            el amor verdadero se construye día a día.
+          </p>
+          <p>
+            Poco a poco empezamos a crecer emocionalmente hasta que llegó el capítulo más emocionante:
+            <strong>¡Nos casamos!</strong> Y porque en algún momento fuiste cómplice de una risa, un
+            consejo, un abrazo o una anécdota, tú también eres parte de esta historia. Por eso estás
+            cordialmente invitado(a) a celebrar con nosotros este día tan especial.
+          </p>
+        </div>
+
+        <!-- Columna fotos (tres tarjetas apiladas) -->
+        <div class="history-photos">
+          <figure class="hp-card">
+            <img src="./img/novios-historia.jpg" alt="Novios 1">
+          </figure>
+          <figure class="hp-card">
+            <img src="./img/img2.jpg" alt="Novios 2">
+          </figure>
+          <figure class="hp-card">
+            <img src="./img/img3.jpg" alt="Novios 3">
+          </figure>
+        </div>
+      </div>
+    </section>
+
 
 
     <main class="wrap main">

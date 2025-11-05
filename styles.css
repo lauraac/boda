@@ -439,15 +439,6 @@ img {
   border-radius: 16px;
   padding: 24px;
 }
-/* Desktop notice SOLO en pantallas grandes con mouse (laptop/desktop) */
-@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
-  .app {
-    display: none !important;
-  }
-  .desktop-notice {
-    display: flex;
-  }
-}
 
 /* Líneas inferiores equilibradas (1px y 2px con pequeña separación) */
 .news-header {
@@ -909,5 +900,232 @@ img {
   }
   .love-announcement .gp-span2 {
     grid-column: 1 / -1; /* la “Madrina de Ramo” ocupa ancho completo */
+  }
+}
+
+/* ===== AVISO SOLO VERSIÓN ESCRITORIO ===== */
+.desktop-notice {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #b3e5fc, #f8bbd0);
+  z-index: 9999;
+  padding: 24px;
+}
+
+.dn-card {
+  width: min(420px, 92vw);
+  background: linear-gradient(180deg, #9bbdfc 0%, #5f5ce6 100%);
+  color: #fff;
+  border-radius: 18px;
+  padding: 30px 22px;
+  text-align: center;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.dn-icon {
+  width: 110px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.dn-text {
+  margin: 6px 0 14px;
+  line-height: 1.45;
+  font-size: 1.05rem;
+}
+
+.dn-qr-wrap {
+  display: grid;
+  place-items: center;
+  gap: 6px;
+  margin: 14px 0 18px;
+}
+
+.dn-qr-wrap img {
+  width: 180px;
+  height: 180px;
+  border-radius: 12px;
+  background: #fff;
+  padding: 8px;
+}
+
+.dn-qr-wrap small {
+  color: #fff;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.dn-qr-wrap a {
+  color: #fff;
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+
+.dn-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-light {
+  background: #fff;
+  color: #333;
+  border: none;
+}
+
+.btn-outline-light {
+  background: transparent;
+  color: #fff;
+  border: 1.8px solid #fff;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* ===== SECCIÓN TITULAR DE NOTICIA ===== */
+.news-headline {
+  text-align: center;
+  margin: 10px auto 30px;
+  width: min(90%, 720px);
+  font-family: "Playfair Display", serif;
+}
+
+.news-headline h2 {
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px double #000;
+  display: inline-block;
+  padding: 8px 16px;
+  margin-bottom: 18px;
+}
+
+.headline-photo {
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+  max-width: 680px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.headline-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ===== Nuestra Historia: tarjeta blanca tipo periódico ===== */
+.history-section {
+  width: min(92%, 720px);
+  margin: 38px auto;
+  background: #fff; /* fondo blanco para fundir imágenes con fondo blanco */
+  border: 1px solid #000; /* borde fino periódico (opcional, quítalo si no lo quieres) */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 22px 18px;
+  overflow: hidden;
+}
+
+/* Título con línea negra detrás */
+.history-title-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4px auto 16px;
+  padding: 6px 0;
+}
+.history-title-wrap::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: #000;
+  transform: translateY(-50%);
+}
+.history-title-img {
+  max-width: 60%;
+  height: auto;
+  background: #fff; /* asegura continuidad blanca */
+  padding: 0 10px;
+  border-radius: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Layout: texto a la izquierda, 3 fotos a la derecha */
+.history-body {
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr; /* texto más ancho */
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 640px) {
+  .history-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Texto largo justificado */
+.history-text p {
+  margin: 0 0 12px 0;
+  text-align: justify;
+  line-height: 1.75;
+  color: #2a2a2a;
+  font-size: 0.98rem;
+}
+
+/* Columna de fotos apiladas */
+/* Ajuste: imágenes más pequeñas y completas */
+.history-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.hp-card {
+  margin: 0;
+
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 120px; /* 🔹 tamaño controlado */
+  background: #fff;
+}
+
+.hp-card img {
+  display: block;
+  width: 100%;
+  height: auto; /* 🔹 mantiene proporción */
+  object-fit: contain; /* 🔹 se ven completas */
+  background-color: #fff; /* por si hay bordes transparentes */
+}
+
+/* En móviles: centra las imágenes */
+@media (max-width: 640px) {
+  .hp-card {
+    max-width: 260px;
   }
 }

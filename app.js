@@ -100,3 +100,36 @@ const pad2 = (n) => String(n).padStart(2, "0");
   const r = parseInt(params.get("reservados"), 10);
   if (!isNaN(r) && r > 0 && r <= 20) el.textContent = String(r);
 })();
+
+(function () {
+  const notice = document.getElementById("desktopNotice");
+  const app = document.getElementById("app");
+  const qr = document.getElementById("dnQr");
+  const copyBtn = document.getElementById("dnCopy");
+  const waBtn = document.getElementById("dnWhats");
+
+  const url = window.location.href;
+
+  const qrBase =
+    "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=";
+  qr.src = qrBase + encodeURIComponent(url);
+
+  waBtn.href =
+    "https://wa.me/?text=" +
+    encodeURIComponent("Hola, ábrelo en mi celular: " + url);
+
+  copyBtn.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(url);
+    copyBtn.textContent = "¡Copiado!";
+    setTimeout(() => (copyBtn.textContent = "Copiar enlace"), 1500);
+  });
+
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (!isMobile) {
+    notice.hidden = false;
+    app.hidden = true;
+  } else {
+    notice.hidden = true;
+    app.hidden = false;
+  }
+})();
