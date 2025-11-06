@@ -1278,3 +1278,37 @@ b,
     height: 44px;
   }
 }
+
+/* ===== Tamaño unificado para imágenes de encabezado con texto ===== */
+:root {
+  /* Cambia este valor para ajustar TODAS a la vez */
+  --heading-w: 360px; /* por ejemplo 320–380px */
+}
+
+/* Lista de clases que usas como títulos en imágenes */
+.title-img,
+.wm-title-img,
+.history-title-img,
+.prog-title-img,
+.counter-title-img,
+.names-img {
+  width: min(var(--heading-w), 82%) !important; /* mismo ancho en todas */
+  height: auto !important;
+  display: block;
+  margin: 0 auto; /* centra */
+  background: #fff; /* mantiene el efecto de “faja blanca” */
+  padding: 0 10px;
+  border-radius: 6px;
+}
+
+/* Si alguna te queda demasiado grande en móviles, puedes afinar así: */
+@media (max-width: 420px) {
+  .title-img,
+  .wm-title-img,
+  .history-title-img,
+  .prog-title-img,
+  .counter-title-img,
+  .names-img {
+    width: min(calc(var(--heading-w) - 30px), 86%) !important;
+  }
+}
