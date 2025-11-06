@@ -1,6 +1,6 @@
 // ========= CONFIG =========
 const EVENT_DATE = new Date("2026-04-11T18:00:00-06:00"); // hora local MX
-const WHATS_NUMBER = "52XXXXXXXXXX"; // solo dígitos
+const WHATS_NUMBER = "525534633490"; // solo dígitos
 
 // ========= HELPERS =========
 const $id = (id) => document.getElementById(id);
