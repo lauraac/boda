@@ -1187,3 +1187,94 @@ b,
 #desktopNotice[hidden] {
   display: none !important;
 }
+
+/* ===== Buzón de deseos + Sugerencia de canciones ===== */
+.wm-section {
+  width: min(92%, var(--max));
+  margin: 38px auto;
+  display: grid;
+  gap: 18px;
+}
+
+.wm-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 18px 16px 22px;
+  overflow: hidden;
+}
+
+.wm-title-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 6px 0 14px;
+}
+.wm-title-wrap::before {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 50%;
+  height: 2px;
+  background: #000;
+  z-index: 0;
+}
+.wm-title-img {
+  width: min(360px, 82%);
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  padding: 0 10px;
+  border-radius: 6px;
+}
+
+.wm-body {
+  padding: 6px 8px 4px;
+}
+.wm-ico {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  margin: 4px auto 10px;
+}
+.wm-lead {
+  margin: 0 0 14px;
+  font-size: 0.98rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.wm-btn {
+  display: inline-block;
+  padding: 12px 26px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: 2px solid #2c2a2a;
+  border-radius: 999px;
+  background: #fff;
+  color: #2c2a2a;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: 0.25s;
+}
+.wm-btn:hover {
+  background: #121312;
+  color: #fff;
+  transform: scale(1.03);
+}
+
+@media (max-width: 420px) {
+  .wm-title-wrap::before {
+    left: 4%;
+    right: 4%;
+  }
+  .wm-ico {
+    width: 44px;
+    height: 44px;
+  }
+}
