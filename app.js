@@ -155,7 +155,7 @@ const pad2 = (n) => String(n).padStart(2, "0");
 
 // ========= RSVP: Google Forms (prefill opcional) =========
 const FORM_URL =
-  "https://docs.google.com/forms/d/e/XXXXXXXXXXXX/viewform?usp=pp_url";
+  "https://docs.google.com/forms/d/e/1FAIpQLScIe2cZNXGnV6x0CooqhrUSYLOrXf6-oghtEeeNJG4DyPOusQ/viewform";
 const FORM_ENTRIES = {
   nombre: "entry.1111111111",
   puedeAsistir: "entry.2222222222",
