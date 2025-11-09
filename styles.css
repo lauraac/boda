@@ -1759,3 +1759,46 @@ img {
   padding-left: var(--gut);
   line-height: 1.4;
 }
+/* ===== Animación delicada para "L & S" ===== */
+.signature-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.signature-text span {
+  display: inline-block;
+  font-size: clamp(38px, 10vw, 90px);
+  opacity: 0.6;
+  transform: scale(0.95);
+  animation: fadeLetter 3s infinite ease-in-out;
+}
+
+.signature-text span:nth-child(1) {
+  animation-delay: 0s; /* L */
+}
+.signature-text span:nth-child(3) {
+  animation-delay: 1.5s; /* S */
+}
+
+/* el & se mantiene fijo, sin animación */
+.signature-text .amp {
+  opacity: 1;
+  transform: none;
+  animation: none;
+  font-size: clamp(26px, 8vw, 60px); /* más pequeño */
+  margin: 0 4px;
+}
+
+@keyframes fadeLetter {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
