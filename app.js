@@ -1,9 +1,20 @@
-// ===== Intro: full-screen + control de audio global =====
+// ===== Intro: video fullscreen, sin overlays ni textos =====
 const intro = document.getElementById("intro-video-container");
 const video = document.getElementById("intro-video");
 
-// Asegurar que el video ocupe toda la pantalla sin scroll
+// Crea el botón "Saltar" si no existe
+let skipBtn = document.getElementById("skip-intro");
+if (!skipBtn && intro) {
+  skipBtn = document.createElement("button");
+  skipBtn.id = "skip-intro";
+  skipBtn.className = "skip-btn";
+  skipBtn.type = "button";
+  skipBtn.textContent = "Saltar video";
+  intro.appendChild(skipBtn);
+}
+
 if (intro && video) {
+  // Ocupa pantalla completa
   Object.assign(intro.style, {
     position: "fixed",
     inset: "0",
@@ -18,27 +29,35 @@ if (intro && video) {
     objectFit: "cover",
   });
 
-  // Audio: silenciar/pausar música de la tarjeta durante el intro
-  const bgAudioForIntro = document.getElementById("bgAudio");
-  if (bgAudioForIntro) {
+  // Silencia música de fondo durante el intro
+  const bg = document.getElementById("bgAudio");
+  if (bg) {
     try {
-      bgAudioForIntro.pause();
+      bg.pause();
     } catch {}
-    bgAudioForIntro.muted = true;
+    bg.muted = true;
   }
 
-  // Queremos que el video SÍ suene
-  video.muted = false;
-  video.setAttribute("playsinline", ""); // iOS
+  // iOS-friendly
+  video.setAttribute("playsinline", "");
   video.playsInline = true;
+  video.muted = false;
 
-  // Intento de autoplay del video con audio; si falla, se habilita al primer toque
+  // Evitar que el primer toque (para desbloquear audio) también pause
+  let justUnlocked = false;
+
+  // Autoplay; si falla por políticas, desbloquear al primer toque/click
   video.play().catch(() => {
     const unlock = () => {
+      justUnlocked = true;
+      video.muted = false;
       video.play().catch(() => {});
       window.removeEventListener("touchstart", unlock, { once: true });
       window.removeEventListener("click", unlock, { once: true });
       window.removeEventListener("keydown", unlock, { once: true });
+      setTimeout(() => {
+        justUnlocked = false;
+      }, 200);
     };
     window.addEventListener("touchstart", unlock, {
       once: true,
@@ -48,14 +67,74 @@ if (intro && video) {
     window.addEventListener("keydown", unlock, { once: true });
   });
 
-  // Cuando termina el video, desaparece suavemente y avisamos que terminó el intro
-  video.addEventListener("ended", () => {
+  const finishIntro = () => {
     intro.classList.add("fade-out");
     setTimeout(() => {
       intro.style.display = "none";
-      document.dispatchEvent(new Event("intro:ended")); // <- Notifica al reproductor principal
+      document.dispatchEvent(new Event("intro:ended"));
     }, 1000);
+  };
+
+  video.addEventListener("ended", finishIntro);
+
+  if (skipBtn) {
+    skipBtn.addEventListener("click", (e) => {
+      e.stopPropagation(); // que no dispare el toggle
+      try {
+        video.pause();
+      } catch {}
+      finishIntro();
+    });
+  }
+
+  // Tocar la pantalla = pausar/reanudar (sin mostrar nada)
+  const toggle = () => {
+    if (justUnlocked) return;
+    if (video.paused) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  };
+
+  ["pointerup", "touchend", "click"].forEach((ev) => {
+    intro.addEventListener(
+      ev,
+      (e) => {
+        if (e.target === skipBtn) return;
+        toggle();
+      },
+      { passive: true }
+    );
   });
+}
+
+// Tocar la pantalla pausa/reanuda el video
+function togglePlayPause() {
+  if (!video) return;
+  if (video.paused) {
+    // reanudar (iOS: esto cuenta como interacción válida)
+    video.play().catch(() => {});
+    pauseOverlay.hidden = true;
+  } else {
+    video.pause();
+    pauseOverlay.hidden = false;
+  }
+}
+
+// Escuchar toques/clicks en TODO el contenedor del intro
+if (intro) {
+  ["click", "pointerup", "touchend"].forEach((ev) =>
+    intro.addEventListener(
+      ev,
+      (e) => {
+        // si tocaron el botón "Saltar", no togglear
+        if (e.target === skipBtn) return;
+        togglePlayPause();
+      },
+      { passive: true }
+    )
+  );
 }
 
 // ========= CONFIG =========
@@ -133,40 +212,6 @@ const pad2 = (n) => String(n).padStart(2, "0");
     cancelAnimationFrame(rid);
     rid = requestAnimationFrame(evaluate);
   });
-
-  // Mini toggle para probar en desktop
-  if (!document.getElementById("modeToggle")) {
-    const t = document.createElement("button");
-    t.id = "modeToggle";
-    t.type = "button";
-    t.textContent =
-      savedMode === "mobile"
-        ? "Salir de simulación móvil"
-        : savedMode === "desktop"
-        ? "Salir de modo escritorio"
-        : "Forzar vista móvil";
-    Object.assign(t.style, {
-      position: "fixed",
-      right: "12px",
-      top: "12px",
-      zIndex: "10000",
-      padding: "8px 10px",
-      borderRadius: "999px",
-      border: "1px solid #000",
-      background: "#fff",
-      fontWeight: "700",
-      fontSize: "12px",
-      cursor: "pointer",
-      boxShadow: "0 6px 16px rgba(0,0,0,.15)",
-    });
-    document.body.appendChild(t);
-    t.addEventListener("click", () => {
-      const cur = localStorage.getItem("previewMode");
-      if (!cur) localStorage.setItem("previewMode", "mobile");
-      else localStorage.removeItem("previewMode");
-      location.reload();
-    });
-  }
 })();
 
 // ========= COUNTDOWN =========
