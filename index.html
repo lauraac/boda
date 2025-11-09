@@ -6,21 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Nos Casamos — Laura Silvia & Salvador</title>
 
-  <!-- Open Graph -->
-  <link rel="canonical" href="https://tu-dominio.com/boda-noticia?v=1">
-  <meta property="og:url" content="https://tu-dominio.com/boda-noticia?v=1">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="NOS CASAMOS — Sábado, 11 Abril 2026">
-  <meta property="og:description" content="Acompáñanos a celebrar. Ceremonia 6:00 p.m. • Recepción 8:00 p.m.">
-  <meta property="og:image" content="https://tu-dominio.com/og/og-1200x630.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Great Vibes = títulos (NO tocar) | Merriweather = cuerpo periódico -->
   <link
     href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Merriweather:wght@300;400;700;900&display=swap"
     rel="stylesheet">
@@ -30,363 +18,242 @@
 </head>
 
 <body>
-  <!-- Aviso para escritorio (lo controla tu app.js) -->
-  <div id="desktopNotice" class="desktop-notice" hidden aria-live="polite">
-    <div class="dn-card">
-      <img src="./img/uri.png" alt="" class="dn-icon" aria-hidden="true">
-      <h2>¡Hola! 👋</h2>
-      <p class="dn-text">
-        Nuestras invitaciones están <strong>diseñadas para verse en celular</strong>.
-        Te invitamos a abrir este enlace en tu teléfono ✨
-      </p>
+  <!-- Portada (recortado a lo esencial) -->
+  <header class="wrap masthead">
+    <div class="news-header">
+      <div class="news-cell left">Laura Silvia &amp; Salvador</div>
+      <div class="news-cell center">
+        <img src="./img/noticiadeultimahora.png" alt="Noticia de última hora" class="news-banner" width="640"
+          height="80">
+      </div>
+      <div class="news-cell right">Sábado,<br>11 Abril 2026</div>
+    </div>
 
-      <div class="dn-qr-wrap">
-        <img id="dnQr" alt="Escanea este código para abrir en tu celular">
-        <small>Escanéalo con la cámara de tu celular</small>
+    <img src="./img/noscasamos.png" alt="NOS CASAMOS" class="headline-img" width="1200" height="280">
+    <div class="headline-lines"></div>
+
+    <div class="news-date">
+      <span class="hearts"><span class="heart black">♥</span><span class="heart gray">♥</span></span>
+      <strong>SÁBADO, 11 Abril 2026</strong>
+      <span class="hearts"><span class="heart black">♥</span><span class="heart gray">♥</span></span>
+    </div>
+
+    <div class="headline-lines"></div>
+    <figure class="feature-photo"><img src="./img/img1.png" alt="Foto de los novios"></figure>
+  </header>
+
+  <!-- Anuncio + Padres + Padrinos -->
+  <section class="section like-history" id="anuncio">
+    <img src="./img/lauraTexto.png" alt="Laura Silvia y Salvador" class="names-img">
+
+    <div class="phrase-wrapper gap-lines">
+      <h2 class="gv-title phrase-text">Han sido flechados</h2>
+    </div>
+
+    <p class="love-text">
+      Con gran alegría, nos complace anunciar que hemos decidido unir nuestras vidas en matrimonio.
+      Este día especial marca el inicio de un nuevo capítulo en nuestra historia, un capítulo que
+      queremos escribir junto a ustedes, nuestros amigos y familiares más queridos.
+    </p>
+
+    <div class="parents-title skinny">CON LA BENDICIÓN DE NUESTROS PADRES</div>
+
+    <div class="parents-split">
+      <div class="parents-col">
+        <h4 class="mini-title">PADRES DEL NOVIO</h4>
+        <p>Dominga Sandoval García<br>Modesto Sánchez Cruz (†)</p>
       </div>
 
-      <div class="dn-actions">
-        <button id="dnCopy" class="btn btn-light btn-sm">Copiar enlace</button>
-        <a id="dnWhats" class="btn btn-outline-light btn-sm" target="_blank" rel="noopener">Enviarme por WhatsApp</a>
+      <div class="parents-sep" aria-hidden="true"><span class="sep-heart">♥</span></div>
+
+      <div class="parents-col">
+        <h4 class="mini-title">PADRES DE LA NOVIA</h4>
+        <p>Rosa Reyna Roldán Cantellano<br>Encarnación Montiel Fernández</p>
       </div>
     </div>
-  </div>
 
-  <!-- App móvil -->
-  <div id="app" class="app" hidden>
-    <!-- Portada estilo periódico -->
-    <header class="wrap masthead">
-      <div class="news-header">
-        <div class="news-cell left">Laura Silvia &amp; Salvador</div>
-        <div class="news-cell center">
-          <img src="./img/noticiadeultimahora.png" alt="Noticia de última hora" class="news-banner" width="640"
-            height="80" loading="eager">
-        </div>
-        <div class="news-cell right">Sábado,<br>11 Abril 2026</div>
-      </div>
+    <div class="ampersand">&</div>
 
-      <img src="./img/noscasamos.png" alt="NOS CASAMOS" class="headline-img" width="1200" height="280" loading="eager">
-      <div class="headline-lines"></div>
+    <div class="padrinos-title skinny">NUESTROS PADRINOS DE HONOR</div>
 
-      <div class="news-date">
-        <span class="hearts"><span class="heart black">♥</span><span class="heart gray">♥</span></span>
-        <strong>SÁBADO, 11 Abril 2026</strong>
-        <span class="hearts"><span class="heart black">♥</span><span class="heart gray">♥</span></span>
-      </div>
-
-      <div class="headline-lines"></div>
-
-      <figure class="feature-photo">
-        <img src="./img/img1.png" alt="Foto de los novios" loading="lazy">
-      </figure>
-    </header>
-
-    <!-- Anuncio principal -->
-    <section class="section like-history" id="anuncio">
-      <img src="./img/lauraTexto.png" alt="Laura Silvia y Salvador" class="names-img">
-
-      <!-- NO TOCAR títulos gv-title -->
-      <div class="phrase-wrapper gap-lines">
-        <h2 class="gv-title phrase-text">Han sido flechados</h2>
-      </div>
-
-      <p class="love-text">
-        Con gran alegría, nos complace anunciar que hemos decidido unir nuestras vidas en matrimonio.
-        Este día especial marca el inicio de un nuevo capítulo en nuestra historia, un capítulo que
-        queremos escribir junto a ustedes, nuestros amigos y familiares más queridos.
+    <section class="gp">
+      <p class="gp-lead"><strong>Padrinos de Velación</strong><br>Catalina Sánchez Sandoval<br>Rogelio Morales Morales
       </p>
+      <div class="gp-rule"></div>
 
-      <div class="parents-title skinny">CON LA BENDICIÓN DE NUESTROS PADRES</div>
+      <div class="gp-grid">
+        <article class="gp-item">
+          <h5>Padrinos de Anillos</h5>
+          <p>Montiel<br>Montiel</p>
+        </article>
 
-      <div class="parents-split">
-        <div class="parents-col">
-          <h4 class="mini-title">PADRES DEL NOVIO</h4>
-          <p>Dominga Sandoval García<br>Modesto Sánchez Cruz (†)</p>
-        </div>
+        <article class="gp-item">
+          <h5>Padrinos de Arras</h5>
+          <p>Manuel de Jesús Espinosa Delgado<br>Lucelia Barrios Ramírez</p>
+        </article>
 
-        <div class="parents-sep" aria-hidden="true"><span class="sep-heart">♥</span></div>
+        <article class="gp-item">
+          <h5>Padrinos de Lazo</h5>
+          <p>Rogelio Fuentes Rodríguez<br>Sandy Esquivel García</p>
+        </article>
 
-        <div class="parents-col">
-          <h4 class="mini-title">PADRES DE LA NOVIA</h4>
-          <p>Rosa Reyna Roldán Cantellano<br>Encarnación Montiel Fernández</p>
-        </div>
+        <article class="gp-item">
+          <h5>Madrina de Ramo</h5>
+          <p>Janet López Meraz</p>
+        </article>
       </div>
+    </section>
+  </section>
 
-      <div class="ampersand">&</div>
+  <!-- Nuestra historia (2 columnas estables en móvil) -->
+  <section class="history-section" id="historia">
+    <div class="phrase-wrapper gap-lines">
+      <h2 class="gv-title history-title-text">Nuestra Historia</h2>
+    </div>
 
-      <div class="padrinos-title skinny">NUESTROS PADRINOS DE HONOR</div>
-
-      <section class="gp">
-        <p class="gp-lead"><strong>Padrinos de Velación</strong><br>Catalina Sánchez Sandoval<br>Rogelio Morales Morales
+    <div class="history-body">
+      <div class="history-text">
+        <p>
+          Nos conocimos en el trabajo, sin imaginar que entre reuniones, tareas y refrigerios
+          apurados encontraríamos algo mucho más importante: el uno al otro. Desde aquel 2 de enero
+          del 2019 hemos reído, madurado, llorado un poquito (pero siempre juntos), y aprendimos que
+          el amor verdadero se construye día a día.
         </p>
-        <div class="gp-rule"></div>
+        <p>
+          Poco a poco empezamos a crecer emocionalmente hasta que llegó el capítulo más emocionante:
+          <strong>¡Nos casamos!</strong> Y porque en algún momento fuiste cómplice de una risa, un
+          consejo, un abrazo o una anécdota, tú también eres parte de esta historia. Por eso estás
+          cordialmente invitado(a) a celebrar con nosotros este día tan especial.
+        </p>
+      </div>
 
-        <div class="gp-grid">
-          <article class="gp-item">
-            <h5>Padrinos de Anillos</h5>
-            <p>Montiel<br>Montiel</p>
-          </article>
+      <div class="history-photos">
+        <figure class="hp-card"><img src="./img/novios-historia.jpg" alt="Novios 1"></figure>
+        <figure class="hp-card"><img src="./img/img2.jpg" alt="Novios 2"></figure>
+      </div>
+    </div>
+  </section>
 
-          <article class="gp-item">
-            <h5>Padrinos de Arras</h5>
-            <p>Manuel de Jesús Espinosa Delgado<br>Lucelia Barrios Ramírez</p>
-          </article>
-
-          <article class="gp-item">
-            <h5>Padrinos de Lazo</h5>
-            <p>Rogelio Fuentes Rodríguez<br>Sandy Esquivel García</p>
-          </article>
-
-          <article class="gp-item">
-            <h5>Madrina de Ramo</h5>
-            <p>Janet López Meraz</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- Titular de noticia -->
-      <section class="news-headline">
-        <h2>¡LLEGA LA BODA MÁS ESPERADA!</h2>
-        <figure class="headline-photo">
-          <img src="./img/boda1.jpg" alt="Llega la boda más esperada" loading="lazy">
-        </figure>
-      </section>
-    </section>
-
-    <!-- Nuestra historia -->
-    <section class="history-section" id="historia">
+  <!-- Programa -->
+  <main class="wrap main">
+    <section class="section prog" id="programa">
       <div class="phrase-wrapper gap-lines">
-        <h2 class="gv-title history-title-text">Nuestra Historia</h2>
+        <h2 class="gv-title prog-title-text">Programa de boda</h2>
       </div>
 
-      <div class="history-body">
-        <div class="history-text">
-          <p>
-            Nos conocimos en el trabajo, sin imaginar que entre reuniones, tareas y refrigerios
-            apurados encontraríamos algo mucho más importante: el uno al otro. Desde aquel 2 de enero
-            del 2019 hemos reído, madurado, llorado un poquito (pero siempre juntos), y aprendimos que
-            el amor verdadero se construye día a día.
-          </p>
-          <p>
-            Poco a poco empezamos a crecer emocionalmente hasta que llegó el capítulo más emocionante:
-            <strong>¡Nos casamos!</strong> Y porque en algún momento fuiste cómplice de una risa, un
-            consejo, un abrazo o una anécdota, tú también eres parte de esta historia. Por eso estás
-            cordialmente invitado(a) a celebrar con nosotros este día tan especial.
-          </p>
+      <div class="prog-grid">
+        <div class="prog-cards">
+          <article class="prog-card">
+            <h3 class="prog-card-title">Ceremonia Religiosa</h3>
+            <p class="prog-card-body">
+              <b>Hora 06:00 pm</b><br>
+              “Templo de San Francisco”<br>
+              Ciudad de México
+            </p>
+            <a class="prog-btn" target="_blank" rel="noopener" href="https://maps.app.goo.gl/xxxxx">Ver mapa</a>
+          </article>
+
+          <article class="prog-card">
+            <h3 class="prog-card-title">Recepción</h3>
+            <p class="prog-card-body">
+              <b>Hora 08:00 pm</b><br>
+              “MOVA Eventos”<br>
+              Miguel Hidalgo, CDMX
+            </p>
+            <a class="prog-btn" target="_blank" rel="noopener" href="https://maps.app.goo.gl/yyyyy">Ver mapa</a>
+          </article>
         </div>
 
-        <div class="history-photos">
-          <figure class="hp-card"><img src="./img/novios-historia.jpg" alt="Novios 1"></figure>
-          <figure class="hp-card"><img src="./img/img2.jpg" alt="Novios 2"></figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- Programa -->
-    <main class="wrap main">
-      <section class="section prog" id="programa">
-        <div class="prog-container">
-          <div class="phrase-wrapper gap-lines">
-            <h2 class="gv-title prog-title-text">Programa de boda</h2>
+        <div class="prog-timeline" aria-label="Itinerario">
+          <div class="prog-tl-row">
+            <time>05:00 pm</time><span class="prog-tl-text">Ceremonia Religiosa</span>
+            <img class="prog-ico" src="./img/iglesia.png" alt="" aria-hidden="true">
           </div>
-
-          <div class="prog-grid">
-            <div class="prog-cards">
-              <article class="prog-card">
-                <h3 class="prog-card-title">Ceremonia Religiosa</h3>
-                <p class="prog-card-body">
-                  <b>Hora 06:00 pm</b><br>
-                  “Templo de San Francisco”<br>
-                  Ciudad de México
-                </p>
-                <a class="prog-btn" target="_blank" rel="noopener" href="https://maps.app.goo.gl/xxxxx">Ver mapa</a>
-              </article>
-
-              <article class="prog-card">
-                <h3 class="prog-card-title">Recepción</h3>
-                <p class="prog-card-body">
-                  <b>Hora 08:00 pm</b><br>
-                  “MOVA Eventos”<br>
-                  Miguel Hidalgo, CDMX
-                </p>
-                <a class="prog-btn" target="_blank" rel="noopener" href="https://maps.app.goo.gl/yyyyy">Ver mapa</a>
-              </article>
-            </div>
-
-            <div class="prog-timeline" aria-label="Itinerario">
-              <div class="prog-tl-row">
-                <time>05:00 pm</time><span class="prog-tl-text">Ceremonia Religiosa</span>
-                <img class="prog-ico" src="./img/iglesia.png" alt="" aria-hidden="true">
-              </div>
-              <div class="prog-tl-row">
-                <time>07:00 pm</time><span class="prog-tl-text">Recepción</span>
-                <img class="prog-ico" src="./img/anillos.png" alt="" aria-hidden="true">
-              </div>
-              <div class="prog-tl-row">
-                <time>08:00 pm</time><span class="prog-tl-text">Vals</span>
-                <img class="prog-ico" src="./img/bals.png" alt="" aria-hidden="true">
-              </div>
-              <div class="prog-tl-row">
-                <time>08:30 pm</time><span class="prog-tl-text">Cena</span>
-                <img class="prog-ico" src="./img/comida.png" alt="" aria-hidden="true">
-              </div>
-              <div class="prog-tl-row">
-                <time>09:30 pm</time><span class="prog-tl-text">Fiesta</span>
-                <img class="prog-ico" src="./img/fiesta.png" alt="" aria-hidden="true">
-              </div>
-            </div>
+          <div class="prog-tl-row">
+            <time>07:00 pm</time><span class="prog-tl-text">Recepción</span>
+            <img class="prog-ico" src="./img/anillos.png" alt="" aria-hidden="true">
+          </div>
+          <div class="prog-tl-row">
+            <time>08:00 pm</time><span class="prog-tl-text">Vals</span>
+            <img class="prog-ico" src="./img/bals.png" alt="" aria-hidden="true">
+          </div>
+          <div class="prog-tl-row">
+            <time>08:30 pm</time><span class="prog-tl-text">Cena</span>
+            <img class="prog-ico" src="./img/comida.png" alt="" aria-hidden="true">
+          </div>
+          <div class="prog-tl-row">
+            <time>09:30 pm</time><span class="prog-tl-text">Fiesta</span>
+            <img class="prog-ico" src="./img/fiesta.png" alt="" aria-hidden="true">
           </div>
         </div>
-      </section>
-    </main>
-
-    <!-- Info -->
-    <section class="info-section" id="info-cards">
-      <article class="info-card">
-        <div class="phrase-wrapper gap-lines">
-          <h2 class="gv-title info-title-text">Código de vestimenta</h2>
-        </div>
-
-        <div class="info-body center">
-          <img src="./img/codigo.png" alt="" class="info-ico" aria-hidden="true">
-          <p class="info-lead"><strong>Elegante – Formal</strong></p>
-          <p class="info-row"><b>Ellas:</b> Vestido largo &nbsp;&nbsp; <b>Ellos:</b> Traje y corbata</p>
-          <p class="info-note">(Se reserva el color blanco para la Novia)</p>
-        </div>
-      </article>
-
-      <article class="info-card">
-        <div class="phrase-wrapper gap-lines">
-          <h2 class="gv-title info-title-text">Sugerencia de regalo</h2>
-        </div>
-
-        <div class="info-body center">
-          <img src="./img/regalo.png" alt="" class="info-ico" aria-hidden="true">
-          <p class="info-lead"><strong>¡Que nos acompañes es lo más importante!</strong></p>
-          <p class="info-text">Si está en tu disposición, realizar una muestra de cariño estaremos muy agradecidos.</p>
-          <p class="gift-name">Salvador</p>
-          <p class="gift-data">BBVA: 1111 1111 0123456789</p>
-        </div>
-      </article>
+      </div>
     </section>
+  </main>
 
-    <!-- Buzón de deseos + Sugerencia de canciones -->
-    <section class="wm-section" id="wish-music">
-      <article class="wm-card">
-        <div class="phrase-wrapper gap-lines">
-          <h2 class="gv-title wm-title-text">Buzón de deseos</h2>
-        </div>
-
-        <div class="wm-body center">
-          <img src="./img/buzon3.png" alt="" class="wm-ico" aria-hidden="true">
-          <p class="wm-lead">
-            Nos encantaría leer tus buenos deseos. <br>
-            ¡Déjanos un mensaje que recordaremos por siempre!
-          </p>
-          <a class="wm-btn" target="_blank" rel="noopener" href="https://tu-formulario.com/buzon">Click aquí</a>
-        </div>
-      </article>
-
-      <article class="wm-card">
-        <div class="phrase-wrapper gap-lines">
-          <h2 class="gv-title wm-title-text">Sugerencia de canciones</h2>
-        </div>
-
-        <div class="wm-body center">
-          <img src="./img/musica23.png" alt="" class="wm-ico" aria-hidden="true">
-          <p class="wm-lead">
-            ¿Qué canciones no pueden faltar en nuestra boda? <br>
-            ¡Comparte tus favoritas con nosotros!
-          </p>
-          <a class="wm-btn" target="_blank" rel="noopener" href="https://tu-formulario.com/canciones">Click aquí</a>
-        </div>
-      </article>
-    </section>
-
-    <!-- Contador -->
-    <section class="counter-section" id="faltan">
+  <!-- Info (dos tarjetas) -->
+  <section class="info-section" id="info-cards">
+    <article class="info-card">
       <div class="phrase-wrapper gap-lines">
-        <h2 class="gv-title counter-title-text">Faltan</h2>
+        <h2 class="gv-title info-title-text">Código de vestimenta</h2>
       </div>
-
-      <div class="count-box" aria-live="polite">
-        <div class="count-item"><span id="cdD" class="num">000</span><small>DÍAS</small></div>
-        <span class="colon">:</span>
-        <div class="count-item"><span id="cdH" class="num">00</span><small>HORAS</small></div>
-        <span class="colon">:</span>
-        <div class="count-item"><span id="cdM" class="num">00</span><small>MINUTOS</small></div>
-        <span class="colon">:</span>
-        <div class="count-item"><span id="cdS" class="num">00</span><small>SEGUNDOS</small></div>
+      <div class="info-body center">
+        <img src="./img/codigo.png" alt="" class="info-ico" aria-hidden="true">
+        <p class="info-lead"><strong>Elegante – Formal</strong></p>
+        <p class="info-row"><b>Ellas:</b> Vestido largo &nbsp;&nbsp; <b>Ellos:</b> Traje y corbata</p>
+        <p class="info-note">(Se reserva el color blanco para la Novia)</p>
       </div>
-    </section>
-    <section class="counter-section" id="faltan">
+    </article>
 
+    <article class="info-card">
       <div class="phrase-wrapper gap-lines">
-        <h2 class="gv-title counter-title-text">Faltan</h2>
+        <h2 class="gv-title info-title-text">Sugerencia de regalo</h2>
       </div>
-      <figure class="feature-photo">
-        <img src="./img/novios-historia.jpg" alt="Foto de los novios" loading="lazy">
-      </figure>
-
-      <div class="date-banner date-banner--double">
-        <span class="hearts"><span class="heart black">♥</span><span class="heart gray">♥</span></span>
-        <strong>SÁBADO, 11 ABRIL 2026</strong>
-        <span class="hearts"><span class="heart black">♥</span><span class="heart gray">♥</span></span>
+      <div class="info-body center">
+        <img src="./img/regalo.png" alt="" class="info-ico" aria-hidden="true">
+        <p class="info-lead"><strong>¡Que nos acompañes es lo más importante!</strong></p>
+        <p class="info-text">Si está en tu disposición, realizar una muestra de cariño estaremos muy agradecidos.</p>
+        <p class="gift-name">Salvador</p>
+        <p class="gift-data">BBVA: 1111 1111 0123456789</p>
       </div>
+    </article>
+  </section>
 
-      <p class="text center">
-        Es un honor y un privilegio invitarlos a ser parte de este día tan significativo para nosotros.
-        Su presencia hará de nuestra boda un evento aún más inolvidable y lleno de felicidad.
-        Por favor confírmanos tu asistencia antes del <strong>11 de Abril, 2026</strong>.
-      </p>
+  <!-- Contador + Firma -->
+  <section class="counter-section">
+    <div class="phrase-wrapper gap-lines">
+      <h2 class="gv-title counter-title-text">Faltan</h2>
+    </div>
 
-      <div class="rsvp center">
-        <a id="btnRSVP" class="btn btn-outline"
-          href="https://docs.google.com/forms/d/e/1FAIpQLScIe2cZNXGnV6x0CooqhrUSYLOrXf6-oghtEeeNJG4DyPOusQ/viewform"
-          target="_blank" rel="noopener">
-          💌 CONFIRMAR ASISTENCIA
-        </a>
+    <figure class="feature-photo">
+      <img src="./img/novios-historia.jpg" alt="Foto de los novios">
+    </figure>
+
+    <p class="text center">
+      Es un honor y un privilegio invitarlos a ser parte de este día tan significativo para nosotros.
+      Su presencia hará de nuestra boda un evento aún más inolvidable y lleno de felicidad.
+      Por favor confírmanos tu asistencia antes del <strong>11 de Abril, 2026</strong>.
+    </p>
+
+    <div class="rsvp center">
+      <a id="btnRSVP" class="btn btn-outline"
+        href="https://docs.google.com/forms/d/e/1FAIpQLScIe2cZNXGnV6x0CooqhrUSYLOrXf6-oghtEeeNJG4DyPOusQ/viewform"
+        target="_blank" rel="noopener">💌 CONFIRMAR ASISTENCIA</a>
+    </div>
+
+    <div class="signature-wrap">
+      <div class="gv-title signature-text">
+        <span class="sigL">L</span><span class="amp">&amp;</span><span class="sigS">S</span>
       </div>
-      <div class="signature-wrap">
-        <div class="gv-title signature-text">
-          <span>L</span><span class="amp">&amp;</span><span>S</span>
-        </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <footer class="wrap footer">
-      <small>
-        © 2025 • Hecho por
-        <strong class="footer-brand">
-          <img src="./img/girasol.png" alt="Girasol" class="footer-icon">
-          LAC
-          <img src="./img/girasol.png" alt="Girasol" class="footer-icon">
-        </strong>
-        — Invitaciones digitales
-      </small>
-      <br>
-      <a class="wa-chip" target="_blank" rel="noopener"
-        href="https://wa.me/525534633490?text=Hola%20Laura%2C%20quiero%20mi%20invitaci%C3%B3n%20tipo%20peri%C3%B3dico%20%F0%9F%93%B0">
-        <img src="./img/iconos/whatsapp.png" alt="WhatsApp" class="wa-icon">
-        Contáctame por WhatsApp
-      </a>
-    </footer>
-  </div>
-
-  <!-- Música -->
-  <audio id="bgAudio" src="./img/boda.mp3" preload="auto" loop></audio>
-
-  <!-- FAB audio -->
-  <button id="audioFab" class="audio-fab" type="button" aria-label="Pausar música" title="Pausar música">
-    <span class="audio-pulse" aria-hidden="true"></span>
-    <svg id="audioIcon" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <rect x="6" y="5" width="4" height="14" rx="1"></rect>
-      <rect x="14" y="5" width="4" height="14" rx="1"></rect>
-    </svg>
-  </button>
-
-  <!-- JS (tu archivo existente) -->
-  <script src="app.js"></script>
+  <footer class="wrap footer">
+    <small>© 2025 • LAC — Invitaciones digitales</small><br>
+    <a class="wa-chip" target="_blank" rel="noopener"
+      href="https://wa.me/525534633490?text=Hola%20Laura%2C%20quiero%20mi%20invitaci%C3%B3n%20tipo%20peri%C3%B3dico%20%F0%9F%93%B0">
+      <img src="./img/iconos/whatsapp.png" alt="" class="wa-icon"> Contáctame por WhatsApp
+    </a>
+  </footer>
 </body>
 
 </html>
