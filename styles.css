@@ -964,3 +964,37 @@ a.btn img,
   text-align: center;
   margin-top: 10px;
 }
+/* ----- Header periódico: que no se desborde en móviles ----- */
+.news-header {
+  grid-template-columns: 1fr minmax(0, auto) 1fr; /* el centro se encoge si hace falta */
+}
+.news-cell {
+  max-width: 100%;
+  white-space: normal; /* permite salto de línea */
+  overflow-wrap: anywhere; /* rompe palabras largas si es necesario */
+  word-break: normal;
+  line-height: 1.2;
+}
+.news-cell.right strong,
+.news-cell.left {
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* Reducir tamaño y padding en pantallas angostas */
+@media (max-width: 380px) {
+  .news-cell {
+    padding: 6px 6px;
+  }
+  .news-cell.right,
+  .news-cell.left {
+    font-size: 11px;
+    letter-spacing: 0.02em;
+  }
+}
+@media (max-width: 320px) {
+  .news-cell.right,
+  .news-cell.left {
+    font-size: 10px;
+  }
+}
