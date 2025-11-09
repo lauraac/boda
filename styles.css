@@ -1109,26 +1109,68 @@ a.btn img,
   backdrop-filter: blur(2px);
   z-index: 10001; /* sobre el video, debajo del botón Saltar */
 }
-/* === Centrar completamente la tarjeta del programa === */
+/* ==== Centrado total del timeline de programa ==== */
 .section.prog {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .prog-timeline {
+  position: relative;
   margin: 0 auto;
-  max-width: 360px; /* evita que se salga del contenedor */
-  width: 100%;
+  max-width: 340px; /* 🔹 ancho máximo controlado */
+  width: 90%;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 16px;
-  padding: 16px 14px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 20px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden; /* evita que algo se salga */
 }
 
-/* Asegura que nada dentro se desborde horizontalmente */
-.prog-timeline * {
-  max-width: 100%;
-  box-sizing: border-box;
+/* 🔹 Cada fila del timeline centrada */
+.prog-tl-row {
+  display: grid;
+  grid-template-columns: 1fr 20px 30px;
+  align-items: center;
+  justify-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+/* 🔹 Línea vertical centrada dentro del timeline */
+.prog-tl-row::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #000;
+}
+
+/* 🔹 Texto y hora alineados a la derecha de la línea */
+.prog-tl-text,
+.prog-tl-row time {
+  text-align: right;
+  justify-self: end;
+}
+
+/* 🔹 Iconos alineados a la izquierda de la línea */
+.prog-ico {
+  justify-self: start;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* Evita desbordes horizontales en pantallas pequeñas */
+@media (max-width: 400px) {
+  .prog-timeline {
+    width: 95%;
+    max-width: 300px;
+  }
 }
