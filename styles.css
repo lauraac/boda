@@ -412,9 +412,11 @@ img {
   gap: 10px;
   align-items: start;
 }
-.prog-cards {
-  display: grid;
-  gap: 10px;
+.prog-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra todo el contenido horizontalmente */
+  text-align: center; /* Centra el texto también */
 }
 .prog-card {
   background: #fff;
@@ -865,4 +867,100 @@ img {
   opacity: 0;
   transition: opacity 1s ease-out;
   pointer-events: none;
+}
+
+/* === Ajuste del ancho de las tarjetas de mapa === */
+.prog-cards {
+  max-width: 360px; /* reduce el ancho total */
+  margin: 0 auto; /* centra horizontalmente */
+}
+
+.prog-card {
+  width: 100%; /* que se adapte al nuevo ancho */
+  margin-bottom: 1rem;
+}
+
+.prog-card button,
+.prog-card a {
+  width: 100%;
+  max-width: 260px; /* el botón también más estrecho */
+  margin: 0 auto;
+  display: block;
+}
+/* === Botones elegantes estilo periódico === */
+button,
+a.btn,
+.prog-card a,
+#btnRSVP {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 24px;
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: linear-gradient(to bottom, #3a3a3a, #1b1b1b);
+  border: 1px solid #000;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+}
+
+/* Hover elegante */
+button:hover,
+a.btn:hover,
+.prog-card a:hover,
+#btnRSVP:hover {
+  background: linear-gradient(to bottom, #4b4b4b, #000);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Icono dentro del botón */
+button img,
+a.btn img,
+#btnRSVP img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+/* ==== Ajuste visual de tarjetas y títulos === */
+.prog-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* El encabezado (título) y el botón tendrán el mismo ancho */
+.prog-card-title,
+.prog-card a {
+  width: 100%;
+  max-width: 260px; /* mismo ancho que el botón */
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Ajuste visual del título */
+.prog-card-title {
+  background: linear-gradient(#f5f5f5, #e7e7e7);
+  border: 1px solid #bdbdbd;
+  border-radius: 999px; /* igual de redondeado que el botón */
+  padding: 8px 0;
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: #111;
+  margin-bottom: 10px;
+}
+
+/* Botón centrado */
+.prog-card a {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
 }
