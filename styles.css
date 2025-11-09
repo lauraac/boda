@@ -968,33 +968,26 @@ a.btn img,
 .news-header {
   grid-template-columns: 1fr minmax(0, auto) 1fr; /* el centro se encoge si hace falta */
 }
-.news-cell {
-  max-width: 100%;
-  white-space: normal; /* permite salto de línea */
-  overflow-wrap: anywhere; /* rompe palabras largas si es necesario */
-  word-break: normal;
-  line-height: 1.2;
-}
-.news-cell.right strong,
-.news-cell.left {
-  display: inline-block;
-  max-width: 100%;
+/* 🔧 Ajuste de tamaño inteligente del encabezado */
+.news-cell.center {
+  font-family: "Old English Text MT", "UnifrakturCook", serif;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  font-size: clamp(14px, 4vw, 24px); /* ✅ se reduce en pantallas pequeñas */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Reducir tamaño y padding en pantallas angostas */
+/* Para móviles muy angostos */
 @media (max-width: 380px) {
-  .news-cell {
-    padding: 6px 6px;
-  }
-  .news-cell.right,
-  .news-cell.left {
-    font-size: 11px;
-    letter-spacing: 0.02em;
+  .news-cell.center {
+    font-size: clamp(12px, 3.8vw, 18px);
+    letter-spacing: 0;
   }
 }
 @media (max-width: 320px) {
-  .news-cell.right,
-  .news-cell.left {
-    font-size: 10px;
+  .news-cell.center {
+    font-size: 12px;
   }
 }
