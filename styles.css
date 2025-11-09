@@ -782,3 +782,61 @@ img {
   border-bottom: 1px solid #000; /* 💖 nueva línea abajo */
   padding: 6px 0; /* espacio para que no se pegue a la imagen */
 }
+
+/* === Botón estilo periódico elegante (negro/gris) === */
+.btn-confirmar {
+  display: inline-block;
+  background: linear-gradient(180deg, #444 0%, #222 100%);
+  color: #fff;
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid #000;
+  border-radius: 50px;
+  padding: 12px 26px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse */
+.btn-confirmar:hover {
+  background: linear-gradient(180deg, #555 0%, #000 100%);
+  color: #f9f9f9;
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Centrado para móviles */
+.rsvp.center {
+  text-align: center;
+  margin-top: 18px;
+}
+/* === Tarjeta bancaria centrada y elegante estilo periódico === */
+.bank-card {
+  background: #ffffff;
+  border: 1px solid #cfcfcf;
+  border-radius: 14px;
+  padding: 16px 22px;
+  margin: 20px auto 0;
+  font-family: "Merriweather", serif;
+  font-size: 0.95rem;
+  color: #111;
+  line-height: 1.65;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  text-align: center; /* 💖 centrado */
+  width: 90%;
+  max-width: 380px; /* 📏 ancho elegante para móvil */
+}
+
+.bank-card p {
+  margin: 8px 0;
+}
+
+.bank-card strong {
+  font-weight: 900;
+  color: #000;
+  text-transform: none;
+}
