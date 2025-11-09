@@ -1109,3 +1109,26 @@ a.btn img,
   backdrop-filter: blur(2px);
   z-index: 10001; /* sobre el video, debajo del botón Saltar */
 }
+/* === Centrar completamente la tarjeta del programa === */
+.section.prog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prog-timeline {
+  margin: 0 auto;
+  max-width: 360px; /* evita que se salga del contenedor */
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 16px 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Asegura que nada dentro se desborde horizontalmente */
+.prog-timeline * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
