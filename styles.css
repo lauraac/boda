@@ -659,3 +659,42 @@ img {
   height: 22px;
   object-fit: contain;
 }
+/* === Corrige centrado del texto de fecha principal === */
+.news-date {
+  display: flex;
+  flex-wrap: wrap; /* permite que el texto salte de línea si es necesario */
+  justify-content: center; /* centra horizontalmente */
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 8px 12px; /* agrega un poco de margen interno */
+  word-break: keep-all; /* evita cortes feos de palabra */
+}
+
+.news-date strong {
+  font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+  line-height: 1.4;
+  text-align: center;
+}
+/* === Líneas centradas al nivel del texto === */
+.phrase-wrapper.gap-lines {
+  display: flex;
+  align-items: center; /* centra verticalmente texto y líneas */
+  justify-content: center; /* centra todo el conjunto */
+  gap: 12px; /* separación entre línea y texto */
+  text-align: center;
+}
+
+.phrase-wrapper.gap-lines::before,
+.phrase-wrapper.gap-lines::after {
+  content: "";
+  flex: 1; /* las líneas ocupan el mismo ancho */
+  height: 1px;
+  background-color: #000;
+  max-width: 80px; /* controla el largo de la línea */
+}
+
+.gv-title {
+  display: inline-block;
+  text-align: center;
+}
