@@ -246,6 +246,18 @@
       </div>
     </div>
   </section>
+  <!-- 🎶 Audio de fondo -->
+  <audio id="bgAudio" src="./musica/boda.mp3" preload="auto" loop></audio>
+
+  <!-- 🔊 Botón flotante (usa el SVG que tu JS actualiza) -->
+  <button id="audioFab" class="audio-fab" type="button" aria-label="Pausar música" title="Pausar música">
+    <span class="audio-pulse" aria-hidden="true"></span>
+    <svg id="audioIcon" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <!-- icono de PAUSA por defecto; tu JS lo cambia si hace falta -->
+      <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+      <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+    </svg>
+  </button>
 
   <footer class="wrap footer">
     <small>© 2025 • LAC — Invitaciones digitales</small><br>
@@ -254,6 +266,7 @@
       <img src="./img/iconos/whatsapp.png" alt="" class="wa-icon"> Contáctame por WhatsApp
     </a>
   </footer>
+  <script src="app.js" defer></script>
 </body>
 
 </html>

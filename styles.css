@@ -698,3 +698,42 @@ img {
   display: inline-block;
   text-align: center;
 }
+.audio-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 1600;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+}
+
+.audio-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(17, 17, 17, 0.25);
+  animation: audioPulse 1.8s ease-out infinite;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+@keyframes audioPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(17, 17, 17, 0.25);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(17, 17, 17, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(17, 17, 17, 0);
+  }
+}
