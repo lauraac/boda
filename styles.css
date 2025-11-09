@@ -1011,3 +1011,60 @@ a.btn img,
     gap: 4px;
   }
 }
+/* ==== FIX encabezado periódico (iPhone) ==== */
+
+/* La rejilla permite que el centro se encoja, lados con mínimo fijo */
+.news-header {
+  grid-template-columns: minmax(84px, 1fr) minmax(0, auto) minmax(84px, 1fr);
+  gap: 6px;
+  overflow: hidden; /* nunca desborde horizontal */
+}
+
+/* Lados más compactos en móvil, sin romper líneas */
+.news-cell.left,
+.news-cell.right {
+  font-size: clamp(10px, 2.7vw, 12px);
+  padding: 6px 6px;
+  line-height: 1.15;
+  letter-spacing: 0.05em;
+  white-space: normal;
+}
+
+/* Centro: que el IMG se adapte y se haga pequeño si hace falta */
+.news-cell.center {
+  padding: 6px 4px;
+}
+.news-cell.center .news-banner {
+  display: block;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  /* se reduce de forma fluida; nunca más grande que 260 ni más chico que 150 */
+  inline-size: clamp(150px, 42vw, 260px);
+}
+
+/* Afinado extra para pantallas angostas */
+@media (max-width: 390px) {
+  .news-header {
+    gap: 4px;
+  }
+  .news-cell.center .news-banner {
+    inline-size: clamp(140px, 48vw, 220px);
+  }
+  .news-cell.left,
+  .news-cell.right {
+    font-size: clamp(10px, 2.9vw, 11.5px);
+    padding: 5px 4px;
+  }
+}
+
+/* Ultra angosto (iPhone SE / zoom) */
+@media (max-width: 340px) {
+  .news-cell.center .news-banner {
+    inline-size: 65vw;
+  }
+  .news-cell.left,
+  .news-cell.right {
+    letter-spacing: 0.03em;
+  }
+}
