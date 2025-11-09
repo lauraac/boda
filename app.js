@@ -1,3 +1,63 @@
+// ===== Intro: full-screen + control de audio global =====
+const intro = document.getElementById("intro-video-container");
+const video = document.getElementById("intro-video");
+
+// Asegurar que el video ocupe toda la pantalla sin scroll
+if (intro && video) {
+  Object.assign(intro.style, {
+    position: "fixed",
+    inset: "0",
+    zIndex: "9999",
+    background: "#000",
+    display: "grid",
+    placeItems: "center",
+  });
+  Object.assign(video.style, {
+    width: "100vw",
+    height: "100vh",
+    objectFit: "cover",
+  });
+
+  // Audio: silenciar/pausar música de la tarjeta durante el intro
+  const bgAudioForIntro = document.getElementById("bgAudio");
+  if (bgAudioForIntro) {
+    try {
+      bgAudioForIntro.pause();
+    } catch {}
+    bgAudioForIntro.muted = true;
+  }
+
+  // Queremos que el video SÍ suene
+  video.muted = false;
+  video.setAttribute("playsinline", ""); // iOS
+  video.playsInline = true;
+
+  // Intento de autoplay del video con audio; si falla, se habilita al primer toque
+  video.play().catch(() => {
+    const unlock = () => {
+      video.play().catch(() => {});
+      window.removeEventListener("touchstart", unlock, { once: true });
+      window.removeEventListener("click", unlock, { once: true });
+      window.removeEventListener("keydown", unlock, { once: true });
+    };
+    window.addEventListener("touchstart", unlock, {
+      once: true,
+      passive: true,
+    });
+    window.addEventListener("click", unlock, { once: true });
+    window.addEventListener("keydown", unlock, { once: true });
+  });
+
+  // Cuando termina el video, desaparece suavemente y avisamos que terminó el intro
+  video.addEventListener("ended", () => {
+    intro.classList.add("fade-out");
+    setTimeout(() => {
+      intro.style.display = "none";
+      document.dispatchEvent(new Event("intro:ended")); // <- Notifica al reproductor principal
+    }, 1000);
+  });
+}
+
 // ========= CONFIG =========
 const EVENT_DATE = new Date("2026-04-11T18:00:00-06:00"); // MX local
 const FORM_URL =
@@ -226,7 +286,30 @@ function waitForMetadata(audio) {
     setPauseIcon(false);
   }
 
+  // === Cambiado: esperar a que termine el intro antes de reproducir la música ===
   async function tryAutoplay() {
+    const introC = document.getElementById("intro-video-container");
+    const introVisible = introC && introC.style.display !== "none";
+
+    if (introVisible) {
+      setPauseIcon(true);
+      document.addEventListener(
+        "intro:ended",
+        async () => {
+          try {
+            // quitar mute aplicado durante el intro
+            try {
+              audio.muted = false;
+            } catch {}
+            await primeAndPlay(START_AT);
+          } catch {}
+        },
+        { once: true }
+      );
+      return; // no reproducir aún
+    }
+
+    // Si no hay intro visible, seguimos igual que antes
     try {
       await primeAndPlay(START_AT);
     } catch {
