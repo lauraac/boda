@@ -18,18 +18,19 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Great Vibes = títulos (NO tocar) | Merriweather = cuerpo periódico -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Merriweather:wght@300;400;700;900&display=swap"
     rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@600;700&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="styles.css?v=2025-11-05b">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <!-- Aviso para escritorio -->
+  <!-- Aviso para escritorio (lo controla tu app.js) -->
   <div id="desktopNotice" class="desktop-notice" hidden aria-live="polite">
     <div class="dn-card">
       <img src="./img/uri.png" alt="" class="dn-icon" aria-hidden="true">
@@ -57,12 +58,10 @@
     <header class="wrap masthead">
       <div class="news-header">
         <div class="news-cell left">Laura Silvia &amp; Salvador</div>
-
         <div class="news-cell center">
           <img src="./img/noticiadeultimahora.png" alt="Noticia de última hora" class="news-banner" width="640"
             height="80" loading="eager">
         </div>
-
         <div class="news-cell right">Sábado,<br>11 Abril 2026</div>
       </div>
 
@@ -83,12 +82,12 @@
     </header>
 
     <!-- Anuncio principal -->
-    <section class="section love-announcement like-history" id="anuncio">
-
+    <section class="section like-history" id="anuncio">
       <img src="./img/lauraTexto.png" alt="Laura Silvia y Salvador" class="names-img">
 
-      <div class="phrase-wrapper">
-        <img src="./img/flechados.png" alt="Han sido flechados" class="phrase-img">
+      <!-- NO TOCAR títulos gv-title -->
+      <div class="phrase-wrapper gap-lines">
+        <h2 class="gv-title phrase-text">Han sido flechados</h2>
       </div>
 
       <p class="love-text">
@@ -117,35 +116,33 @@
 
       <div class="padrinos-title skinny">NUESTROS PADRINOS DE HONOR</div>
 
-      <div class="padrinos-wrapper">
-        <section class="gp">
-          <p class="gp-lead"><strong>Padrinos de Velación</strong><br>Catalina Sánchez Sandoval<br>Rogelio Morales
-            Morales</p>
-          <div class="gp-rule"></div>
+      <section class="gp">
+        <p class="gp-lead"><strong>Padrinos de Velación</strong><br>Catalina Sánchez Sandoval<br>Rogelio Morales Morales
+        </p>
+        <div class="gp-rule"></div>
 
-          <div class="gp-grid">
-            <article class="gp-item">
-              <h5>Padrinos de Anillos</h5>
-              <p>Montiel<br>Montiel</p>
-            </article>
+        <div class="gp-grid">
+          <article class="gp-item">
+            <h5>Padrinos de Anillos</h5>
+            <p>Montiel<br>Montiel</p>
+          </article>
 
-            <article class="gp-item">
-              <h5>Padrinos de Arras</h5>
-              <p>Manuel de Jesús Espinosa Delgado<br>Lucelia Barrios Ramírez</p>
-            </article>
+          <article class="gp-item">
+            <h5>Padrinos de Arras</h5>
+            <p>Manuel de Jesús Espinosa Delgado<br>Lucelia Barrios Ramírez</p>
+          </article>
 
-            <article class="gp-item">
-              <h5>Padrinos de Lazo</h5>
-              <p>Rogelio Fuentes Rodríguez<br>Sandy Esquivel García</p>
-            </article>
+          <article class="gp-item">
+            <h5>Padrinos de Lazo</h5>
+            <p>Rogelio Fuentes Rodríguez<br>Sandy Esquivel García</p>
+          </article>
 
-            <article class="gp-item gp-span2">
-              <h5>Madrina de Ramo</h5>
-              <p>Janet López Meraz</p>
-            </article>
-          </div>
-        </section>
-      </div>
+          <article class="gp-item">
+            <h5>Madrina de Ramo</h5>
+            <p>Janet López Meraz</p>
+          </article>
+        </div>
+      </section>
 
       <!-- Titular de noticia -->
       <section class="news-headline">
@@ -158,8 +155,8 @@
 
     <!-- Nuestra historia -->
     <section class="history-section" id="historia">
-      <div class="history-title-wrap">
-        <img src="./img/nuestraHistoria.png" alt="Nuestra Historia" class="history-title-img">
+      <div class="phrase-wrapper gap-lines">
+        <h2 class="gv-title history-title-text">Nuestra Historia</h2>
       </div>
 
       <div class="history-body">
@@ -181,7 +178,6 @@
         <div class="history-photos">
           <figure class="hp-card"><img src="./img/novios-historia.jpg" alt="Novios 1"></figure>
           <figure class="hp-card"><img src="./img/img2.jpg" alt="Novios 2"></figure>
-          <figure class="hp-card"><img src="./img/img3.jpg" alt="Novios 3"></figure>
         </div>
       </div>
     </section>
@@ -190,8 +186,8 @@
     <main class="wrap main">
       <section class="section prog" id="programa">
         <div class="prog-container">
-          <div class="prog-title-wrap">
-            <img src="./img/programaboda.png" alt="Programa de boda" class="prog-title-img">
+          <div class="phrase-wrapper gap-lines">
+            <h2 class="gv-title prog-title-text">Programa de boda</h2>
           </div>
 
           <div class="prog-grid">
@@ -244,11 +240,11 @@
       </section>
     </main>
 
-    <!-- Dress code + Sugerencia -->
+    <!-- Info -->
     <section class="info-section" id="info-cards">
       <article class="info-card">
-        <div class="title-line-wrap">
-          <img src="./img/codigoVestimenta.png" alt="Dress code" class="title-img">
+        <div class="phrase-wrapper gap-lines">
+          <h2 class="gv-title info-title-text">Código de vestimenta</h2>
         </div>
 
         <div class="info-body center">
@@ -260,8 +256,8 @@
       </article>
 
       <article class="info-card">
-        <div class="title-line-wrap">
-          <img src="./img/sugerenciaRegalo.png" alt="Sugerencia de regalo" class="title-img">
+        <div class="phrase-wrapper gap-lines">
+          <h2 class="gv-title info-title-text">Sugerencia de regalo</h2>
         </div>
 
         <div class="info-body center">
@@ -273,58 +269,44 @@
         </div>
       </article>
     </section>
+
     <!-- Buzón de deseos + Sugerencia de canciones -->
     <section class="wm-section" id="wish-music">
-      <!-- Buzón de deseos -->
       <article class="wm-card">
-        <div class="wm-title-wrap">
-          <!-- Pon aquí TU imagen de título -->
-          <img src="./img/buzon.png" alt="Buzón de deseos" class="wm-title-img">
+        <div class="phrase-wrapper gap-lines">
+          <h2 class="gv-title wm-title-text">Buzón de deseos</h2>
         </div>
 
         <div class="wm-body center">
-          <!-- Ícono opcional (puedes quitarlo si no lo usas) -->
           <img src="./img/buzon3.png" alt="" class="wm-ico" aria-hidden="true">
-
           <p class="wm-lead">
             Nos encantaría leer tus buenos deseos. <br>
             ¡Déjanos un mensaje que recordaremos por siempre!
           </p>
-
-          <!-- Cambia el href por tu enlace (Google Form, Typeform, etc.) -->
-          <a class="wm-btn" target="_blank" rel="noopener" href="https://tu-formulario.com/buzon">
-            Click aquí
-          </a>
+          <a class="wm-btn" target="_blank" rel="noopener" href="https://tu-formulario.com/buzon">Click aquí</a>
         </div>
       </article>
 
-      <!-- Sugerencia de canciones -->
       <article class="wm-card">
-        <div class="wm-title-wrap">
-          <!-- Pon aquí TU imagen de título -->
-          <img src="./img/1.png" alt="Sugerencia de canciones" class="wm-title-img">
+        <div class="phrase-wrapper gap-lines">
+          <h2 class="gv-title wm-title-text">Sugerencia de canciones</h2>
         </div>
 
         <div class="wm-body center">
           <img src="./img/musica23.png" alt="" class="wm-ico" aria-hidden="true">
-
           <p class="wm-lead">
             ¿Qué canciones no pueden faltar en nuestra boda? <br>
             ¡Comparte tus favoritas con nosotros!
           </p>
-
-          <!-- Cambia el href por tu enlace (Google Form de canciones) -->
-          <a class="wm-btn" target="_blank" rel="noopener" href="https://tu-formulario.com/canciones">
-            Click aquí
-          </a>
+          <a class="wm-btn" target="_blank" rel="noopener" href="https://tu-formulario.com/canciones">Click aquí</a>
         </div>
       </article>
     </section>
 
     <!-- Contador -->
     <section class="counter-section" id="faltan">
-      <div class="counter-title-wrap">
-        <img src="./img/faltan.png" alt="Faltan" class="counter-title-img">
+      <div class="phrase-wrapper gap-lines">
+        <h2 class="gv-title counter-title-text">Faltan</h2>
       </div>
 
       <div class="count-box" aria-live="polite">
@@ -357,10 +339,6 @@
           Por favor confírmanos tu asistencia antes del <strong>11 de Abril, 2026</strong>.
         </p>
 
-        <div class="reservation">
-          <div class="reserve-box">Hemos reservado <span id="rsv">2</span> lugares en tu honor</div>
-        </div>
-
         <div class="rsvp center">
           <a id="btnRSVP" class="btn btn-outline"
             href="https://docs.google.com/forms/d/e/1FAIpQLScIe2cZNXGnV6x0CooqhrUSYLOrXf6-oghtEeeNJG4DyPOusQ/viewform"
@@ -369,11 +347,12 @@
           </a>
         </div>
 
-
-
         <div class="signature-wrap">
-          <img src="./img/LyS.png" alt="Iniciales L & S" class="signature-img">
+          <div class="gv-title signature-text">
+            L <span class="amp">&amp;</span> S
+          </div>
         </div>
+
       </div>
     </section>
 
@@ -388,10 +367,9 @@
         — Invitaciones digitales
       </small>
       <br>
-
       <a class="wa-chip" target="_blank" rel="noopener"
         href="https://wa.me/525534633490?text=Hola%20Laura%2C%20quiero%20mi%20invitaci%C3%B3n%20tipo%20peri%C3%B3dico%20%F0%9F%93%B0">
-        <img src="./img/whatsapp.png" alt="WhatsApp" class="wa-icon">
+        <img src="./img/iconos/whatsapp.png" alt="WhatsApp" class="wa-icon">
         Contáctame por WhatsApp
       </a>
     </footer>
@@ -409,8 +387,8 @@
     </svg>
   </button>
 
-  <!-- JS -->
-  <script src="app.js?v=2025-11-05b"></script>
+  <!-- JS (tu archivo existente) -->
+  <script src="app.js"></script>
 </body>
 
 </html>

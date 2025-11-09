@@ -1,54 +1,55 @@
 // ========= CONFIG =========
-const EVENT_DATE = new Date("2026-04-11T18:00:00-06:00"); // hora local MX
-const WHATS_NUMBER = "525534633490"; // solo dígitos
+const EVENT_DATE = new Date("2026-04-11T18:00:00-06:00"); // MX local
+const FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLScIe2cZNXGnV6x0CooqhrUSYLOrXf6-oghtEeeNJG4DyPOusQ/viewform";
+const FORM_ENTRIES = {
+  nombre: "entry.1111111111",
+  puedeAsistir: "entry.2222222222",
+  lugares: "entry.3333333333",
+  mensaje: "entry.4444444444",
+};
 
 // ========= HELPERS =========
 const $id = (id) => document.getElementById(id);
 const pad2 = (n) => String(n).padStart(2, "0");
 
-// ========= SOLO MÓVIL + AVISO ESCRITORIO =========
-// ========= SOLO MÓVIL + AVISO ESCRITORIO (con resize y overrides) =========
+// ========= AVISO ESCRITORIO / SOLO MÓVIL =========
 (function initDesktopNotice() {
-  const notice = document.getElementById("desktopNotice");
-  const app = document.getElementById("app");
-  const qr = document.getElementById("dnQr");
-  const copyBtn = document.getElementById("dnCopy");
-  const waBtn = document.getElementById("dnWhats");
+  const notice = $id("desktopNotice");
+  const app = $id("app");
+  const qr = $id("dnQr");
+  const copyBtn = $id("dnCopy");
+  const waBtn = $id("dnWhats");
 
-  // Helpers
   const url = window.location.href;
   const setVisible = (showApp) => {
     if (!notice || !app) return;
-    notice.hidden = showApp; // si muestro app, oculto aviso
-    app.hidden = !showApp; // si NO muestro app, muestro aviso
+    notice.hidden = showApp;
+    app.hidden = !showApp;
   };
 
-  // Desktop-like: ancho grande + mouse + puntero fino
   const isDesktopLike = () =>
     window.matchMedia("(min-width: 900px)").matches &&
     window.matchMedia("(hover: hover)").matches &&
     window.matchMedia("(pointer: fine)").matches;
 
-  // Overrides por query o memoria (para probar en desktop)
+  // Overrides por query / memoria
   const qsMode = new URLSearchParams(location.search).get("mode"); // "mobile" | "desktop"
-  if (qsMode === "mobile" || qsMode === "desktop") {
+  if (qsMode === "mobile" || qsMode === "desktop")
     localStorage.setItem("previewMode", qsMode);
-  }
-  const savedMode = localStorage.getItem("previewMode"); // puede ser null
+  const savedMode = localStorage.getItem("previewMode");
   const forceMobile = savedMode === "mobile";
   const forceDesktop = savedMode === "desktop";
 
-  // Arma QR / Whats / Copiar
-  if (qr) {
-    const qrBase =
-      "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=";
-    qr.src = qrBase + encodeURIComponent(url);
-  }
-  if (waBtn) {
+  // QR + Whats + Copiar
+  if (qr)
+    qr.src =
+      "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
+      encodeURIComponent(url);
+  if (waBtn)
     waBtn.href =
       "https://wa.me/?text=" +
       encodeURIComponent("Hola, ábrelo en mi celular: " + url);
-  }
   if (copyBtn) {
     copyBtn.addEventListener("click", async () => {
       await navigator.clipboard.writeText(url);
@@ -57,33 +58,23 @@ const pad2 = (n) => String(n).padStart(2, "0");
     });
   }
 
-  // Decide qué mostrar (y re-evalúa en cada resize)
   function evaluate() {
-    // Regla:
-    // - Si forceMobile => siempre APP (para probar en desktop)
-    // - Si forceDesktop => siempre AVISO
-    // - Si NO overrides:
-    //     * Si isDesktopLike() => AVISO
-    //     * Si NO => APP (por ejemplo, al reducir la ventana)
     let showApp;
     if (forceMobile) showApp = true;
     else if (forceDesktop) showApp = false;
     else showApp = !isDesktopLike();
-
     setVisible(showApp);
   }
 
   evaluate();
 
-  // Recalcula al cambiar el tamaño de la ventana (permite probar reduciendo la web)
   let rid;
   window.addEventListener("resize", () => {
     cancelAnimationFrame(rid);
     rid = requestAnimationFrame(evaluate);
   });
 
-  // Botón/atajo para alternar modo en desktop (opcional y útil)
-  // Agrega un pequeño toggle en esquina para forzar modo mobile/desktop.
+  // Mini toggle para probar en desktop
   if (!document.getElementById("modeToggle")) {
     const t = document.createElement("button");
     t.id = "modeToggle";
@@ -109,14 +100,10 @@ const pad2 = (n) => String(n).padStart(2, "0");
       boxShadow: "0 6px 16px rgba(0,0,0,.15)",
     });
     document.body.appendChild(t);
-
     t.addEventListener("click", () => {
       const cur = localStorage.getItem("previewMode");
-      if (!cur) {
-        localStorage.setItem("previewMode", "mobile");
-      } else {
-        localStorage.removeItem("previewMode");
-      }
+      if (!cur) localStorage.setItem("previewMode", "mobile");
+      else localStorage.removeItem("previewMode");
       location.reload();
     });
   }
@@ -154,15 +141,6 @@ const pad2 = (n) => String(n).padStart(2, "0");
 })();
 
 // ========= RSVP: Google Forms (prefill opcional) =========
-const FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLScIe2cZNXGnV6x0CooqhrUSYLOrXf6-oghtEeeNJG4DyPOusQ/viewform";
-const FORM_ENTRIES = {
-  nombre: "entry.1111111111",
-  puedeAsistir: "entry.2222222222",
-  lugares: "entry.3333333333",
-  mensaje: "entry.4444444444",
-};
-
 function getReservados() {
   const r = parseInt(
     new URLSearchParams(location.search).get("reservados"),
@@ -188,7 +166,6 @@ function getReservados() {
   btn.href = url.toString();
 })();
 
-// Mostrar número reservado desde query
 (function reservedFromQuery() {
   const el = $id("rsv");
   if (!el) return;

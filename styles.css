@@ -1,15 +1,25 @@
+/* =========================
+   Variables & fuentes
+   ========================= */
+@font-face {
+  font-family: "Digital7";
+  src: url("./fonts/digital-7.ttf") format("truetype");
+}
+
 :root {
   --paper: #f7f7f7;
   --ink: #121212;
   --muted: #6b6b6b;
   --line: #e3e3e3;
   --soft: #fbfbfb;
-  --max: 720px; /* 🔗 ancho único para TODA la app */
+  --max: 720px;
   --r: 16px;
   --shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
 }
 
-/* Tipografía uniforme */
+/* =========================
+   Reset básico + tipografía
+   ========================= */
 * {
   box-sizing: border-box;
 }
@@ -19,8 +29,9 @@ body {
   padding: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
-    Helvetica, Arial;
+  /* Estilo periódico en TODO menos títulos y reloj */
+  font-family: "Merriweather", serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -30,27 +41,42 @@ img {
   display: block;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-strong,
-b,
-.section-title,
-.mini-title,
-.parents-title,
-.padrinos-title,
-.prog-card-title,
-.info-lead,
-.btn,
-.count-item .num {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+/* NO TOCAR: títulos caligrafía */
+.gv-title {
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.2px;
+  text-align: center;
+  color: var(--ink);
+  display: inline-block;
+  background: #fff;
+  padding: 0 10px;
+  border-radius: 6px;
+}
+.phrase-text {
+  font-size: clamp(28px, 9vw, 68px);
+}
+.history-title-text {
+  font-size: clamp(28px, 8vw, 62px);
+}
+.prog-title-text {
+  font-size: clamp(28px, 8vw, 56px);
+}
+.info-title-text,
+.wm-title-text {
+  font-size: clamp(26px, 7.5vw, 48px);
+}
+.counter-title-text {
+  font-size: clamp(26px, 8vw, 56px);
+}
+.signature-text {
+  font-size: clamp(36px, 14vw, 96px);
+  letter-spacing: 2px;
+  opacity: 0.9;
 }
 
+/* Contenedores */
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
@@ -63,7 +89,9 @@ b,
   text-align: center;
 }
 
-/* Portada */
+/* =========================
+   Portada estilo periódico
+   ========================= */
 .masthead {
   background: #fff;
   border-radius: 20px;
@@ -79,6 +107,7 @@ b,
   position: relative;
   border-top: 1px solid #000;
   border-bottom: 2px solid #000;
+  gap: 8px;
 }
 .news-header::after {
   content: "";
@@ -91,8 +120,8 @@ b,
 }
 .news-cell {
   padding: 8px 10px;
-  font-size: 12px;
-  color: #333;
+  font-size: clamp(12px, 2.6vw, 14px);
+  color: #111;
   text-align: center;
 }
 .news-cell + .news-cell {
@@ -100,9 +129,15 @@ b,
 }
 .news-cell.left {
   text-align: left;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 0.03em;
 }
 .news-cell.right {
   text-align: right;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 0.03em;
 }
 .news-banner {
   max-width: 260px;
@@ -128,6 +163,7 @@ b,
   height: 1px;
   background: #000;
 }
+
 .news-date {
   display: flex;
   align-items: center;
@@ -135,12 +171,18 @@ b,
   gap: 10px;
   padding: 8px 0;
   background: #fff;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.06em;
   margin-top: 2px;
 }
+.news-date strong {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
-/* Foto destacada */
+/* =========================
+   Foto destacada
+   ========================= */
 .feature-photo {
   margin: 14px 0 2px;
 }
@@ -153,7 +195,9 @@ b,
   object-fit: cover;
 }
 
-/* Corazones */
+/* =========================
+   Corazones
+   ========================= */
 .hearts {
   display: inline-flex;
   gap: 2px;
@@ -183,30 +227,9 @@ b,
   }
 }
 
-/* Love announcement */
-/* ===== Love announcement con el MISMO contenedor que history-section ===== */
-.love-announcement.like-history {
-  /* mismo “box” que .history-section */
-  width: min(92%, var(--max));
-  margin: 38px auto;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  padding: 22px 18px;
-  overflow: hidden;
-
-  /* neutraliza padding/estilos previos del “wrap” y del bloque antiguo */
-  border: 1px solid #e3e3e3; /* igual que otras tarjetas */
-}
-
-/* Mantén el resto de sus hijos como ya los tienes (names-img, phrase-wrapper, etc.) */
-
-.names-img {
-  max-width: 95%;
-  margin: 0 auto 0;
-  border-top: 1px solid #000;
-  padding-top: 1px;
-}
+/* =========================
+   Títulos con líneas
+   ========================= */
 .phrase-wrapper {
   display: flex;
   align-items: center;
@@ -216,25 +239,184 @@ b,
   width: 95%;
   position: relative;
 }
-.phrase-wrapper::before,
-.phrase-wrapper::after {
+.gap-lines {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.gap-lines::before,
+.gap-lines::after {
   content: "";
-  flex: 1;
   height: 1px;
   background: #000;
-  position: relative;
-  top: 1px;
+  flex: 1 1 auto;
 }
-.phrase-img {
-  max-width: 50%;
-  position: relative;
-  top: 10px;
+@media (max-width: 420px) {
+  .prog {
+    padding: 10px 8px;
+  }
+
+  /* 🔹 Mantener SIEMPRE dos columnas */
+  .prog-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* izquierda más ancha */
+    column-gap: 8px;
+    align-items: start;
+  }
+
+  /* 🔹 Tarjetas más compactas */
+  .prog-cards {
+    gap: 8px;
+  }
+
+  .prog-card {
+    padding: 8px;
+  }
+
+  .prog-card-title {
+    font-size: 0.9rem;
+    padding: 5px 7px;
+  }
+
+  .prog-card-body {
+    font-size: 0.85rem;
+    line-height: 1.35;
+  }
+
+  .prog-btn {
+    padding: 7px 8px;
+    font-size: 0.85rem;
+  }
+
+  /* 🔹 Línea de tiempo más junta, igual a la 1ª imagen */
+  .prog-timeline {
+    --div-x: 60px; /* línea vertical más cerca */
+    --gut: 6px;
+    --tick: 7px;
+    padding: 6px 8px;
+  }
+
+  .prog-tl-row {
+    grid-template-columns: 58px 1fr auto; /* hora / texto / icono */
+    gap: 4px;
+    padding: 8px 0;
+  }
+
+  .prog-tl-row time {
+    font-size: 0.86rem;
+    text-align: left;
+  }
+
+  .prog-tl-text {
+    font-size: 0.86rem;
+    line-height: 1.3;
+  }
+
+  .prog-ico {
+    width: 18px;
+    height: 18px;
+    margin-left: 4px;
+  }
+}
+
+/* === Programa SIEMPRE en dos columnas, también en celular === */
+.prog-grid {
+  display: grid;
+  grid-template-columns: 5fr 4fr; /* igual que desktop */
+  gap: 14px;
+  align-items: start;
+}
+
+/* Ajustes finos para pantallas pequeñas, manteniendo 2 columnas */
+@media (max-width: 430px) {
+  .prog {
+    padding: 12px 10px;
+  }
+
+  /* Mantener 2 columnas, pero más estrechas y con tipografías compactas */
+  .prog-grid {
+    grid-template-columns: 1.05fr 0.95fr; /* dos columnas en móvil */
+    column-gap: 10px;
+  }
+
+  .prog-cards {
+    gap: 10px;
+  }
+  .prog-card {
+    padding: 10px;
+  }
+
+  .prog-card-title {
+    font-size: 0.95rem;
+    padding: 6px 8px;
+  }
+  .prog-card-body {
+    font-size: 0.9rem;
+  }
+  .prog-btn {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+
+  /* Timeline más compacto para que quepa lado a lado */
+  .prog-timeline {
+    --div-x: 68px; /* línea central más cerca de la izquierda */
+    --gut: 8px;
+    --tick: 8px;
+    padding: 8px 10px;
+  }
+  .prog-tl-row {
+    grid-template-columns: 64px 1fr auto; /* hora / texto / icono */
+    gap: 6px;
+    padding: 10px 0;
+  }
+  .prog-tl-row time {
+    font-size: 0.88rem;
+    text-align: left;
+  }
+  .prog-tl-text {
+    font-size: 0.9rem;
+  }
+  .prog-ico {
+    width: 18px;
+    height: 18px;
+    margin-left: 6px;
+  }
+}
+
+/* =========================
+   Cajas principales
+   ========================= */
+.like-history,
+.history-section,
+.prog,
+.info-section,
+.wm-section,
+.counter-section,
+.rsvp-container {
+  width: min(92%, var(--max));
+  margin: 38px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 22px 18px;
+  overflow: hidden;
+  border: 1px solid #e3e3e3;
+}
+
+/* Texto anuncio */
+.names-img {
+  max-width: 95%;
+  margin: 0 auto 0;
+  border-top: 1px solid #000;
+  padding-top: 1px;
 }
 .love-text {
   text-align: justify;
-  font-size: 0.95rem;
-  color: #333;
-  line-height: 1.7;
+  font-size: 1.02rem;
+  color: #222;
+  line-height: 1.8;
   margin-bottom: 20px;
 }
 
@@ -247,9 +429,6 @@ b,
   text-align: center;
   padding: 8px 12px;
   margin: 18px auto 16px;
-}
-.parents-title.skinny,
-.padrinos-title.skinny {
   font-weight: 400;
   letter-spacing: 0.08em;
   font-size: 0.95rem;
@@ -265,14 +444,17 @@ b,
   text-align: center;
 }
 .mini-title {
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.06em;
   margin: 0 0 6px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
 }
 .parents-col p {
   margin: 0;
   line-height: 1.6;
   color: #333;
+  font-size: 0.98rem;
 }
 .parents-sep {
   position: relative;
@@ -323,16 +505,16 @@ b,
 }
 .ampersand {
   text-align: center;
-  font-family: "Playfair Display", serif;
   font-weight: 900;
   font-size: 26px;
   margin: 6px 0 2px;
 }
 
-@media (max-width: 420px) {
+/* Responsive padres */
+@media (max-width: 520px) {
   .parents-split {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 12px;
   }
   .parents-sep {
     height: 24px;
@@ -355,8 +537,8 @@ b,
   }
 }
 
-/* Padrinos */
-.love-announcement .gp {
+/* ===== Padrinos — siempre 2 columnas ===== */
+.gp {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -365,21 +547,24 @@ b,
   margin-top: 10px;
   text-align: center;
 }
-.love-announcement .gp-lead {
-  font-family: "Playfair Display", serif;
-  font-weight: 600;
+
+/* título centrado (Padrinos de Velación...) */
+.gp-lead {
+  font-weight: 700;
   font-size: 1.06rem;
   line-height: 1.6;
   margin: 4px 0 10px;
 }
-.love-announcement .gp-rule {
+
+/* doble línea bajo el título */
+.gp-rule {
   position: relative;
   height: 2px;
   background: #000;
   max-width: 520px;
   margin: 8px auto 14px;
 }
-.love-announcement .gp-rule::after {
+.gp-rule::after {
   content: "";
   position: absolute;
   left: 0;
@@ -388,51 +573,78 @@ b,
   height: 1px;
   background: #000;
 }
-.love-announcement .gp-grid {
+
+/* === Grid SIEMPRE en 2 columnas === */
+.gp-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
+  grid-template-columns: 1fr 1fr; /* << fijo en 2 col */
+  column-gap: 22px;
+  row-gap: 14px;
   position: relative;
 }
-.love-announcement .gp-item {
-  padding: 6px 8px;
+.gp-grid > * {
+  min-width: 0;
+} /* evita desbordes */
+
+.gp-item {
+  padding: 12px;
   background: var(--soft);
   border: 1px solid var(--line);
   border-radius: 12px;
 }
-.love-announcement .gp-item h5 {
-  margin: 0 0 4px;
-  font-weight: 800;
+.gp-item h5 {
+  margin: 0 0 6px;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-size: 0.92rem;
 }
-.love-announcement .gp-item p {
+.gp-item p {
   margin: 0;
   color: #333;
   line-height: 1.55;
-  font-size: 0.92rem;
+  font-size: 0.96rem;
   text-align: center;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
-@media (min-width: 560px) {
-  .love-announcement .gp-grid {
-    grid-template-columns: 1fr 1fr;
-    column-gap: 22px;
+
+/* ===== ÚNICO BREAKPOINT ===== */
+@media (max-width: 420px) {
+  .gp {
+    padding: 16px 12px;
+    border-radius: 14px;
   }
-  .love-announcement .gp-grid::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 1px;
-    background: #000;
-    opacity: 0.18;
-    transform: translateX(-50%);
-    pointer-events: none;
+
+  .gp-lead {
+    font-size: 0.98rem;
+    line-height: 1.45;
+    margin: 2px 0 8px;
   }
-  .love-announcement .gp-span2 {
-    grid-column: 1 / -1;
+  .gp-rule {
+    max-width: 100%;
+    margin: 6px auto 10px;
+  }
+
+  /* 2 columnas más angostas para que no colapsen */
+  .gp-grid {
+    grid-template-columns: 1.02fr 0.98fr;
+    column-gap: 10px;
+    row-gap: 10px;
+    align-items: start;
+  }
+
+  .gp-item {
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .gp-item h5 {
+    font-size: 0.84rem;
+    letter-spacing: 0.05em;
+  }
+  .gp-item p {
+    font-size: 0.88rem;
+    line-height: 1.35;
   }
 }
 
@@ -441,10 +653,9 @@ b,
   text-align: center;
   margin: 10px auto 30px;
   width: min(90%, var(--max));
-  font-family: "Playfair Display", serif;
 }
 .news-headline h2 {
-  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  font-size: clamp(1.3rem, 5vw, 1.8rem);
   text-transform: uppercase;
   letter-spacing: 1px;
   border-bottom: 2px double #000;
@@ -462,66 +673,17 @@ b,
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 .headline-photo img {
-  display: block;
   width: 100%;
   height: auto;
   object-fit: cover;
 }
 
-/* Nuestra historia (🔗 ancho unificado) */
-.history-section {
-  width: min(92%, var(--max));
-  margin: 38px auto;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  padding: 22px 18px;
-  overflow: hidden;
-}
-.history-title-wrap {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 4px auto 16px;
-  padding: 6px 0;
-}
-.history-title-wrap::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 2px;
-  background: #000;
-  transform: translateY(-50%);
-}
-.history-title-img {
-  max-width: 60%;
-  height: auto;
-  background: #fff;
-  padding: 0 10px;
-  border-radius: 6px;
-  position: relative;
-  z-index: 1;
-}
-.history-body {
+/* ===== HISTORIA — SIEMPRE EN 2 COLUMNAS ===== */
+.history-section .history-body {
   display: grid;
-  grid-template-columns: 1.35fr 0.85fr;
+  grid-template-columns: 1.2fr 0.8fr; /* texto más ancho */
   gap: 16px;
   align-items: start;
-}
-@media (max-width: 640px) {
-  .history-body {
-    grid-template-columns: 1fr;
-  }
-}
-.history-text p {
-  margin: 0 0 12px 0;
-  text-align: justify;
-  line-height: 1.75;
-  color: #2a2a2a;
-  font-size: 0.98rem;
 }
 .history-photos {
   display: flex;
@@ -530,71 +692,69 @@ b,
   align-items: center;
 }
 .hp-card {
-  margin: 0;
-  border-radius: 6px;
+  width: 100%;
+  max-width: 160px; /* mini “polaroids” */
+  border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 120px;
-  background: #fff;
 }
-.hp-card img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  background: #fff;
-}
-@media (max-width: 640px) {
+
+/* ===== ÚNICO BREAKPOINT ===== */
+@media (max-width: 420px) {
+  .history-section {
+    padding: 16px 12px;
+  }
+
+  /* Mantener 2 columnas también en móvil, más angostas */
+  .history-section .history-body {
+    grid-template-columns: 1.05fr 0.95fr;
+    column-gap: 10px;
+  }
+
+  /* Texto más compacto para que respire */
+  .history-text p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 10px;
+  }
+
+  /* Columna de fotos más pequeña y uniforme */
+  .history-photos {
+    gap: 8px;
+  }
   .hp-card {
-    max-width: 260px;
+    max-width: 110px;
+  } /* reduce ancho de cada foto */
+  .hp-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
   }
 }
 
-/* Main ancho completo y Programa */
+/* ====== PROGRAMA (base, siempre 2 columnas) ====== */
 .wrap.main {
   max-width: 100%;
   padding: 0;
 }
-.prog {
-  width: min(92%, var(--max));
-  margin: 38px auto;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  padding: 22px 18px;
-  overflow: hidden;
+
+/* Evita desbordes que empujan filas */
+.prog-grid > *,
+.prog-cards,
+.prog-timeline {
+  min-width: 0;
 }
-.prog-title-wrap {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 12px 0 24px;
-}
-.prog-title-wrap::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 5%;
-  right: 5%;
-  height: 2px;
-  background: #000;
-  z-index: 0;
-}
-.prog-title-img {
-  width: min(360px, 82%);
-  position: relative;
-  z-index: 1;
-  background: #fff;
-  padding: 0 10px;
-  border-radius: 6px;
-}
+
+/* Dos columnas estables (izq más ancha) */
 .prog-grid {
   display: grid;
-  grid-template-columns: 5fr 4fr;
+  grid-template-columns: 1.1fr 0.9fr;
   gap: 14px;
   align-items: start;
 }
+
+/* Tarjetas */
 .prog-cards {
   display: grid;
   gap: 12px;
@@ -608,9 +768,7 @@ b,
 }
 .prog-card-title {
   margin: 0 0 8px;
-  font-family: "Playfair Display", serif;
   font-weight: 900;
-  font-size: 1.02rem;
   text-align: center;
   border: 1px solid #bdbdbd;
   border-radius: 8px;
@@ -626,17 +784,184 @@ b,
   display: block;
   width: 100%;
   text-align: center;
-  padding: 9px 12px;
+  padding: 10px 12px;
   border-radius: 8px;
   background: #6c6c6c;
   color: #fff;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 900;
   border: 1px solid #505050;
 }
 .prog-btn:active {
   transform: translateY(1px);
 }
+
+/* Timeline */
+.prog-timeline {
+  position: relative;
+  background: #fff;
+  border: 1px solid #d6d6d6;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  --div-x: 42%;
+  --gut: 14px;
+  --tick: 12px;
+  align-self: center; /* centrada respecto a las tarjetas */
+}
+.prog-timeline::before {
+  content: "";
+  position: absolute;
+  left: var(--div-x);
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: #000;
+  z-index: 0;
+}
+.prog-tl-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 0;
+}
+.prog-tl-row::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(var(--div-x) - var(--tick));
+  width: calc(var(--tick) * 2);
+  height: 1px;
+  background: #000;
+  transform: translateY(-50%);
+  border-radius: 1px;
+  z-index: 1;
+}
+.prog-tl-row time {
+  font-weight: 900;
+  font-size: 0.96rem;
+  text-align: right;
+  padding-right: var(--gut);
+}
+.prog-tl-text {
+  font-size: 0.96rem;
+  padding-left: var(--gut);
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+.prog-ico {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  margin-left: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ====== ÚNICO BREAKPOINT ====== */
+@media (max-width: 420px) {
+  .prog {
+    padding: 10px 8px;
+  }
+
+  /* Mantener 2 columnas en móvil, más estrechas */
+  .prog-grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    column-gap: 8px;
+    align-items: center;
+  }
+
+  /* Tarjetas compactas */
+  .prog-card {
+    padding: 8px;
+  }
+  .prog-card-title {
+    font-size: 0.88rem;
+    padding: 5px 7px;
+  }
+  .prog-card-body {
+    font-size: 0.84rem;
+    line-height: 1.3;
+  }
+  .prog-btn {
+    padding: 7px 8px;
+    font-size: 0.84rem;
+  }
+
+  /* Timeline compacta y legible (sin texto “en columna”) */
+  .prog-timeline {
+    --div-x: 54px;
+    --gut: 6px;
+    --tick: 7px;
+    padding: 6px;
+  }
+  .prog-tl-row {
+    grid-template-columns: 52px 1fr auto;
+    gap: 4px;
+    padding: 7px 0;
+  }
+  .prog-tl-row time {
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+    text-align: left;
+  }
+  .prog-tl-text {
+    font-size: 0.82rem;
+    line-height: 1.2;
+    hyphens: auto;
+  }
+  .prog-ico {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+  }
+}
+
+.prog-cards {
+  display: grid;
+  gap: 12px;
+}
+.prog-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 12px 14px;
+  box-shadow: var(--shadow);
+}
+.prog-card-title {
+  margin: 0 0 8px;
+  font-weight: 900;
+  text-align: center;
+  border: 1px solid #bdbdbd;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: linear-gradient(#efefef, #e7e7e7);
+}
+.prog-card-body {
+  margin: 8px 0 12px;
+  text-align: center;
+  color: #444;
+}
+.prog-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #6c6c6c;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 900;
+  border: 1px solid #505050;
+}
+.prog-btn:active {
+  transform: translateY(1px);
+}
+
+/* Timeline */
 .prog-timeline {
   position: relative;
   background: #fff;
@@ -679,7 +1004,7 @@ b,
   z-index: 1;
 }
 .prog-tl-row time {
-  font-weight: 800;
+  font-weight: 900;
   font-size: 0.96rem;
   text-align: right;
   padding-right: var(--gut);
@@ -698,15 +1023,16 @@ b,
   position: relative;
   z-index: 2;
 }
-@media (max-width: 520px) {
+
+@media (max-width: 560px) {
   .prog-timeline {
     --div-x: 92px;
     --gut: 12px;
     --tick: 10px;
-    padding: 10px 10px;
+    padding: 10px;
   }
   .prog-tl-row {
-    grid-template-columns: 76px 1fr auto;
+    grid-template-columns: 86px 1fr auto;
     padding: 10px 0;
   }
   .prog-tl-row time {
@@ -723,59 +1049,31 @@ b,
     margin-left: 6px;
   }
 }
-@media (max-width: 430px) {
-  .prog {
-    padding: 18px 12px;
-  }
-  .prog-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
+
+/* ======== INFO: Código de vestimenta + Sugerencia de regalo ======== */
+
+/* Contenedor principal — 2 columnas en pantallas amplias */
+.info-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dos tarjetas lado a lado */
+  gap: 20px;
+  align-items: stretch;
 }
 
-/* Info cards (🔗 ancho unificado) */
-.info-section {
-  width: min(92%, var(--max));
-  margin: 38px auto;
-  display: grid;
-  gap: 18px;
-}
+/* Tarjetas individuales */
 .info-card {
   background: #fff;
   border: 1px solid #e3e3e3;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   padding: 18px 16px 22px;
-  overflow: hidden;
+  text-align: center;
 }
-.title-line-wrap {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 6px 0 14px;
-}
-.title-line-wrap::before {
-  content: "";
-  position: absolute;
-  left: 6%;
-  right: 6%;
-  top: 50%;
-  height: 2px;
-  background: #000;
-  z-index: 0;
-}
-.title-img {
-  width: min(340px, 80%);
-  position: relative;
-  z-index: 1;
-  background: #fff;
-  padding: 0 10px;
-  border-radius: 6px;
-}
+
 .info-body {
   padding: 6px 8px 4px;
 }
+
 .info-ico {
   width: 46px;
   height: 46px;
@@ -783,147 +1081,237 @@ b,
   filter: grayscale(100%);
   margin: 2px auto 10px;
 }
+
 .info-lead {
   margin: 0 0 6px;
   font-size: 1rem;
+  font-weight: 900;
 }
+
 .info-row {
   margin: 2px 0 8px;
   font-size: 0.95rem;
 }
+
 .info-note {
   margin: 0;
   font-size: 0.9rem;
   color: #666;
   font-style: italic;
 }
+
 .gift-name {
   margin: 8px 0 0;
-  font-weight: 700;
+  font-weight: 900;
 }
+
 .gift-data {
   margin: 2px 0 0;
   color: #333;
-  font-weight: 600;
+  font-weight: 700;
 }
+
+/* ===== ÚNICO BREAKPOINT (móviles hasta 420px) ===== */
 @media (max-width: 420px) {
-  .title-line-wrap::before {
-    left: 4%;
-    right: 4%;
+  .info-section {
+    grid-template-columns: 1fr; /* una columna en celular */
+    gap: 14px;
   }
+
+  .info-card {
+    padding: 14px 12px 18px;
+  }
+
+  .info-ico {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 6px;
+  }
+
+  .info-lead {
+    font-size: 0.94rem;
+  }
+
+  .info-row {
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+
+  .info-note {
+    font-size: 0.82rem;
+  }
+
+  .gift-name,
+  .gift-data {
+    font-size: 0.88rem;
+  }
+}
+/* ===== Ajuste fino de títulos (para que no se partan en dos líneas) ===== */
+.info-title-text {
+  font-size: clamp(22px, 6vw, 38px); /* antes eran más grandes */
+  white-space: nowrap; /* evita salto de línea */
+}
+
+/* En pantallas muy pequeñas, se reduce un poco más */
+@media (max-width: 420px) {
+  .info-title-text {
+    font-size: clamp(20px, 5vw, 32px);
+  }
+}
+
+@media (max-width: 420px) {
   .info-ico {
     width: 42px;
     height: 42px;
   }
 }
 
-/* Contador (🔗 ancho unificado) */
-.counter-section {
-  width: min(92%, var(--max));
-  margin: 38px auto;
+/* Buzón & Música */
+.wm-section {
+  display: grid;
+  gap: 18px;
+}
+.wm-card {
   background: #fff;
-  border: 1px solid #e1e1e1;
+  border: 1px solid var(--line);
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  padding: 20px 14px 22px;
-  overflow: hidden;
+  padding: 18px 16px 22px;
 }
-.counter-title-wrap {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 4px 0 16px;
-  padding: 6px 0;
+.wm-body {
+  padding: 6px 8px 4px;
 }
-.counter-title-wrap::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 2px;
-  background: #000;
-  transform: translateY(-50%);
+.wm-ico {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  margin: 4px auto 10px;
 }
-.counter-title-img {
-  max-width: 46%;
+.wm-lead {
+  margin: 0 0 14px;
+  font-size: 0.98rem;
+  color: #333;
+  line-height: 1.6;
+}
+.wm-btn {
+  display: inline-block;
+  padding: 12px 26px;
+  font-size: 0.95rem;
+  font-weight: 900;
+  border: 2px solid #2c2a2a;
+  border-radius: 999px;
   background: #fff;
-  padding: 0 10px;
-  border-radius: 6px;
-  position: relative;
-  z-index: 1;
+  color: #2c2a2a;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: 0.25s;
 }
+.wm-btn:hover {
+  background: #121312;
+  color: #fff;
+  transform: scale(1.03);
+}
+@media (max-width: 420px) {
+  .wm-ico {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ===== CONTADOR (más compacto) ===== */
 .count-box {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: clamp(8px, 2.2vw, 22px);
-  padding: 16px 14px;
+  justify-content: center; /* centrado total */
+  gap: clamp(4px, 1vw, 10px); /* menos separación entre piezas */
+  padding: 14px 16px; /* padding más contenido */
   border: 1px solid #111;
   border-radius: 18px;
   background: linear-gradient(#fff, #f3f3f3);
 }
-.count-box > * {
-  min-width: 0;
-}
+
 .count-item {
   display: grid;
   justify-items: center;
   min-width: 0;
 }
+
 .count-item .num {
-  font-family: "Bodoni Moda", serif;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.02em;
+  font-family: "Digital7", monospace; /* solo reloj */
+  font-weight: normal;
+  letter-spacing: 1px; /* <<< clave: más cerrado */
+  color: #000;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
   white-space: nowrap;
-  font-size: clamp(34px, 8.4vw, 64px);
-}
-.colon {
+  font-size: clamp(
+    32px,
+    7.6vw,
+    54px
+  ); /* un pelín más pequeño para caber mejor */
   line-height: 1;
-  font-size: clamp(28px, 7.4vw, 56px);
 }
+
+.colon {
+  font-family: "Digital7", monospace;
+  line-height: 1;
+  font-size: clamp(30px, 7vw, 52px);
+  margin: 0 2px; /* <<< menos margen lateral */
+  animation: blink 1s steps(1, start) infinite;
+}
+
 .count-item small {
   margin-top: 6px;
-  letter-spacing: 0.28em;
-  font-weight: 700;
+  font-size: clamp(10px, 2.6vw, 12px); /* <<< etiquetas más chicas */
+  letter-spacing: 0.14em; /* menos tracking para que quepan */
+  font-weight: 800;
+  word-spacing: 2px;
 }
+
+/* Variante cuando los días tienen 3+ dígitos */
 .count-box.three-digits {
-  gap: clamp(6px, 1.6vw, 14px);
+  gap: clamp(4px, 0.8vw, 8px);
 }
 .count-box.three-digits .num {
-  font-size: clamp(24px, 7vw, 36px);
+  font-size: clamp(26px, 6.6vw, 44px);
+  letter-spacing: 0.5px;
 }
+
+/* Móviles muy pequeños */
 @media (max-width: 420px) {
   .count-box {
-    padding: 14px 12px;
+    padding: 12px 12px;
   }
   .count-item .num {
-    font-size: clamp(30px, 7.6vw, 56px);
+    font-size: clamp(28px, 7vw, 48px);
   }
   .colon {
-    font-size: clamp(22px, 8.8vw, 34px);
+    font-size: clamp(24px, 6.8vw, 40px);
+    margin: 0 1px;
   }
   .count-item small {
-    letter-spacing: 0.18em;
-    font-size: 0.72rem;
+    font-size: 10px;
+    letter-spacing: 0.12em;
   }
 }
 
-/* RSVP (🔗 ancho unificado) */
+/* Parpadeo de los dos puntos */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* RSVP */
 .rsvp-section {
   display: flex;
   justify-content: center;
   padding: 30px 0;
 }
 .rsvp-container {
-  background: #fff;
   border-radius: 16px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-  padding: 24px 20px;
-  width: min(92%, var(--max));
-  margin: 0 auto;
 }
 .date-banner {
   display: flex;
@@ -932,7 +1320,7 @@ b,
   gap: 10px;
   padding: 10px 12px;
   background: #fff;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.06em;
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
@@ -964,8 +1352,8 @@ b,
 }
 .text.center {
   text-align: justify;
-  font-size: 0.96rem;
-  line-height: 1.6;
+  font-size: 0.98rem;
+  line-height: 1.7;
   margin: 0 auto 16px;
   width: 90%;
   color: #222;
@@ -979,42 +1367,13 @@ b,
   background: #f5f5f5;
   border-radius: 8px;
   padding: 10px;
-  font-weight: 500;
+  font-weight: 700;
   width: 90%;
   margin: 0 auto 14px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-.btn.btn-outline {
-  display: inline-block;
-  padding: 12px 26px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  border: 2px solid #000;
-  border-radius: 8px;
-  background: transparent;
-  color: #000;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: 0.25s;
-}
-.btn.btn-outline:hover {
-  background: #000;
-  color: #fff;
-  transform: scale(1.02);
-}
-.signature-wrap {
-  text-align: center;
-  margin-top: 24px;
-}
-.signature-img {
-  max-width: 120px;
-  height: auto;
-  opacity: 0.9;
-  display: inline-block;
-}
 
-/* Footer + Whats */
+/* Footer */
 .footer {
   text-align: center;
   color: #444;
@@ -1040,7 +1399,7 @@ b,
   border: 2px solid #2c2a2a;
   background: #fff;
   color: #4d504e;
-  font-weight: 700;
+  font-weight: 900;
   text-decoration: none;
   font-size: 0.95rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -1163,7 +1522,7 @@ b,
 .btn {
   border-radius: 999px;
   padding: 8px 14px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   text-decoration: none;
 }
@@ -1183,132 +1542,220 @@ b,
 .btn:hover {
   transform: scale(1.05);
 }
+
+/* Mostrar/ocultar contenedores (lo controla JS) */
 #app[hidden],
 #desktopNotice[hidden] {
   display: none !important;
 }
+/* ========== PROGRAMA: versión móvil ultra-compacta (420px y menos) ========== */
+@media (max-width: 420px) {
+  /* grid igual en 2 columnas pero más ajustado */
+  .prog-grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    column-gap: 8px;
+  }
 
-/* ===== Buzón de deseos + Sugerencia de canciones ===== */
-.wm-section {
-  width: min(92%, var(--max));
-  margin: 38px auto;
-  display: grid;
-  gap: 18px;
+  /* tarjetas más compactas */
+  .prog-card {
+    padding: 8px;
+  }
+  .prog-card-title {
+    font-size: 0.88rem;
+    padding: 5px 7px;
+  }
+  .prog-card-body {
+    font-size: 0.84rem;
+    line-height: 1.3;
+  }
+  .prog-btn {
+    padding: 7px 8px;
+    font-size: 0.84rem;
+  }
+
+  /* timeline más delgada + texto sin romperse por letras */
+  .prog-timeline {
+    --div-x: 54px; /* línea vertical más a la izquierda */
+    --gut: 6px;
+    --tick: 7px;
+    padding: 6px;
+  }
+  .prog-tl-row {
+    grid-template-columns: 52px 1fr auto; /* hora / texto / icono */
+    gap: 4px;
+    padding: 7px 0;
+  }
+  .prog-tl-row time {
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+    text-align: left;
+  }
+  .prog-tl-text {
+    font-size: 0.82rem;
+    line-height: 1.2;
+    word-break: normal; /* << evita cortar cada letra */
+    overflow-wrap: break-word; /* solo rompe si es necesario */
+    hyphens: auto; /* guiones bonitos cuando aplique */
+  }
+  .prog-ico {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+  }
 }
 
-.wm-card {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  padding: 18px 16px 22px;
-  overflow: hidden;
+/* por si quedó algún anywhere por arriba */
+.prog-tl-text {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+/* ===== FIX títulos de las 2 tarjetas (no recortados) ===== */
+
+/* Que las columnas puedan reducirse sin desbordar */
+.info-section {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.info-card {
+  min-width: 0; /* evita que la tarjeta empuje y corte el título */
+  padding: 16px 12px 20px; /* un pelín menos de margen lateral */
 }
 
-.wm-title-wrap {
-  position: relative;
+/* Título caligráfico dentro de la tarjeta */
+.info-card .gv-title {
+  line-height: 1;
+  max-width: 100%;
+  overflow: visible;
+  padding: 0 6px; /* menos padding para que quepa */
+}
+
+/* Tamaño del texto para que quepa en una sola línea sin cortarse */
+.info-title-text {
+  font-size: clamp(18px, 4.6vw, 30px); /* ↓ más pequeño y fluido */
+  white-space: nowrap; /* permanece en una línea */
+  letter-spacing: 0.2px;
+}
+
+/* En móviles mantenemos legibilidad (si decides seguir en 1 columna ahí) */
+@media (max-width: 420px) {
+  .info-title-text {
+    font-size: clamp(18px, 5.2vw, 26px);
+  }
+}
+/* ===== Justificar texto de "Nuestra Historia" ===== */
+.history-text p {
+  text-align: justify;
+  text-justify: inter-word; /* mejora la distribución del texto */
+}
+/* ===== Centrar verticalmente el texto entre las imágenes ===== */
+.history-section .history-body {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 6px 0 14px;
-}
-.wm-title-wrap::before {
-  content: "";
-  position: absolute;
-  left: 6%;
-  right: 6%;
-  top: 50%;
-  height: 2px;
-  background: #000;
-  z-index: 0;
-}
-.wm-title-img {
-  width: min(360px, 82%);
-  position: relative;
-  z-index: 1;
-  background: #fff;
-  padding: 0 10px;
-  border-radius: 6px;
+  align-items: center; /* centra verticalmente texto e imágenes */
+  justify-content: space-between;
+  gap: 20px;
 }
 
-.wm-body {
-  padding: 6px 8px 4px;
-}
-.wm-ico {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  filter: grayscale(100%);
-  margin: 4px auto 10px;
-}
-.wm-lead {
-  margin: 0 0 14px;
-  font-size: 0.98rem;
-  color: #333;
-  line-height: 1.6;
+.history-text {
+  flex: 1;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
-.wm-btn {
+.history-photos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centra las imágenes respecto al texto */
+  gap: 12px;
+}
+
+/* ===== Firma "L & S" centrada y elegante ===== */
+.signature-wrap {
+  text-align: center;
+  margin-top: 26px; /* separa del texto anterior */
+  margin-bottom: 10px;
+}
+
+.signature-text {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(52px, 14vw, 110px);
+  letter-spacing: 3px;
+  color: #111;
   display: inline-block;
-  padding: 12px 26px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  border: 2px solid #2c2a2a;
-  border-radius: 999px;
-  background: #fff;
-  color: #2c2a2a;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: 0.25s;
-}
-.wm-btn:hover {
-  background: #121312;
-  color: #fff;
-  transform: scale(1.03);
+  position: relative;
 }
 
-@media (max-width: 420px) {
-  .wm-title-wrap::before {
-    left: 4%;
-    right: 4%;
-  }
-  .wm-ico {
-    width: 44px;
-    height: 44px;
-  }
+/* Ampersand (&) más pequeño */
+.signature-text span.amp {
+  font-size: 0.5em;
+  vertical-align: middle;
+  padding: 0 8px;
+  display: inline-block;
+  transform: translateY(-0.15em);
+}
+/* ===== Ajuste de tamaño más compacto en el Programa de Boda ===== */
+.prog-grid {
+  grid-template-columns: 0.95fr 0.85fr; /* columnas un poco más estrechas */
+  gap: 10px;
 }
 
-/* ===== Tamaño unificado para imágenes de encabezado con texto ===== */
-:root {
-  /* Cambia este valor para ajustar TODAS a la vez */
-  --heading-w: 360px; /* por ejemplo 320–380px */
+.prog-card {
+  padding: 10px 10px 12px;
 }
 
-/* Lista de clases que usas como títulos en imágenes */
-.title-img,
-.wm-title-img,
-.history-title-img,
-.prog-title-img,
-.counter-title-img,
-.names-img {
-  width: min(var(--heading-w), 82%) !important; /* mismo ancho en todas */
-  height: auto !important;
-  display: block;
-  margin: 0 auto; /* centra */
-  background: #fff; /* mantiene el efecto de “faja blanca” */
-  padding: 0 10px;
-  border-radius: 6px;
+.prog-card-title {
+  font-size: 0.9rem;
+  padding: 6px 8px;
 }
 
-/* Si alguna te queda demasiado grande en móviles, puedes afinar así: */
-@media (max-width: 420px) {
-  .title-img,
-  .wm-title-img,
-  .history-title-img,
-  .prog-title-img,
-  .counter-title-img,
-  .names-img {
-    width: min(calc(var(--heading-w) - 30px), 86%) !important;
-  }
+.prog-card-body {
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.prog-btn {
+  font-size: 0.85rem;
+  padding: 8px 10px;
+}
+
+/* Línea de tiempo más angosta */
+.prog-timeline {
+  --div-x: 58px; /* mueve la línea central un poco más a la izquierda */
+  padding: 8px 10px;
+}
+
+.prog-tl-row time {
+  font-size: 0.85rem;
+}
+
+.prog-tl-text {
+  font-size: 0.85rem;
+}
+
+.prog-ico {
+  width: 18px;
+  height: 18px;
+}
+/* ===== Ajuste fino de alineación en la línea de tiempo ===== */
+.prog-timeline {
+  --div-x: 70px; /* mueve la línea un poco a la derecha */
+  --gut: 10px; /* separa más la hora del texto */
+  --tick: 8px;
+  padding: 10px 12px;
+}
+
+.prog-tl-row {
+  grid-template-columns: 66px 1fr auto; /* espacio suficiente entre hora y texto */
+  gap: 6px;
+  padding: 10px 0;
+}
+
+.prog-tl-row time {
+  font-size: 0.9rem;
+  text-align: right;
+  padding-right: var(--gut);
+}
+
+.prog-tl-text {
+  font-size: 0.9rem;
+  padding-left: var(--gut);
+  line-height: 1.4;
 }
