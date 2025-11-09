@@ -991,3 +991,23 @@ a.btn img,
     font-size: 12px;
   }
 }
+/* Evita cualquier desborde horizontal del header */
+.news-header {
+  overflow: hidden;
+}
+
+/* Laterales un poco más compactos en móvil */
+.news-cell.left,
+.news-cell.right {
+  font-size: clamp(10px, 2.8vw, 12px);
+  padding: 6px 6px;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+}
+
+/* Ajuste fino en pantallas muy angostas */
+@media (max-width: 360px) {
+  .news-header {
+    gap: 4px;
+  }
+}
