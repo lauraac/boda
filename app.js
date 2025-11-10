@@ -396,3 +396,56 @@ function waitForMetadata(audio) {
     document.addEventListener("DOMContentLoaded", tryAutoplay, { once: true });
   }
 })();
+(() => {
+  const icons = Array.from(
+    document.querySelectorAll(".prog-timeline .prog-ico")
+  );
+  if (icons.length < 1) return;
+
+  let idx = -1; // índice actual
+  let dir = 1; // 1: hacia abajo | -1: hacia arriba
+  const speed = 900; // ms entre cambios
+  let paused = false; // para pausar cuando la pestaña no está visible
+
+  function paint() {
+    icons.forEach((el) => el.classList.remove("is-on"));
+    icons[idx]?.classList.add("is-on");
+  }
+
+  function step() {
+    if (paused) {
+      // no avances mientras esté oculta la pestaña
+      setTimeout(step, speed);
+      return;
+    }
+
+    idx += dir;
+
+    // Rebote (1→N→1…)
+    if (idx >= icons.length) {
+      dir = -1;
+      idx = icons.length - 2;
+    } else if (idx < 0) {
+      dir = 1;
+      idx = 1;
+    }
+
+    paint();
+    setTimeout(step, speed);
+  }
+
+  // Arranca encendiendo el primero
+  idx = 0;
+  paint();
+  setTimeout(step, speed);
+
+  // Pausa/resume cuando cambie visibilidad de la pestaña
+  document.addEventListener("visibilitychange", () => {
+    paused = document.hidden;
+  });
+
+  // Respeta accesibilidad
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    icons.forEach((el) => el.classList.add("is-on")); // sin animación
+  }
+})();

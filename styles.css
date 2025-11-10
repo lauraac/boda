@@ -1100,3 +1100,63 @@ a.btn img,
     font-size: 0.9rem;
   }
 }
+/* ---- Parpadeo secuencial SOLO en el timeline ---- */
+.prog-timeline .prog-ico {
+  opacity: 0.35;
+  filter: grayscale(100%) brightness(0.7);
+  transform: scale(1);
+  transition: opacity 0.35s ease, filter 0.35s ease, transform 0.25s ease;
+  will-change: opacity, transform, filter;
+}
+
+.prog-timeline .prog-ico.is-on {
+  opacity: 1;
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.06);
+}
+
+/* Respeta accesibilidad: sin animaciones si el usuario lo pide */
+@media (prefers-reduced-motion: reduce) {
+  .prog-timeline .prog-ico {
+    transition: none !important;
+  }
+}
+/* ❤️ Latido para el corazón del separador de padres */
+.parents-sep .sep-heart {
+  display: inline-block;
+  animation: heartbeat 1.8s ease-in-out infinite;
+  transform-origin: center;
+  /* opcional: un brillo muy sutil como de tinta */
+  text-shadow: 0 0 0.6px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  10% {
+    transform: scale(1.22);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  30% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+/* Accesibilidad: si el usuario prefiere menos movimiento, quita la animación */
+@media (prefers-reduced-motion: reduce) {
+  .parents-sep .sep-heart {
+    animation: none !important;
+  }
+}
