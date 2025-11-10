@@ -406,54 +406,6 @@ img {
   max-width: 100%;
   padding: 0;
 }
-.prog-grid {
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 10px;
-  align-items: start;
-}
-.prog-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centra todo el contenido horizontalmente */
-  text-align: center; /* Centra el texto también */
-}
-.prog-card {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 10px 10px 12px;
-  box-shadow: var(--shadow);
-}
-.prog-card-title {
-  margin: 0 0 6px;
-  font-weight: 900;
-  text-align: center;
-  border: 1px solid #bdbdbd;
-  border-radius: 8px;
-  padding: 6px 8px;
-  background: linear-gradient(#efefef, #e7e7e7);
-  font-size: 0.92rem;
-}
-.prog-card-body {
-  margin: 6px 0 10px;
-  text-align: center;
-  color: #444;
-  font-size: 0.88rem;
-  line-height: 1.35;
-}
-.prog-btn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: #6c6c6c;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 900;
-  border: 1px solid #505050;
-}
 
 /* ---------- Timeline móvil (hora arriba, texto abajo, línea al centro y T a la mitad) ---------- */
 @media (max-width: 900px) {
@@ -469,36 +421,6 @@ img {
   .section.prog .prog-timeline {
     order: 2;
     width: 100%;
-  }
-
-  /* Variables layout */
-  .prog-timeline {
-    --left: clamp(190px, 60vw, 260px); /* bloque hora + texto */
-    --line-w: 18px; /* columna de la línea */
-    --tick-left: 14px; /* hacia el bloque izq */
-    --tick-right: 16px; /* hacia el icono */
-    --icon-size: 30px; /* tamaño de icono */
-    --gap-text-icon: 6px; /* espacio texto–icono */
-
-    position: relative;
-    max-width: 92%;
-    margin: 0 auto;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 14px;
-    padding: 14px 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }
-
-  /* Fila: [bloque izq] [línea] [icono] */
-  .prog-tl-row {
-    position: relative;
-    display: grid;
-    grid-template-columns: var(--left) var(--line-w) var(--icon-size);
-    column-gap: var(--gap-text-icon);
-    align-items: center;
-    justify-items: end; /* empuja hora y texto hacia la línea */
-    padding: 10px 0;
   }
 
   /* Hora arriba, pegada a la línea */
@@ -522,29 +444,6 @@ img {
     line-height: 1.35;
     font-size: 1rem;
     margin: 0;
-  }
-
-  /* Segmento vertical por fila (en el centro de la columna 2) */
-  .prog-tl-row::before {
-    content: "";
-    position: absolute;
-    left: calc(var(--left) + var(--line-w) / 2);
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: #000;
-  }
-
-  /* Tick que cruza la línea (forma “T”) */
-  .prog-tl-row::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: calc(var(--left) + var(--line-w) / 2);
-    width: calc(var(--tick-left) + var(--tick-right) - 6px);
-    height: 2px;
-    background: #000;
-    transform: translate(calc(-1 * var(--tick-left)), -50%);
   }
 
   /* Icono pegado a la línea */
@@ -1109,68 +1008,95 @@ a.btn img,
   backdrop-filter: blur(2px);
   z-index: 10001; /* sobre el video, debajo del botón Saltar */
 }
-/* ==== Centrado total del timeline de programa ==== */
-.section.prog {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
+/* ===== Timeline del programa ===== */
 .prog-timeline {
   position: relative;
+  max-width: var(--max, 720px);
   margin: 0 auto;
-  max-width: 340px; /* 🔹 ancho máximo controlado */
-  width: 90%;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 16px;
-  padding: 20px 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  overflow: hidden; /* evita que algo se salga */
+  padding: 8px 0 12px;
 }
 
-/* 🔹 Cada fila del timeline centrada */
-.prog-tl-row {
-  display: grid;
-  grid-template-columns: 1fr 20px 30px;
-  align-items: center;
-  justify-items: center;
-  gap: 10px;
-  position: relative;
-}
-
-/* 🔹 Línea vertical centrada dentro del timeline */
-.prog-tl-row::before {
+/* Línea vertical negra al centro */
+.prog-timeline::before {
   content: "";
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #000;
+  background: #111; /* línea negra */
+  transform: translateX(-50%);
+  pointer-events: none;
 }
 
-/* 🔹 Texto y hora alineados a la derecha de la línea */
-.prog-tl-text,
-.prog-tl-row time {
+.prog-tl-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* izq | der */
+  align-items: center;
+  gap: 16px;
+  padding: 18px 0; /* alto por fila (ajusta para compactar/expandir) */
+}
+
+/* Tick horizontal (uno por fila) */
+.prog-tl-row::before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 14px); /* centrado en la línea vertical */
+  top: 50%;
+  width: 28px; /* largo del tick */
+  height: 2px;
+  background: #111;
+  transform: translateY(-50%);
+}
+
+/* Columna izquierda (hora + texto) */
+.prog-left {
   text-align: right;
-  justify-self: end;
+  padding-right: 24px; /* separa del eje */
+}
+.prog-left time {
+  display: block;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.prog-tl-text {
+  margin: 2px 0 0;
+  line-height: 1.2;
 }
 
-/* 🔹 Iconos alineados a la izquierda de la línea */
+/* Columna derecha (icono) */
+.prog-right {
+  padding-left: 24px; /* separa del eje */
+}
 .prog-ico {
-  justify-self: start;
-  width: 28px;
-  height: 28px;
+  width: 46px; /* tamaño uniforme del icono */
+  height: 46px;
   object-fit: contain;
+  display: block;
+  margin-left: 0;
 }
 
-/* Evita desbordes horizontales en pantallas pequeñas */
-@media (max-width: 400px) {
-  .prog-timeline {
-    width: 95%;
-    max-width: 300px;
+/* ----- Responsivo móvil ----- */
+@media (max-width: 480px) {
+  .prog-tl-row {
+    gap: 12px;
+    padding: 14px 0;
+  }
+  .prog-left {
+    padding-right: 16px;
+  }
+  .prog-right {
+    padding-left: 16px;
+  }
+  .prog-ico {
+    width: 38px;
+    height: 38px;
+  }
+  .prog-left time {
+    font-size: 0.95rem;
+  }
+  .prog-tl-text {
+    font-size: 0.9rem;
   }
 }
