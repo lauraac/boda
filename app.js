@@ -449,34 +449,82 @@ function waitForMetadata(audio) {
     icons.forEach((el) => el.classList.add("is-on")); // sin animación
   }
 })();
-// ==== Modal de Google Maps / Waze ====
+
+// ==== Modal de Google Maps / Waze (Recepción + Ceremonia) ====
 (function () {
   const modal = document.getElementById("mapModal");
-  const btnOpen = document.getElementById("btnMapaRecepcion");
+  const btnRecepcion = document.getElementById("btnMapaRecepcion");
+  const btnCeremonia = document.getElementById("btnMapaCeremonia");
+
   const btnClose = document.getElementById("mapModalClose");
   const backdrop = document.getElementById("mapModalBackdrop");
   const btnMaps = document.getElementById("mapModalMaps");
   const btnWaze = document.getElementById("mapModalWaze");
 
+  if (!modal || !btnMaps || !btnWaze) return;
+
   const openModal = () => modal.classList.add("is-open");
   const closeModal = () => modal.classList.remove("is-open");
 
-  btnOpen.addEventListener("click", openModal);
-  btnClose.addEventListener("click", closeModal);
-  backdrop.addEventListener("click", closeModal);
+  btnClose?.addEventListener("click", closeModal);
+  backdrop?.addEventListener("click", closeModal);
 
-  // Maps
-  btnMaps.addEventListener("click", () => {
-    window.open("https://maps.app.goo.gl/kwyLQwGJEmRAFHPZ7?g_st=aw", "_blank");
-    closeModal();
-  });
+  // función que configura los links según de dónde venga (recepción / ceremonia)
+  function configurarLinks(tipo) {
+    if (tipo === "recepcion") {
+      // 👉 SALÓN (usa tu link de Maps del salón)
+      btnMaps.onclick = () => {
+        window.open(
+          "https://maps.app.goo.gl/kwyLQwGJEmRAFHPZ7?g_st=aw",
+          "_blank"
+        );
+        closeModal();
+      };
 
-  // Waze (ajusta las coordenadas reales si gustas)
-  btnWaze.addEventListener("click", () => {
-    window.open(
-      "https://waze.com/ul?ll=19.4326,-99.1332&navigate=yes",
-      "_blank"
-    );
-    closeModal();
-  });
+      // 👉 Waze del salón (ajusta coordenadas reales si quieres)
+      btnWaze.onclick = () => {
+        window.open(
+          "https://waze.com/ul?ll=19.4326,-99.1332&navigate=yes",
+          "_blank"
+        );
+        closeModal();
+      };
+    }
+
+    if (tipo === "ceremonia") {
+      // 👉 GOOGLE MAPS (Parroquia de María Auxiliadora)
+      btnMaps.onclick = () => {
+        window.open(
+          "https://www.google.com/maps/place/Parroquia+de+Mar%C3%ADa+Auxiliadora/@19.4457111,-99.1775055,17z",
+          "_blank"
+        );
+        closeModal();
+      };
+
+      // 👉 WAZE (misma iglesia, coordenadas exactas)
+      btnWaze.onclick = () => {
+        window.open(
+          "https://waze.com/ul?ll=19.4457111,-99.1775055&navigate=yes",
+          "_blank"
+        );
+        closeModal();
+      };
+    }
+  }
+
+  // botón Recepción
+  if (btnRecepcion) {
+    btnRecepcion.addEventListener("click", () => {
+      configurarLinks("recepcion");
+      openModal();
+    });
+  }
+
+  // botón Ceremonia
+  if (btnCeremonia) {
+    btnCeremonia.addEventListener("click", () => {
+      configurarLinks("ceremonia");
+      openModal();
+    });
+  }
 })();
