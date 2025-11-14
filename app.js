@@ -472,27 +472,31 @@ function waitForMetadata(audio) {
   // función que configura los links según de dónde venga (recepción / ceremonia)
   function configurarLinks(tipo) {
     if (tipo === "recepcion") {
-      // 👉 SALÓN (usa tu link de Maps del salón)
+      // 👉 GOOGLE MAPS: usa exactamente el link que tienes en WhatsApp
       btnMaps.onclick = () => {
         window.open(
-          "https://maps.app.goo.gl/kwyLQwGJEmRAFHPZ7?g_st=aw",
+          "https://maps.app.goo.gl/LUXP5rXH8cxzmnhCA?g_st=aw",
           "_blank"
         );
         closeModal();
       };
 
-      // 👉 Waze del salón (ajusta coordenadas reales si quieres)
+      // 👉 WAZE: búsqueda directa del salón con navegación
       btnWaze.onclick = () => {
-        window.open(
-          "https://waze.com/ul?ll=19.4326,-99.1332&navigate=yes",
-          "_blank"
-        );
+        const wazeUrl =
+          "https://waze.com/ul?q=" +
+          encodeURIComponent(
+            "Salones Palazzio Videmar, Manuel González 71, Ex Hipódromo de Peralvillo, Cuauhtémoc, Ciudad de México, CDMX"
+          ) +
+          "&navigate=yes";
+
+        window.open(wazeUrl, "_blank");
         closeModal();
       };
     }
 
     if (tipo === "ceremonia") {
-      // 👉 GOOGLE MAPS (Parroquia de María Auxiliadora)
+      // TODO: aquí dejas igual lo de la iglesia como ya lo tenías
       btnMaps.onclick = () => {
         window.open(
           "https://www.google.com/maps/place/Parroquia+de+Mar%C3%ADa+Auxiliadora/@19.4457111,-99.1775055,17z",
@@ -501,7 +505,6 @@ function waitForMetadata(audio) {
         closeModal();
       };
 
-      // 👉 WAZE (misma iglesia, coordenadas exactas)
       btnWaze.onclick = () => {
         window.open(
           "https://waze.com/ul?ll=19.4457111,-99.1775055&navigate=yes",
@@ -527,4 +530,20 @@ function waitForMetadata(audio) {
       openModal();
     });
   }
+})();
+// ==== Modal: ¿Hasta qué hora es la fiesta? ====
+(function () {
+  const modal = document.getElementById("horaModal");
+  const btnOpen = document.getElementById("btnHoraFiesta"); // este botón lo creamos abajo
+  const btnClose = document.getElementById("horaModalClose");
+  const backdrop = document.getElementById("horaModalBackdrop");
+
+  if (!modal || !btnOpen) return;
+
+  const openModal = () => modal.classList.add("is-open");
+  const closeModal = () => modal.classList.remove("is-open");
+
+  btnOpen.addEventListener("click", openModal);
+  btnClose.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", closeModal);
 })();

@@ -180,7 +180,7 @@
           <article class="prog-card">
             <h3 class="prog-card-title">Ceremonia Religiosa</h3>
             <p class="prog-card-body">
-              <b>Hora 05:00 pm</b><br>“Parroquia de María Auxiliadora”<br>Colegio Salesiano #61, Anáhuac I Secc, Miguel
+              <b>Hora 07:00 pm</b><br>“Parroquia de María Auxiliadora”<br>Colegio Salesiano #61, Anáhuac I Secc, Miguel
               Hidalgo, 11320 Ciudad de México, CDMX, México
             </p>
 
@@ -191,7 +191,7 @@
 
 
           <article class="prog-card">
-            <h3 class="prog-card-title">Recepción</h3>
+            <h3 class="prog-card-title">Recepción Salón Rubí</h3>
             <p class="prog-card-body">
               <b>Hora 07:00 pm</b><br>“Salones Palazzio Videmar”<br>Manuel Gonzalez 71, Ex Hipódromo de Peralvillo,
               Cuauhtémoc, 06220 Ciudad de México, CDMX
@@ -207,7 +207,7 @@
           <!-- Fila 1 -->
           <div class="prog-tl-row">
             <div class="prog-left">
-              <time>05:00 pm</time>
+              <time>07:00 pm</time>
               <p class="prog-tl-text">Ceremonia Religiosa</p>
             </div>
             <div class="prog-right">
@@ -229,7 +229,7 @@
           <!-- Fila 3 -->
           <div class="prog-tl-row">
             <div class="prog-left">
-              <time>08:00 pm</time>
+              <time>09:00 pm</time>
               <p class="prog-tl-text">Vals</p>
             </div>
             <div class="prog-right">
@@ -240,7 +240,7 @@
           <!-- Fila 4 -->
           <div class="prog-tl-row">
             <div class="prog-left">
-              <time>08:30 pm</time>
+              <time>09:30 pm</time>
               <p class="prog-tl-text">Cena</p>
             </div>
             <div class="prog-right">
@@ -251,7 +251,7 @@
           <!-- Fila 5 -->
           <div class="prog-tl-row">
             <div class="prog-left">
-              <time>09:30 pm</time>
+              <time>10:00 pm</time>
               <p class="prog-tl-text">Fiesta</p>
             </div>
             <div class="prog-right">
@@ -262,15 +262,36 @@
         </section>
         <!-- Nota de puntualidad -->
         <p class="prog-note">
-          Te pedimos llegar puntual, ya que antes de la ceremonia tendremos una pequeña sesión de fotos
-          y queremos aprovechar cada momento contigo.
+          Llega a tiempo para no perderte ni un solo instante.
         </p>
 
 
 
       </div>
     </section>
+    <!-- Modal: ¿Hasta qué hora es la fiesta? -->
+    <div class="hora-modal" id="horaModal">
+      <div class="hora-modal-backdrop" id="horaModalBackdrop"></div>
+
+      <div class="hora-modal-dialog">
+
+        <button type="button" class="hora-modal-close" id="horaModalClose">×</button>
+
+        <p class="hora-modal-title">¿Hasta qué hora es la fiesta?</p>
+
+        <p class="hora-modal-text">
+          La noche está pensada para disfrutarse al máximo.<br>
+          La fiesta termina a las <b>2:00 a.m.</b>, para que puedas organizar tu regreso con tranquilidad y sin
+          prisas.<br><br>
+          ¡Queremos verte bailar hasta el final!
+        </p>
+      </div>
+    </div>
   </main>
+  <button class="prog-btn" id="btnHoraFiesta">
+    ¿Hasta qué hora es la fiesta?
+  </button>
+
 
   <!-- Info (dos tarjetas) -->
   <section class="info-section" id="info-cards">
@@ -293,7 +314,9 @@
       <div class="info-body center">
         <img src="./img/regalo.png" alt="" class="info-ico" aria-hidden="true">
         <p class="info-lead"><strong>¡Que nos acompañes es lo más importante!</strong></p>
-        <p class="info-text">Si está en tu disposición, realizar una muestra de cariño estaremos muy agradecidos.</p>
+        <p class="info-text">Tu presencia es lo más importante y agradecemos tu valiosa compañía en este día tan
+          especial para nosotros. Si deseas manifestar una muestra de cariño, agradeceremos profundamente el detalle en
+          la siguiente cuenta.</p>
         <div class="bank-card">
           <p><strong>Cuenta CLABE:</strong><br>072180013135379444</p>
           <p><strong>Banco:</strong><br>Banorte</p>
@@ -383,6 +406,25 @@
       </div>
     </div>
 
+    <!-- SECCIÓN: ¿Se pueden subir fotos o videos? -->
+    <section class="section fotos-videos-section">
+      <div class="phrase-wrapper gap-lines">
+        <h2 class="gv-title fotos-videos-title">¿Se pueden subir fotos o videos?</h2>
+      </div>
+
+      <p class="fv-strong">
+        ¡Claro! Solo te pedimos hacerlo con respeto y sin interrumpir momentos clave.
+      </p>
+
+      <p class="fv-soft">
+        Y si es una ceremonia religiosa, por favor evita grabar o usar flash 🙏🏼
+      </p>
+
+      <div class="fotos-collage">
+        <img src="./img/tomando.jpg" alt="Invitada tomando foto">
+        <img src="./img/collage.png" alt="Collage de fotos">
+      </div>
+    </section>
 
     <script src="app.js" defer></script>
 </body>

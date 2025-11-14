@@ -1309,3 +1309,123 @@ a.btn img,
   height: 28px;
   object-fit: contain;
 }
+/* ===== Modal "¿Hasta qué hora es la fiesta?" ===== */
+.hora-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 6000;
+  font-family: "Merriweather", serif;
+}
+
+.hora-modal.is-open {
+  display: flex;
+}
+
+.hora-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+}
+
+.hora-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: 360px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 22px 28px;
+  border: 1px solid #333;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  animation: modalIn 0.22s ease-out;
+}
+
+.hora-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.hora-modal-close:hover {
+  color: #000;
+}
+
+.hora-modal-title {
+  text-align: center;
+  margin: 0 0 14px;
+  font-size: 1.4rem;
+  font-family: "Great Vibes", cursive;
+}
+
+.hora-modal-text {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.6;
+  margin: 0;
+}
+/* ===== Sección ¿Se pueden subir fotos o videos? ===== */
+.fotos-videos-section {
+  text-align: center;
+  padding-bottom: 18px;
+}
+
+.fotos-videos-title {
+  font-size: clamp(26px, 7vw, 42px);
+}
+
+/* Texto fuerte */
+.fv-strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 6px;
+}
+
+/* Texto suave */
+.fv-soft {
+  font-size: 0.9rem;
+  color: #444;
+  margin: 0 0 14px;
+  line-height: 1.45;
+  font-style: italic;
+}
+
+/* Collage */
+.fotos-collage {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.fotos-collage img {
+  width: 44%;
+  max-width: 180px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
+}
+
+/* Responsive: en celulares apilado */
+@media (max-width: 450px) {
+  .fotos-collage {
+    flex-direction: column;
+    gap: 14px;
+  }
+  .fotos-collage img {
+    width: 82%;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+}
