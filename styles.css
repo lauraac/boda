@@ -203,6 +203,24 @@ img {
   border: 1px solid var(--line);
   overflow: hidden;
 }
+/* --- Aviso solo adultos --- */
+.adults-only {
+  width: min(92%, var(--max));
+  margin: 26px auto;
+  background: #555; /* gris discreto */
+  color: #fff; /* letra blanca */
+  border-radius: 10px;
+  padding: 16px 18px;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.adults-only p {
+  margin: 0;
+  letter-spacing: 0.03em;
+}
 
 /* Texto anuncio */
 .names-img {
@@ -846,16 +864,6 @@ a.btn img,
 }
 
 /* Ajuste visual del título */
-.prog-card-title {
-  background: linear-gradient(#f5f5f5, #e7e7e7);
-  border: 1px solid #bdbdbd;
-  border-radius: 999px; /* igual de redondeado que el botón */
-  padding: 8px 0;
-  font-weight: 900;
-  font-size: 0.95rem;
-  color: #111;
-  margin-bottom: 10px;
-}
 
 /* Botón centrado */
 .prog-card a {
@@ -1159,4 +1167,145 @@ a.btn img,
   .parents-sep .sep-heart {
     animation: none !important;
   }
+}
+/* Nota amable dentro de "Programa de boda" */
+.prog-note {
+  width: min(92%, var(--max));
+  margin: 0 auto 16px;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #444;
+  background: #f3f3f3;
+  border-radius: 10px;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  font-style: italic;
+}
+/* ===== Modal elegante ===== */
+.map-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 6000;
+  font-family: "Merriweather", serif;
+}
+
+.map-modal.is-open {
+  display: flex;
+}
+
+.map-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+}
+
+/* Caja principal */
+.map-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: 340px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 60px 22px 28px; /* 💖 MÁS ESPACIO ARRIBA */
+  border: 1px solid #333;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+  animation: modalIn 0.22s ease-out;
+}
+
+/* Animación */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* X de cerrar */
+.map-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.map-modal-close:hover {
+  color: #000;
+}
+
+/* Títulos */
+.map-modal-title {
+  margin: 0 0 6px;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #111;
+}
+
+.map-modal-text {
+  margin: 0 0 18px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* Botones */
+.map-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.map-modal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid #000;
+  background: linear-gradient(to bottom, #3a3a3a, #1b1b1b);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  transition: 0.2s;
+}
+
+.map-modal-btn:hover {
+  background: linear-gradient(to bottom, #4b4b4b, #000);
+  transform: translateY(-1px);
+}
+
+/* Botón Waze azul */
+.waze-btn {
+  background: linear-gradient(to bottom, #2d89ff, #0054b4);
+  border-color: #003f87;
+}
+
+.waze-btn:hover {
+  background: linear-gradient(to bottom, #3b97ff, #003f87);
+}
+
+/* Iconos */
+.map-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }

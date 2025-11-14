@@ -449,3 +449,34 @@ function waitForMetadata(audio) {
     icons.forEach((el) => el.classList.add("is-on")); // sin animación
   }
 })();
+// ==== Modal de Google Maps / Waze ====
+(function () {
+  const modal = document.getElementById("mapModal");
+  const btnOpen = document.getElementById("btnMapaRecepcion");
+  const btnClose = document.getElementById("mapModalClose");
+  const backdrop = document.getElementById("mapModalBackdrop");
+  const btnMaps = document.getElementById("mapModalMaps");
+  const btnWaze = document.getElementById("mapModalWaze");
+
+  const openModal = () => modal.classList.add("is-open");
+  const closeModal = () => modal.classList.remove("is-open");
+
+  btnOpen.addEventListener("click", openModal);
+  btnClose.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", closeModal);
+
+  // Maps
+  btnMaps.addEventListener("click", () => {
+    window.open("https://maps.app.goo.gl/kwyLQwGJEmRAFHPZ7?g_st=aw", "_blank");
+    closeModal();
+  });
+
+  // Waze (ajusta las coordenadas reales si gustas)
+  btnWaze.addEventListener("click", () => {
+    window.open(
+      "https://waze.com/ul?ll=19.4326,-99.1332&navigate=yes",
+      "_blank"
+    );
+    closeModal();
+  });
+})();
