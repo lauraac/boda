@@ -496,20 +496,22 @@ function waitForMetadata(audio) {
     }
 
     if (tipo === "ceremonia") {
-      // TODO: aquí dejas igual lo de la iglesia como ya lo tenías
+      // 👉 GOOGLE MAPS (tu link exacto)
       btnMaps.onclick = () => {
-        window.open(
-          "https://www.google.com/maps/place/Parroquia+de+Mar%C3%ADa+Auxiliadora/@19.4457111,-99.1775055,17z",
-          "_blank"
-        );
+        window.open("https://maps.app.goo.gl/dMMmgYUSe3YkB8MQ6", "_blank");
         closeModal();
       };
 
+      // 👉 WAZE (búsqueda por nombre/dirección)
       btnWaze.onclick = () => {
-        window.open(
-          "https://waze.com/ul?ll=19.4457111,-99.1775055&navigate=yes",
-          "_blank"
-        );
+        const wazeUrl =
+          "https://waze.com/ul?q=" +
+          encodeURIComponent(
+            "Parroquia de María Auxiliadora, Colegio Salesiano #61, Anáhuac I Secc, Miguel Hidalgo, CDMX"
+          ) +
+          "&navigate=yes";
+
+        window.open(wazeUrl, "_blank");
         closeModal();
       };
     }
