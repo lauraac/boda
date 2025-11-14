@@ -4,149 +4,228 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fotos del evento</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Mural de recuerdos</title>
+
   <style>
-    .fotos-wrap {
+    :root {
+      --bg: #f7f3ec;
+      --wall: #f0e2cf;
+      --frame: #ffffff;
+      --accent: #c89a55;
+      --ink: #2f2520;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      color: var(--ink);
+    }
+
+    .mural-wrap {
       min-height: 100vh;
-      max-width: 480px;
+      max-width: 520px;
       margin: 0 auto;
-      padding: 24px 16px 40px;
+      padding: 28px 16px 40px;
       text-align: center;
     }
 
-    .fotos-title {
+    .mural-title {
       font-family: "Great Vibes", cursive;
-      font-size: 2.3rem;
-      margin-bottom: 6px;
-    }
-
-    .fotos-sub {
-      font-size: 0.95rem;
-      margin-bottom: 20px;
-    }
-
-    .fotos-form {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 18px;
-      padding: 18px 16px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
-      margin-bottom: 24px;
-    }
-
-    .fotos-form label {
-      display: block;
-      text-align: left;
-      font-size: 0.85rem;
+      font-size: 2.4rem;
       margin-bottom: 4px;
-      font-weight: 600;
     }
 
-    .fotos-form input[type="text"],
-    .fotos-form textarea {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
+    .mural-sub {
       font-size: 0.9rem;
-      margin-bottom: 10px;
+      margin-bottom: 18px;
     }
 
-    .fotos-form input[type="file"] {
-      width: 100%;
-      margin-bottom: 12px;
+    .mural-actions {
+      margin-bottom: 18px;
     }
 
-    .btn-enviar-foto {
-      width: 100%;
-      padding: 10px 16px;
+    .btn-camara {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
       border-radius: 999px;
       border: none;
+      background: var(--accent);
+      color: #fff;
       font-weight: 600;
       font-size: 0.95rem;
       cursor: pointer;
-      background: #c59b5f;
-      color: #fff;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
     }
 
-    .fotos-msg {
-      margin-top: 10px;
+    .btn-camara span {
+      font-size: 1.2rem;
+    }
+
+    .btn-camara:active {
+      transform: scale(0.97);
+    }
+
+    .mural-msg {
+      min-height: 18px;
+      font-size: 0.8rem;
+      margin-top: 6px;
+    }
+
+    /* Pared / mural */
+    .mural-wall {
+      margin-top: 18px;
+    }
+
+    .mural-frame {
+      background: radial-gradient(circle at top, #f9efe0, var(--wall));
+      border-radius: 20px;
+      padding: 12px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+      position: relative;
+    }
+
+    .mural-frame::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 18px;
+      background: #d9c09d;
+      border-radius: 10px;
+      box-shadow: 0 7px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .mural-label {
       font-size: 0.85rem;
-    }
-
-    /* Galería */
-    .galeria-title {
       font-weight: 600;
-      margin-bottom: 10px;
-      font-size: 0.95rem;
+      margin: 12px 0 8px;
     }
 
-    .galeria-grid {
+    .mural-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 8px;
     }
 
-    .galeria-item {
-      border-radius: 12px;
+    .mural-item {
+      background: var(--frame);
+      border-radius: 14px;
       overflow: hidden;
-      background: #f3f3f3;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+      position: relative;
     }
 
-    .galeria-item img {
+    .mural-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .galeria-empty {
-      font-size: 0.85rem;
-      color: #666;
+    /* un poco de “desorden bonito” */
+    .mural-item:nth-child(2n) {
+      transform: rotate(-1.5deg);
+    }
+
+    .mural-item:nth-child(3n) {
+      transform: rotate(1.2deg);
+    }
+
+    .mural-empty {
+      font-size: 0.8rem;
+      color: #5f564e;
+      margin: 12px 0 4px;
     }
   </style>
 </head>
 
 <body>
-  <main class="fotos-wrap">
-    <h1 class="fotos-title">Sube tus fotos</h1>
-    <p class="fotos-sub">
-      Toma una foto o súbela desde tu galería.
-      Se guardará automáticamente en nuestro álbum 💕
+  <main class="mural-wrap">
+    <h1 class="mural-title">Mural de recuerdos</h1>
+    <p class="mural-sub">
+      Toca la cámara para tomar una foto o elegirla de tu galería.
+      Se irá pegando aquí en nuestro muro 📷💞
     </p>
 
-    <form id="uploadForm" class="fotos-form">
-      <label for="nombre">Tu nombre (opcional)</label>
-      <input type="text" id="nombre" name="nombre" placeholder="Ej. Familia Sandoval" />
+    <section class="mural-actions">
+      <!-- input oculto, se abre con el botón -->
+      <input type="file" id="archivo" accept="image/*" capture="environment" multiple hidden />
+      <button id="btnTomarFoto" class="btn-camara">
+        <span>📷</span> <strong>Tomar o subir foto</strong>
+      </button>
+      <div id="estado" class="mural-msg"></div>
+    </section>
 
-      <label for="mensaje">Mensaje (opcional)</label>
-      <textarea id="mensaje" name="mensaje" rows="2" placeholder="Escribe un mensajito bonito"></textarea>
-
-      <label for="archivo">Foto(s)</label>
-      <input type="file" id="archivo" name="archivo" accept="image/*" capture="environment" multiple required />
-
-      <button type="submit" class="btn-enviar-foto">Enviar fotos</button>
-
-      <div id="estado" class="fotos-msg"></div>
-    </form>
-
-    <section id="galeria">
-      <p class="galeria-title">Mural de recuerdos</p>
-      <div id="galeriaGrid" class="galeria-grid"></div>
-      <p id="galeriaEmpty" class="galeria-empty" hidden>
-        Aún no hay fotos, ¡sé el primero en subir una! 📸
-      </p>
+    <section class="mural-wall">
+      <div class="mural-frame">
+        <p class="mural-label">Fotos del evento</p>
+        <div id="galeriaGrid" class="mural-grid"></div>
+        <p id="galeriaEmpty" class="mural-empty" hidden>
+          Aún no hay fotos pegadas en el muro. ¡Sé el primero en subir una! ✨
+        </p>
+      </div>
     </section>
   </main>
 
   <script>
-    // 👇 PON AQUÍ TU URL DE APPS SCRIPT (el Web App)
+    // ⬇⬇ PON AQUÍ TU URL DEL WEBAPP DE APPS SCRIPT
     const API_URL = "https://script.google.com/macros/s/AKfycbynRvq7DAvnuKBrjdMaCjFq5enIecOGRLNDcQiCZewY8CJgkQn87PoE6detOW2_9qKk3Q/exec";
 
-    const form = document.getElementById("uploadForm");
+    const btnTomar = document.getElementById("btnTomarFoto");
+    const inputArchivo = document.getElementById("archivo");
     const estado = document.getElementById("estado");
     const grid = document.getElementById("galeriaGrid");
     const emptyMsg = document.getElementById("galeriaEmpty");
+
+    btnTomar.addEventListener("click", () => {
+      inputArchivo.click();
+    });
+
+    inputArchivo.addEventListener("change", () => {
+      if (!inputArchivo.files.length) return;
+      subirFotos(inputArchivo.files);
+    });
+
+    async function subirFotos(files) {
+      try {
+        estado.textContent = "Subiendo foto(s)...";
+        const formData = new FormData();
+
+        Array.from(files).forEach((file, index) => {
+          formData.append("file" + index, file);
+        });
+
+        const resp = await fetch(API_URL, {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!resp.ok) throw new Error("Error HTTP");
+
+        const data = await resp.json().catch(() => ({}));
+        estado.textContent =
+          data.message || "¡Gracias! Tu foto se pegó en el mural 🥰";
+        inputArchivo.value = "";
+
+        // recargar mural
+        cargarGaleria();
+      } catch (err) {
+        console.error(err);
+        estado.textContent =
+          "Ocurrió un error al subir tu foto. Intenta de nuevo.";
+      }
+    }
 
     async function cargarGaleria() {
       try {
@@ -164,9 +243,9 @@
 
         data.files.forEach((f) => {
           const div = document.createElement("div");
-          div.className = "galeria-item";
+          div.className = "mural-item";
           const img = document.createElement("img");
-          img.src = f.url;       // URL pública de la imagen
+          img.src = f.url;
           img.alt = f.name || "";
           div.appendChild(img);
           grid.appendChild(div);
@@ -174,53 +253,11 @@
       } catch (err) {
         console.error(err);
         emptyMsg.hidden = false;
-        emptyMsg.textContent = "No se pudieron cargar las fotos.";
+        emptyMsg.textContent = "No se pudieron cargar las fotos del mural.";
       }
     }
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      estado.textContent = "Subiendo fotos, por favor espera...";
-
-      const filesInput = document.getElementById("archivo");
-      const nombre = document.getElementById("nombre").value || "";
-      const mensaje = document.getElementById("mensaje").value || "";
-
-      if (!filesInput.files.length) {
-        estado.textContent = "Por favor selecciona al menos una foto.";
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append("nombre", nombre);
-      formData.append("mensaje", mensaje);
-
-      Array.from(filesInput.files).forEach((file, index) => {
-        formData.append("file" + index, file);
-      });
-
-      try {
-        const resp = await fetch(API_URL, {
-          method: "POST",
-          body: formData,
-        });
-
-        if (!resp.ok) throw new Error("Error en la subida");
-
-        const data = await resp.json().catch(() => ({}));
-
-        estado.textContent = data.message || "¡Gracias! Tus fotos se subieron correctamente 🥰";
-        form.reset();
-
-        // recargar galería
-        cargarGaleria();
-      } catch (err) {
-        console.error(err);
-        estado.textContent = "Ocurrió un error al subir tus fotos. Inténtalo de nuevo.";
-      }
-    });
-
-    // Al entrar a la página, carga la galería
+    // cargar mural al entrar
     cargarGaleria();
   </script>
 </body>
