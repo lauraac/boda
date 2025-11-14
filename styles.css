@@ -1429,3 +1429,14 @@ a.btn img,
     margin: 0 auto;
   }
 }
+.fallecido {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; /* espacio entre el nombre y la palomita */
+}
+
+.icon-paloma {
+  width: 30px;
+  height: auto;
+  margin-top: -2px; /* MUY importante: ajusta para que quede alineada */
+}
