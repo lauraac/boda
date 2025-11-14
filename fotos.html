@@ -225,27 +225,48 @@
     });
 
     async function subirFotos(files) {
-      try {
-        estado.textContent = "Subiendo foto(s)...";
+      const file = files[0]; // por ahora subimos una por vez
+      if (!file) return;
 
-        const formData = new FormData();
-        Array.from(files).forEach((file, index) => {
-          formData.append("file" + index, file);
-        });
+      estado.textContent = "Subiendo foto...";
 
-        const resp = await fetch(API_URL, {
-          method: "POST",
-          body: formData,
-        });
-        const data = await resp.json();
+      const reader = new FileReader();
 
-        estado.textContent = data.message || "¡Foto subida al mural! 🥰";
+      reader.onloadend = async () => {
+        try {
+          // reader.result = "data:image/jpeg;base64,AAAA..."
+          const base64 = reader.result.split(",")[1];
 
-        cargarGaleria();
-      } catch (e) {
-        estado.textContent = "Error al subir la foto 😔 intenta de nuevo.";
-      }
+          const payload = {
+            image: base64,
+            name: file.name,
+            // si luego quieres, puedes mandar nombre/mensaje:
+            // nombre: "Invitado",
+            // mensaje: ""
+          };
+
+          const resp = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          const data = await resp.json();
+          estado.textContent = data.message || "¡Foto subida al mural! 🥰";
+
+          cargarGaleria();
+        } catch (err) {
+          console.error(err);
+          estado.textContent = "Error al subir la foto 😔 intenta de nuevo.";
+        }
+      };
+
+      // dispara la lectura en base64
+      reader.readAsDataURL(file);
     }
+
 
     async function cargarGaleria() {
       const resp = await fetch(API_URL);
