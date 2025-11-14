@@ -1440,3 +1440,43 @@ a.btn img,
   height: auto;
   margin-top: -2px; /* MUY importante: ajusta para que quede alineada */
 }
+.sec-fotos {
+  padding: 40px 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.03); /* si tienes fondo claro, ajusta al diseño */
+}
+
+.sec-fotos-inner {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.sec-fotos .sec-title {
+  font-family: "Great Vibes", cursive;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.sec-fotos .sec-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.btn-fotos {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  /* ajusta a tu paleta dorado/hueso */
+  background: #c59b5f;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+.btn-fotos:active {
+  transform: scale(0.98);
+}

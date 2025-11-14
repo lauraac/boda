@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fotos del evento</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .fotos-wrap {
+      min-height: 100vh;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+      text-align: center;
+    }
+
+    .fotos-title {
+      font-family: "Great Vibes", cursive;
+      font-size: 2.3rem;
+      margin-bottom: 6px;
+    }
+
+    .fotos-sub {
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .fotos-form {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 18px;
+      padding: 18px 16px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+      margin-bottom: 24px;
+    }
+
+    .fotos-form label {
+      display: block;
+      text-align: left;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .fotos-form input[type="text"],
+    .fotos-form textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .fotos-form input[type="file"] {
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    .btn-enviar-foto {
+      width: 100%;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      background: #c59b5f;
+      color: #fff;
+    }
+
+    .fotos-msg {
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    /* Galería */
+    .galeria-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .galeria-item {
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f3f3f3;
+    }
+
+    .galeria-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .galeria-empty {
+      font-size: 0.85rem;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="fotos-wrap">
+    <h1 class="fotos-title">Sube tus fotos</h1>
+    <p class="fotos-sub">
+      Toma una foto o súbela desde tu galería.
+      Se guardará automáticamente en nuestro álbum 💕
+    </p>
+
+    <form id="uploadForm" class="fotos-form">
+      <label for="nombre">Tu nombre (opcional)</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Ej. Familia Sandoval" />
+
+      <label for="mensaje">Mensaje (opcional)</label>
+      <textarea id="mensaje" name="mensaje" rows="2" placeholder="Escribe un mensajito bonito"></textarea>
+
+      <label for="archivo">Foto(s)</label>
+      <input type="file" id="archivo" name="archivo" accept="image/*" capture="environment" multiple required />
+
+      <button type="submit" class="btn-enviar-foto">Enviar fotos</button>
+
+      <div id="estado" class="fotos-msg"></div>
+    </form>
+
+    <section id="galeria">
+      <p class="galeria-title">Mural de recuerdos</p>
+      <div id="galeriaGrid" class="galeria-grid"></div>
+      <p id="galeriaEmpty" class="galeria-empty" hidden>
+        Aún no hay fotos, ¡sé el primero en subir una! 📸
+      </p>
+    </section>
+  </main>
+
+  <script>
+    // 👇 PON AQUÍ TU URL DE APPS SCRIPT (el Web App)
+    const API_URL = "https://script.google.com/macros/s/AKfycbynRvq7DAvnuKBrjdMaCjFq5enIecOGRLNDcQiCZewY8CJgkQn87PoE6detOW2_9qKk3Q/exec";
+
+    const form = document.getElementById("uploadForm");
+    const estado = document.getElementById("estado");
+    const grid = document.getElementById("galeriaGrid");
+    const emptyMsg = document.getElementById("galeriaEmpty");
+
+    async function cargarGaleria() {
+      try {
+        const resp = await fetch(API_URL); // GET → doGet
+        const data = await resp.json();
+
+        grid.innerHTML = "";
+
+        if (!data.ok || !data.files || data.files.length === 0) {
+          emptyMsg.hidden = false;
+          return;
+        }
+
+        emptyMsg.hidden = true;
+
+        data.files.forEach((f) => {
+          const div = document.createElement("div");
+          div.className = "galeria-item";
+          const img = document.createElement("img");
+          img.src = f.url;       // URL pública de la imagen
+          img.alt = f.name || "";
+          div.appendChild(img);
+          grid.appendChild(div);
+        });
+      } catch (err) {
+        console.error(err);
+        emptyMsg.hidden = false;
+        emptyMsg.textContent = "No se pudieron cargar las fotos.";
+      }
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      estado.textContent = "Subiendo fotos, por favor espera...";
+
+      const filesInput = document.getElementById("archivo");
+      const nombre = document.getElementById("nombre").value || "";
+      const mensaje = document.getElementById("mensaje").value || "";
+
+      if (!filesInput.files.length) {
+        estado.textContent = "Por favor selecciona al menos una foto.";
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("nombre", nombre);
+      formData.append("mensaje", mensaje);
+
+      Array.from(filesInput.files).forEach((file, index) => {
+        formData.append("file" + index, file);
+      });
+
+      try {
+        const resp = await fetch(API_URL, {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!resp.ok) throw new Error("Error en la subida");
+
+        const data = await resp.json().catch(() => ({}));
+
+        estado.textContent = data.message || "¡Gracias! Tus fotos se subieron correctamente 🥰";
+        form.reset();
+
+        // recargar galería
+        cargarGaleria();
+      } catch (err) {
+        console.error(err);
+        estado.textContent = "Ocurrió un error al subir tus fotos. Inténtalo de nuevo.";
+      }
+    });
+
+    // Al entrar a la página, carga la galería
+    cargarGaleria();
+  </script>
+</body>
+
+</html>
