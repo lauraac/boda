@@ -159,13 +159,24 @@
     </p>
 
     <section class="mural-actions">
-      <!-- input oculto, se abre con el botón -->
-      <input type="file" id="archivo" accept="image/*" capture="environment" multiple hidden />
-      <button id="btnTomarFoto" class="btn-camara">
-        <span>📷</span> <strong>Tomar o subir foto</strong>
+
+      <!-- Cámara -->
+      <input type="file" id="archivoCamara" accept="image/*" capture="environment" hidden />
+
+      <!-- Galería -->
+      <input type="file" id="archivoGaleria" accept="image/*" multiple hidden />
+
+      <button id="btnCamara" class="btn-camara">
+        📷 Tomar foto
       </button>
+
+      <button id="btnGaleria" class="btn-camara" style="margin-top:10px;">
+        🖼️ Subir desde galería
+      </button>
+
       <div id="estado" class="mural-msg"></div>
     </section>
+
 
     <section class="mural-wall">
       <div class="mural-frame">
@@ -179,29 +190,44 @@
   </main>
 
   <script>
-    // 👇 tu URL del WebApp de Apps Script
-    const API_URL = "https://script.google.com/macros/s/AKfycbynRvq7DAvnuKBrjdMaCjFq5enIecOGRLNDcQiCZewY8CJgkQn87PoE6detOW2_9qKk3Q/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbyCcB-VROGFaE-_rN1OwLnKRqFuWCmLJjO2UOvx9lgaqwPssZyYauYOioCSToWHM26ESw/exec";
 
-    const btnTomar = document.getElementById("btnTomarFoto");
-    const inputArchivo = document.getElementById("archivo");
+    const camaraBtn = document.getElementById("btnCamara");
+    const galeriaBtn = document.getElementById("btnGaleria");
+
+    const inputCamara = document.getElementById("archivoCamara");
+    const inputGaleria = document.getElementById("archivoGaleria");
+
     const estado = document.getElementById("estado");
     const grid = document.getElementById("galeriaGrid");
     const emptyMsg = document.getElementById("galeriaEmpty");
 
-    // abrir cámara / galería
-    btnTomar.addEventListener("click", () => {
-      inputArchivo.click();
+    // Abrir cámara
+    camaraBtn.addEventListener("click", () => {
+      inputCamara.click();
     });
 
-    // cuando el usuario elige/toma la foto
-    inputArchivo.addEventListener("change", () => {
-      if (!inputArchivo.files.length) return;
-      subirFotos(inputArchivo.files);
+    // Abrir galería
+    galeriaBtn.addEventListener("click", () => {
+      inputGaleria.click();
+    });
+
+    // Cuando la cámara toma foto
+    inputCamara.addEventListener("change", () => {
+      if (!inputCamara.files.length) return;
+      subirFotos(inputCamara.files);
+    });
+
+    // Cuando se eligen fotos de galería
+    inputGaleria.addEventListener("change", () => {
+      if (!inputGaleria.files.length) return;
+      subirFotos(inputGaleria.files);
     });
 
     async function subirFotos(files) {
       try {
         estado.textContent = "Subiendo foto(s)...";
+
         const formData = new FormData();
         Array.from(files).forEach((file, index) => {
           formData.append("file" + index, file);
@@ -211,47 +237,45 @@
           method: "POST",
           body: formData,
         });
-        const data = await resp.json().catch(() => ({}));
+        const data = await resp.json();
 
         estado.textContent = data.message || "¡Foto subida al mural! 🥰";
-        inputArchivo.value = "";
+
         cargarGaleria();
       } catch (e) {
-        console.error(e);
-        estado.textContent = "Error al subir la foto, intenta de nuevo.";
+        estado.textContent = "Error al subir la foto 😔 intenta de nuevo.";
       }
     }
 
     async function cargarGaleria() {
-      try {
-        const resp = await fetch(API_URL); // GET → doGet
-        const data = await resp.json();
+      const resp = await fetch(API_URL);
+      const data = await resp.json();
 
-        grid.innerHTML = "";
-        if (!data.ok || !data.files || data.files.length === 0) {
-          emptyMsg.hidden = false;
-          return;
-        }
-        emptyMsg.hidden = true;
+      grid.innerHTML = "";
 
-        data.files.forEach((f) => {
-          const div = document.createElement("div");
-          div.className = "mural-item";
-          const img = document.createElement("img");
-          img.src = f.url;
-          img.alt = f.name || "";
-          div.appendChild(img);
-          grid.appendChild(div);
-        });
-      } catch (e) {
-        console.error(e);
+      if (!data.ok || !data.files || data.files.length === 0) {
         emptyMsg.hidden = false;
-        emptyMsg.textContent = "No se pudieron cargar las fotos.";
+        return;
       }
+
+      emptyMsg.hidden = true;
+
+      data.files.forEach((f) => {
+        const div = document.createElement("div");
+        div.className = "mural-item";
+
+        const img = document.createElement("img");
+        img.src = f.url;
+        img.alt = f.name;
+
+        div.appendChild(img);
+        grid.appendChild(div);
+      });
     }
 
     cargarGaleria();
   </script>
+
 
 
 </body>
