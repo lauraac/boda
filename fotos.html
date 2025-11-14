@@ -179,7 +179,7 @@
   </main>
 
   <script>
-    // ⬇⬇ PON AQUÍ TU URL DEL WEBAPP DE APPS SCRIPT
+    // 👇 tu URL del WebApp de Apps Script
     const API_URL = "https://script.google.com/macros/s/AKfycbynRvq7DAvnuKBrjdMaCjFq5enIecOGRLNDcQiCZewY8CJgkQn87PoE6detOW2_9qKk3Q/exec";
 
     const btnTomar = document.getElementById("btnTomarFoto");
@@ -188,10 +188,12 @@
     const grid = document.getElementById("galeriaGrid");
     const emptyMsg = document.getElementById("galeriaEmpty");
 
+    // abrir cámara / galería
     btnTomar.addEventListener("click", () => {
       inputArchivo.click();
     });
 
+    // cuando el usuario elige/toma la foto
     inputArchivo.addEventListener("change", () => {
       if (!inputArchivo.files.length) return;
       subirFotos(inputArchivo.files);
@@ -201,7 +203,6 @@
       try {
         estado.textContent = "Subiendo foto(s)...";
         const formData = new FormData();
-
         Array.from(files).forEach((file, index) => {
           formData.append("file" + index, file);
         });
@@ -210,20 +211,14 @@
           method: "POST",
           body: formData,
         });
-
-        if (!resp.ok) throw new Error("Error HTTP");
-
         const data = await resp.json().catch(() => ({}));
-        estado.textContent =
-          data.message || "¡Gracias! Tu foto se pegó en el mural 🥰";
-        inputArchivo.value = "";
 
-        // recargar mural
+        estado.textContent = data.message || "¡Foto subida al mural! 🥰";
+        inputArchivo.value = "";
         cargarGaleria();
-      } catch (err) {
-        console.error(err);
-        estado.textContent =
-          "Ocurrió un error al subir tu foto. Intenta de nuevo.";
+      } catch (e) {
+        console.error(e);
+        estado.textContent = "Error al subir la foto, intenta de nuevo.";
       }
     }
 
@@ -233,12 +228,10 @@
         const data = await resp.json();
 
         grid.innerHTML = "";
-
         if (!data.ok || !data.files || data.files.length === 0) {
           emptyMsg.hidden = false;
           return;
         }
-
         emptyMsg.hidden = true;
 
         data.files.forEach((f) => {
@@ -250,16 +243,17 @@
           div.appendChild(img);
           grid.appendChild(div);
         });
-      } catch (err) {
-        console.error(err);
+      } catch (e) {
+        console.error(e);
         emptyMsg.hidden = false;
-        emptyMsg.textContent = "No se pudieron cargar las fotos del mural.";
+        emptyMsg.textContent = "No se pudieron cargar las fotos.";
       }
     }
 
-    // cargar mural al entrar
     cargarGaleria();
   </script>
+
+
 </body>
 
 </html>

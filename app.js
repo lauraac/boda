@@ -549,30 +549,3 @@ function waitForMetadata(audio) {
   btnClose.addEventListener("click", closeModal);
   backdrop.addEventListener("click", closeModal);
 })();
-
-document.getElementById("btnSubirFoto").onclick = async () => {
-  const fileInput = document.getElementById("inputFoto");
-  const file = fileInput.files[0];
-
-  if (!file) {
-    alert("Por favor toma una foto primero");
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onloadend = async () => {
-    const base64 = reader.result.split(",")[1];
-
-    const res = await fetch("TU_WEBAPP_URL_AQUI", {
-      method: "POST",
-      body: base64,
-    });
-
-    const json = await res.json();
-
-    document.getElementById("uploadStatus").innerText =
-      "Foto subida exitosamente 📸✨";
-  };
-
-  reader.readAsDataURL(file);
-};
