@@ -225,7 +225,7 @@
     });
 
     async function subirFotos(files) {
-      const file = files[0]; // por ahora subimos una por vez
+      const file = files[0];
       if (!file) return;
 
       estado.textContent = "Subiendo foto...";
@@ -234,15 +234,11 @@
 
       reader.onloadend = async () => {
         try {
-          // reader.result = "data:image/jpeg;base64,AAAA..."
           const base64 = reader.result.split(",")[1];
 
           const payload = {
             image: base64,
             name: file.name,
-            // si luego quieres, puedes mandar nombre/mensaje:
-            // nombre: "Invitado",
-            // mensaje: ""
           };
 
           const resp = await fetch(API_URL, {
@@ -263,7 +259,6 @@
         }
       };
 
-      // dispara la lectura en base64
       reader.readAsDataURL(file);
     }
 
