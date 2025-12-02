@@ -7,11 +7,11 @@
   <title>Mural de recuerdos</title>
 
   <!-- Fuentes como la invitación de periódico -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Merriweather:wght@300;400;700;900&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" />
 
   <style>
     :root {
@@ -70,7 +70,7 @@
       margin-bottom: 18px;
     }
 
-    /* Botones estilo periódico (negro/gris) como en la otra invitación */
+    /* Botones estilo periódico (negro/gris) */
     .btn-camara {
       display: inline-flex;
       align-items: center;
@@ -171,7 +171,7 @@
       display: block;
     }
 
-    /* SIN tantos giros locos, solo un toque mínimo */
+    /* Pequeño giro */
     .mural-item:nth-child(2n) {
       transform: rotate(-0.4deg);
     }
@@ -193,7 +193,7 @@
   <main class="mural-wrap">
     <h1 class="mural-title">Mural de recuerdos</h1>
     <p class="mural-sub">
-      Toca la cámara para tomar una foto o elegirla de tu galería.<br>
+      Toca la cámara para tomar una foto o elegirla de tu galería.<br />
       Se irá pegando aquí en nuestro muro 📷💞
     </p>
 
@@ -208,7 +208,7 @@
         📷 Tomar foto
       </button>
 
-      <button id="btnGaleria" class="btn-camara" style="margin-top:10px;">
+      <button id="btnGaleria" class="btn-camara" style="margin-top: 10px">
         🖼️ Subir desde galería
       </button>
 
@@ -220,14 +220,17 @@
         <p class="mural-label">Fotos del evento</p>
         <div id="galeriaGrid" class="mural-grid"></div>
         <p id="galeriaEmpty" class="mural-empty" hidden>
-          Aún no hay fotos pegadas en el muro. ¡Sé el primero en subir una! ✨
+          Aún no hay fotos pegadas en el muro. ¡Sé el primero en subir una!
+          ✨
         </p>
       </div>
     </section>
   </main>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbyNqh8oL-JsHAi8RvqZWTr3fXp1TiAWL-U2kVH19abW0Cua0naB8tLp-nPUXdgfVIdGeA/exec";
+    // 👉 Tu URL del Web App (la que me pasaste)
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbzbNvyeQoLkJtDOkwb-Lzgie64louV68HDDFwcZcDSIQHwyOvNhyZzivw8JIjtCD_gLIw/exec";
 
     const camaraBtn = document.getElementById("btnCamara");
     const galeriaBtn = document.getElementById("btnGaleria");
@@ -241,11 +244,13 @@
 
     // Abrir cámara
     camaraBtn.addEventListener("click", () => {
+      inputCamara.value = "";
       inputCamara.click();
     });
 
     // Abrir galería
     galeriaBtn.addEventListener("click", () => {
+      inputGaleria.value = "";
       inputGaleria.click();
     });
 
@@ -280,25 +285,25 @@
 
           const resp = await fetch(API_URL, {
             method: "POST",
-            // 👇 Enviamos como texto plano para evitar problemas de CORS
             headers: {
-              "Content-Type": "text/plain;charset=utf-8",
+              "Content-Type": "application/json",
             },
             body: JSON.stringify(payload),
           });
 
-          // Si algo sale mal en la respuesta, marcamos error
           if (!resp.ok) {
             throw new Error("Error HTTP " + resp.status);
           }
 
           const data = await resp.json();
-          estado.textContent = data.message || "¡Foto subida al mural! 🥰";
+          estado.textContent =
+            data.message || "¡Foto subida al mural! 🥰";
 
           cargarGaleria();
         } catch (err) {
           console.error(err);
-          estado.textContent = "Error al subir la foto 😔 intenta de nuevo.";
+          estado.textContent =
+            "Error al subir la foto 😔 intenta de nuevo.";
         }
       };
 
@@ -307,7 +312,7 @@
 
     async function cargarGaleria() {
       try {
-        const resp = await fetch(API_URL);
+        const resp = await fetch(API_URL + "?mode=json");
         if (!resp.ok) throw new Error("Error HTTP " + resp.status);
 
         const data = await resp.json();
@@ -338,7 +343,7 @@
       }
     }
 
-
+    // Cargar al entrar
     cargarGaleria();
   </script>
 </body>
