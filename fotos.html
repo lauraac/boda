@@ -7,11 +7,11 @@
   <title>Mural de recuerdos</title>
 
   <!-- Fuentes como la invitación de periódico -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Merriweather:wght@300;400;700;900&display=swap"
-    rel="stylesheet" />
+    rel="stylesheet">
 
   <style>
     :root {
@@ -41,8 +41,6 @@
       margin: 0 auto;
       padding: 28px 16px 40px;
       text-align: center;
-
-      /* caja estilo nota de periódico */
       background: #ffffff;
       border-radius: 16px;
       box-shadow: var(--shadow);
@@ -70,7 +68,6 @@
       margin-bottom: 18px;
     }
 
-    /* Botones estilo periódico (negro/gris) */
     .btn-camara {
       display: inline-flex;
       align-items: center;
@@ -111,7 +108,6 @@
       color: #444;
     }
 
-    /* Pared / mural */
     .mural-wall {
       margin-top: 18px;
     }
@@ -125,7 +121,6 @@
       border: 1px solid var(--line);
     }
 
-    /* “plaque” discreta arriba, pero en gris */
     .mural-frame::before {
       content: "";
       position: absolute;
@@ -171,7 +166,6 @@
       display: block;
     }
 
-    /* Pequeño giro */
     .mural-item:nth-child(2n) {
       transform: rotate(-0.4deg);
     }
@@ -193,7 +187,7 @@
   <main class="mural-wrap">
     <h1 class="mural-title">Mural de recuerdos</h1>
     <p class="mural-sub">
-      Toca la cámara para tomar una foto o elegirla de tu galería.<br />
+      Toca la cámara para tomar una foto o elegirla de tu galería.<br>
       Se irá pegando aquí en nuestro muro 📷💞
     </p>
 
@@ -208,7 +202,7 @@
         📷 Tomar foto
       </button>
 
-      <button id="btnGaleria" class="btn-camara" style="margin-top: 10px">
+      <button id="btnGaleria" class="btn-camara" style="margin-top:10px;">
         🖼️ Subir desde galería
       </button>
 
@@ -217,50 +211,35 @@
 
     <section class="mural-wall">
       <div class="mural-frame">
-        <p class="mural-label">Fotos del evento</p>
+        <p class="mural-label">FOTOS DEL EVENTO</p>
         <div id="galeriaGrid" class="mural-grid"></div>
         <p id="galeriaEmpty" class="mural-empty" hidden>
-          Aún no hay fotos pegadas en el muro. ¡Sé el primero en subir una!
-          ✨
+          Aún no hay fotos pegadas en el muro. ¡Sé el primero en subir una! ✨
         </p>
       </div>
     </section>
   </main>
 
   <script>
-    // 👉 Tu URL del Web App (la que me pasaste)
-    const API_URL =
-      "https://script.google.com/macros/s/AKfycbzbNvyeQoLkJtDOkwb-Lzgie64louV68HDDFwcZcDSIQHwyOvNhyZzivw8JIjtCD_gLIw/exec";
+    // URL de tu App Script (NUEVA)
+    const API_URL = "https://script.google.com/macros/s/AKfycbzbNvyeQoLkJtDOkwb-Lzgie64louV68HDDFwcZcDSIQHwyOvNhyZzivw8JIjtCD_gLIw/exec";
 
     const camaraBtn = document.getElementById("btnCamara");
     const galeriaBtn = document.getElementById("btnGaleria");
-
     const inputCamara = document.getElementById("archivoCamara");
     const inputGaleria = document.getElementById("archivoGaleria");
-
     const estado = document.getElementById("estado");
     const grid = document.getElementById("galeriaGrid");
     const emptyMsg = document.getElementById("galeriaEmpty");
 
-    // Abrir cámara
-    camaraBtn.addEventListener("click", () => {
-      inputCamara.value = "";
-      inputCamara.click();
-    });
+    camaraBtn.addEventListener("click", () => inputCamara.click());
+    galeriaBtn.addEventListener("click", () => inputGaleria.click());
 
-    // Abrir galería
-    galeriaBtn.addEventListener("click", () => {
-      inputGaleria.value = "";
-      inputGaleria.click();
-    });
-
-    // Cuando la cámara toma foto
     inputCamara.addEventListener("change", () => {
       if (!inputCamara.files.length) return;
       subirFotos(inputCamara.files);
     });
 
-    // Cuando se eligen fotos de galería
     inputGaleria.addEventListener("change", () => {
       if (!inputGaleria.files.length) return;
       subirFotos(inputGaleria.files);
@@ -280,15 +259,15 @@
 
           const payload = {
             image: base64,
-            name: file.name,
+            name: file.name
           };
 
           const resp = await fetch(API_URL, {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "application/json"
             },
-            body: JSON.stringify(payload),
+            body: JSON.stringify(payload)
           });
 
           if (!resp.ok) {
@@ -296,14 +275,17 @@
           }
 
           const data = await resp.json();
-          estado.textContent =
-            data.message || "¡Foto subida al mural! 🥰";
+
+          if (!data.ok) {
+            throw new Error(data.error || "Error en el servidor");
+          }
+
+          estado.textContent = data.message || "¡Foto subida al mural! 🥰";
 
           cargarGaleria();
         } catch (err) {
           console.error(err);
-          estado.textContent =
-            "Error al subir la foto 😔 intenta de nuevo.";
+          estado.textContent = "Error al subir la foto 😔 intenta de nuevo.";
         }
       };
 
@@ -312,7 +294,7 @@
 
     async function cargarGaleria() {
       try {
-        const resp = await fetch(API_URL + "?mode=json");
+        const resp = await fetch(API_URL);
         if (!resp.ok) throw new Error("Error HTTP " + resp.status);
 
         const data = await resp.json();
@@ -343,7 +325,6 @@
       }
     }
 
-    // Cargar al entrar
     cargarGaleria();
   </script>
 </body>
