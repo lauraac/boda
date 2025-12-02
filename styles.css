@@ -1496,3 +1496,94 @@ a.btn:hover,
   transform: translateY(-2px);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
+
+/* === Frase especial tipo nota de periódico === */
+.history-quote {
+  text-align: center;
+  padding: 26px 18px 30px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #dcdcdc;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.history-quote-text {
+  position: relative;
+  max-width: 26ch;
+  margin: 0 auto;
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(24px, 6.2vw, 34px);
+  line-height: 1.3;
+  color: #111;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  animation: quoteFade 1s ease-out;
+}
+
+/* Comillas decorativas en gris suave */
+.history-quote-text::before,
+.history-quote-text::after {
+  position: absolute;
+  font-family: "Merriweather", serif;
+  font-size: 2.2rem;
+  color: rgba(0, 0, 0, 0.12);
+}
+
+.history-quote-text::before {
+  content: "“";
+  left: -18px;
+  top: -18px;
+}
+
+.history-quote-text::after {
+  content: "”";
+  right: -18px;
+  bottom: -26px;
+}
+
+/* Animación suave de aparición */
+@keyframes quoteFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Frase elegante en sección aparte === */
+.special-phrase {
+  width: min(92%, 720px);
+  margin: 38px auto;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #dcdcdc;
+  padding: 30px 22px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.special-phrase-text {
+  font-family: "Merriweather", serif;
+  font-size: clamp(18px, 5vw, 26px);
+  line-height: 1.5;
+  color: #111;
+  max-width: 38ch;
+  margin: 0 auto;
+  font-style: italic;
+  animation: fadeInSoft 1.1s ease-out;
+}
+
+/* Suave animación de entrada */
+@keyframes fadeInSoft {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
