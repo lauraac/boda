@@ -1462,21 +1462,37 @@ a.btn img,
   line-height: 1.5;
   margin-bottom: 20px;
 }
-
+button,
+a.btn,
+.prog-card a,
+#btnRSVP,
 .btn-fotos {
-  display: inline-block;
-  padding: 12px 24px;
+  /* 👉 agregamos .btn-fotos aquí */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 24px;
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: linear-gradient(to bottom, #3a3a3a, #1b1b1b);
+  border: 1px solid #000;
   border-radius: 999px;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border: none;
-  cursor: pointer;
-  /* ajusta a tu paleta dorado/hueso */
-  background: #c59b5f;
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
 }
-.btn-fotos:active {
-  transform: scale(0.98);
+
+button:hover,
+a.btn:hover,
+.prog-card a:hover,
+#btnRSVP:hover,
+.btn-fotos:hover {
+  /* 👉 y aquí también */
+  background: linear-gradient(to bottom, #4b4b4b, #000);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
