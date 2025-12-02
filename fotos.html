@@ -6,16 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mural de recuerdos</title>
 
-  <!-- Fuentes como la invitación de periódico -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Merriweather:wght@300;400;700;900&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" />
 
   <style>
     :root {
-      /* Paleta tipo periódico */
       --paper: #f7f7f7;
       --ink: #121212;
       --line: #e3e3e3;
@@ -187,22 +185,18 @@
   <main class="mural-wrap">
     <h1 class="mural-title">Mural de recuerdos</h1>
     <p class="mural-sub">
-      Toca la cámara para tomar una foto o elegirla de tu galería.<br>
+      Toca la cámara para tomar una foto o elegirla de tu galería.<br />
       Se irá pegando aquí en nuestro muro 📷💞
     </p>
 
     <section class="mural-actions">
-      <!-- Cámara -->
       <input type="file" id="archivoCamara" accept="image/*" capture="environment" hidden />
 
-      <!-- Galería -->
       <input type="file" id="archivoGaleria" accept="image/*" multiple hidden />
 
-      <button id="btnCamara" class="btn-camara">
-        📷 Tomar foto
-      </button>
+      <button id="btnCamara" class="btn-camara">📷 Tomar foto</button>
 
-      <button id="btnGaleria" class="btn-camara" style="margin-top:10px;">
+      <button id="btnGaleria" class="btn-camara" style="margin-top: 10px">
         🖼️ Subir desde galería
       </button>
 
@@ -221,9 +215,6 @@
   </main>
 
   <script>
-    // URL de tu App Script (NUEVA)
-    const API_URL = "https://script.google.com/macros/s/AKfycbzbNvyeQoLkJtDOkwb-Lzgie64louV68HDDFwcZcDSIQHwyOvNhyZzivw8JIjtCD_gLIw/exec";
-
     const camaraBtn = document.getElementById("btnCamara");
     const galeriaBtn = document.getElementById("btnGaleria");
     const inputCamara = document.getElementById("archivoCamara");
@@ -245,86 +236,71 @@
       subirFotos(inputGaleria.files);
     });
 
-    async function subirFotos(files) {
+    function subirFotos(files) {
       const file = files[0];
       if (!file) return;
 
       estado.textContent = "Subiendo foto...";
 
       const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64 = reader.result.split(",")[1];
 
-      reader.onloadend = async () => {
-        try {
-          const base64 = reader.result.split(",")[1];
-
-          const payload = {
-            image: base64,
-            name: file.name
-          };
-
-          const resp = await fetch(API_URL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-          });
-
-          if (!resp.ok) {
-            throw new Error("Error HTTP " + resp.status);
-          }
-
-          const data = await resp.json();
-
-          if (!data.ok) {
-            throw new Error(data.error || "Error en el servidor");
-          }
-
-          estado.textContent = data.message || "¡Foto subida al mural! 🥰";
-
-          cargarGaleria();
-        } catch (err) {
-          console.error(err);
-          estado.textContent = "Error al subir la foto 😔 intenta de nuevo.";
-        }
+        google.script.run
+          .withSuccessHandler((data) => {
+            if (!data.ok) {
+              console.error(data.error);
+              estado.textContent =
+                "Error al subir la foto 😔 intenta de nuevo.";
+              return;
+            }
+            estado.textContent =
+              data.message || "¡Foto subida al mural! 🥰";
+            cargarGaleria();
+          })
+          .withFailureHandler((err) => {
+            console.error(err);
+            estado.textContent =
+              "Error al subir la foto 😔 intenta de nuevo.";
+          })
+          .subirFoto({ image: base64, name: file.name });
       };
 
       reader.readAsDataURL(file);
     }
 
-    async function cargarGaleria() {
-      try {
-        const resp = await fetch(API_URL);
-        if (!resp.ok) throw new Error("Error HTTP " + resp.status);
+    function cargarGaleria() {
+      google.script.run
+        .withSuccessHandler((data) => {
+          grid.innerHTML = "";
 
-        const data = await resp.json();
+          if (!data.ok || !data.files || data.files.length === 0) {
+            emptyMsg.hidden = false;
+            return;
+          }
 
-        grid.innerHTML = "";
+          emptyMsg.hidden = true;
 
-        if (!data.ok || !data.files || data.files.length === 0) {
-          emptyMsg.hidden = false;
-          return;
-        }
+          data.files.forEach((f) => {
+            const div = document.createElement("div");
+            div.className = "mural-item";
 
-        emptyMsg.hidden = true;
+            const img = document.createElement("img");
+            img.src = f.url;
+            img.alt = f.name;
 
-        data.files.forEach((f) => {
-          const div = document.createElement("div");
-          div.className = "mural-item";
-
-          const img = document.createElement("img");
-          img.src = f.url;
-          img.alt = f.name;
-
-          div.appendChild(img);
-          grid.appendChild(div);
-        });
-      } catch (err) {
-        console.error(err);
-        estado.textContent = "No se pudo cargar la galería 😔";
-      }
+            div.appendChild(img);
+            grid.appendChild(div);
+          });
+        })
+        .withFailureHandler((err) => {
+          console.error(err);
+          estado.textContent = "No se pudo cargar la galería 😔";
+        })
+        .listarFotos();
     }
 
+    // cargar al entrar
     cargarGaleria();
   </script>
 </body>
