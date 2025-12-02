@@ -6,13 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mural de recuerdos</title>
 
+  <!-- Fuentes como la invitación de periódico -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Merriweather:wght@300;400;700;900&display=swap"
+    rel="stylesheet">
+
   <style>
     :root {
-      --bg: #f7f3ec;
-      --wall: #f0e2cf;
-      --frame: #ffffff;
-      --accent: #c89a55;
-      --ink: #2f2520;
+      /* Paleta tipo periódico */
+      --paper: #f7f7f7;
+      --ink: #121212;
+      --line: #e3e3e3;
+      --soft: #fbfbfb;
+      --shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
     }
 
     * {
@@ -21,10 +29,10 @@
 
     body {
       margin: 0;
-      background: var(--bg);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
+      background: var(--paper);
+      font-family: "Merriweather", serif;
       color: var(--ink);
+      -webkit-font-smoothing: antialiased;
     }
 
     .mural-wrap {
@@ -33,51 +41,74 @@
       margin: 0 auto;
       padding: 28px 16px 40px;
       text-align: center;
+
+      /* caja estilo nota de periódico */
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
     }
 
     .mural-title {
       font-family: "Great Vibes", cursive;
       font-size: 2.4rem;
-      margin-bottom: 4px;
+      margin: 0 0 4px;
+      display: inline-block;
+      padding: 0 10px;
+      background: #fff;
+      border-radius: 6px;
     }
 
     .mural-sub {
       font-size: 0.9rem;
-      margin-bottom: 18px;
+      margin: 0 0 18px;
+      line-height: 1.5;
+      color: #333;
     }
 
     .mural-actions {
       margin-bottom: 18px;
     }
 
+    /* Botones estilo periódico (negro/gris) como en la otra invitación */
     .btn-camara {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 12px 22px;
+      padding: 10px 24px;
       border-radius: 999px;
-      border: none;
-      background: var(--accent);
+      border: 1px solid #000;
+      background: linear-gradient(to bottom, #3a3a3a, #1b1b1b);
       color: #fff;
-      font-weight: 600;
-      font-size: 0.95rem;
+      font-family: "Merriweather", serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       cursor: pointer;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-    }
-
-    .btn-camara span {
-      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      width: 100%;
+      max-width: 320px;
     }
 
     .btn-camara:active {
       transform: scale(0.97);
     }
 
+    .btn-camara:hover {
+      background: linear-gradient(to bottom, #4b4b4b, #000000);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+    }
+
     .mural-msg {
       min-height: 18px;
       font-size: 0.8rem;
       margin-top: 6px;
+      color: #444;
     }
 
     /* Pared / mural */
@@ -86,30 +117,36 @@
     }
 
     .mural-frame {
-      background: radial-gradient(circle at top, #f9efe0, var(--wall));
-      border-radius: 20px;
-      padding: 12px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+      background: #fff;
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
       position: relative;
+      border: 1px solid var(--line);
     }
 
+    /* “plaque” discreta arriba, pero en gris */
     .mural-frame::before {
       content: "";
       position: absolute;
-      top: -10px;
+      top: -8px;
       left: 50%;
       transform: translateX(-50%);
       width: 70px;
-      height: 18px;
-      background: #d9c09d;
-      border-radius: 10px;
-      box-shadow: 0 7px 12px rgba(0, 0, 0, 0.25);
+      height: 16px;
+      background: #d1d1d1;
+      border-radius: 999px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
     }
 
     .mural-label {
       font-size: 0.85rem;
-      font-weight: 600;
-      margin: 12px 0 8px;
+      font-weight: 700;
+      margin: 8px 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid #000;
+      padding-bottom: 4px;
     }
 
     .mural-grid {
@@ -119,11 +156,12 @@
     }
 
     .mural-item {
-      background: var(--frame);
-      border-radius: 14px;
+      background: var(--soft);
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
       position: relative;
+      border: 1px solid #dcdcdc;
     }
 
     .mural-item img {
@@ -133,19 +171,20 @@
       display: block;
     }
 
-    /* un poco de “desorden bonito” */
+    /* SIN tantos giros locos, solo un toque mínimo */
     .mural-item:nth-child(2n) {
-      transform: rotate(-1.5deg);
+      transform: rotate(-0.4deg);
     }
 
     .mural-item:nth-child(3n) {
-      transform: rotate(1.2deg);
+      transform: rotate(0.4deg);
     }
 
     .mural-empty {
       font-size: 0.8rem;
-      color: #5f564e;
+      color: #555;
       margin: 12px 0 4px;
+      font-style: italic;
     }
   </style>
 </head>
@@ -154,12 +193,11 @@
   <main class="mural-wrap">
     <h1 class="mural-title">Mural de recuerdos</h1>
     <p class="mural-sub">
-      Toca la cámara para tomar una foto o elegirla de tu galería.
+      Toca la cámara para tomar una foto o elegirla de tu galería.<br>
       Se irá pegando aquí en nuestro muro 📷💞
     </p>
 
     <section class="mural-actions">
-
       <!-- Cámara -->
       <input type="file" id="archivoCamara" accept="image/*" capture="environment" hidden />
 
@@ -176,7 +214,6 @@
 
       <div id="estado" class="mural-msg"></div>
     </section>
-
 
     <section class="mural-wall">
       <div class="mural-frame">
@@ -262,7 +299,6 @@
       reader.readAsDataURL(file);
     }
 
-
     async function cargarGaleria() {
       const resp = await fetch(API_URL);
       const data = await resp.json();
@@ -291,9 +327,6 @@
 
     cargarGaleria();
   </script>
-
-
-
 </body>
 
 </html>
