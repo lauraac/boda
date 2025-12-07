@@ -160,6 +160,37 @@
       </div>
     </section>
   </section>
+  <!-- Cuenta regresiva -->
+  <section class="countdown-section" id="contador">
+    <div class="phrase-wrapper gap-lines">
+      <h2 class="gv-title counter-title-text">
+        El reloj avanza y el corazón late más fuerte… falta poco para nuestro gran día
+      </h2>
+    </div>
+
+    <p class="countdown-subtitle">Cuenta regresiva</p>
+
+    <div class="countdown" id="countdown">
+      <div class="time-box">
+        <span class="time-num" id="days">00</span>
+        <span class="time-label">DÍAS</span>
+      </div>
+      <div class="time-box">
+        <span class="time-num" id="hours">00</span>
+        <span class="time-label">HORAS</span>
+      </div>
+      <div class="time-box">
+        <span class="time-num" id="minutes">00</span>
+        <span class="time-label">MINUTOS</span>
+      </div>
+      <div class="time-box">
+        <span class="time-num" id="seconds">00</span>
+        <span class="time-label">SEGUNDOS</span>
+      </div>
+    </div>
+
+    <p class="countdown-msg" id="countdownMsg"></p>
+  </section>
 
   <!-- Nuestra historia -->
   <section class="history-section" id="historia">
@@ -335,13 +366,26 @@
       <div class="phrase-wrapper gap-lines">
         <h2 class="gv-title info-title-text">Código de vestimenta</h2>
       </div>
+
       <div class="info-body center">
         <img src="./img/codigo.png" alt="" class="info-ico" aria-hidden="true">
+
         <p class="info-lead"><strong>Formal</strong></p>
-        <p class="info-row">Queremos que cada una de ustedes se sienta especial y luzca espectacular en nuestro día.</p>
-        <p class="info-note">(Se reserva el color blanco para la Novia)</p>
+
+        <p class="info-row">
+          Queremos que cada una de ustedes se sienta especial y luzca espectacular en nuestro día.
+        </p>
+
+        <p class="info-note">
+          (Se reserva el color <strong>blanco</strong> exclusivamente para la Novia)
+        </p>
+
+        <p class="info-note">
+          (El color <strong>morado</strong> está reservado para nuestras Damas de Honor)
+        </p>
       </div>
     </article>
+
 
     <article class="info-card">
       <div class="phrase-wrapper gap-lines">
@@ -423,13 +467,27 @@
         Es un honor y un privilegio invitarlos a ser parte de este día tan significativo para nosotros…
       </p>
 
-      <div class="rsvp center">
-        <a id="btnRSVP" class="btn-confirmar"
-          href="https://docs.google.com/forms/d/e/1FAIpQLScIe2cZNXGnV6x0CooqhrUSYLOrXf6-oghtEeeNJG4DyPOusQ/viewform"
-          target="_blank" rel="noopener">
-          💌 Confirmar asistencia
-        </a>
-      </div>
+      <section class="rsvp-box">
+        <p class="rsvp-intro">
+          ¡Estamos contando los días!<br>
+          Confirma tu asistencia para que podamos hacer de este día algo inolvidable.
+        </p>
+
+        <h3 class="rsvp-title">Confirma tu Asistencia</h3>
+
+        <div class="rsvp center">
+          <a id="btnRSVP" class="btn-confirmar btn-fotos"
+            href="https://docs.google.com/forms/d/e/1FAIpQLScIe2cZNXGnV6x0CooqhrUSYLOrXf6-oghtEeeNJG4DyPOusQ/viewform"
+            target="_blank" rel="noopener">
+            AQUÍ
+          </a>
+        </div>
+
+        <p class="rsvp-deadline">
+          Favor confirmar antes del <strong>11 de abril del 2026</strong>.
+        </p>
+      </section>
+
 
 
       <div class="signature-wrap">

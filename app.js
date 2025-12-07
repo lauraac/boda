@@ -549,3 +549,48 @@ function waitForMetadata(audio) {
   btnClose.addEventListener("click", closeModal);
   backdrop.addEventListener("click", closeModal);
 })();
+
+// ===== Cuenta regresiva boda =====
+(function () {
+  const countdownEl = document.getElementById("countdown");
+  if (!countdownEl) return;
+
+  // Fecha y hora de la boda (CDMX)
+  const targetDate = new Date("2026-04-11T19:00:00-06:00");
+
+  const daysEl = document.getElementById("days");
+  const hoursEl = document.getElementById("hours");
+  const minutesEl = document.getElementById("minutes");
+  const secondsEl = document.getElementById("seconds");
+  const msgEl = document.getElementById("countdownMsg");
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = targetDate.getTime() - now;
+
+    if (diff <= 0) {
+      daysEl.textContent = "00";
+      hoursEl.textContent = "00";
+      minutesEl.textContent = "00";
+      secondsEl.textContent = "00";
+      if (msgEl) {
+        msgEl.textContent = "¡Hoy es nuestro gran día! 💍";
+      }
+      return;
+    }
+
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / (60 * 60 * 24));
+    const hours = Math.floor((totalSeconds / (60 * 60)) % 24);
+    const minutes = Math.floor((totalSeconds / 60) % 60);
+    const seconds = totalSeconds % 60;
+
+    daysEl.textContent = String(days).padStart(2, "0");
+    hoursEl.textContent = String(hours).padStart(2, "0");
+    minutesEl.textContent = String(minutes).padStart(2, "0");
+    secondsEl.textContent = String(seconds).padStart(2, "0");
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+})();
