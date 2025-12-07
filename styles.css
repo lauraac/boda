@@ -1407,6 +1407,8 @@ a.btn img,
   justify-content: center;
   gap: 10px;
   margin-top: 10px;
+  height: 180px;
+  object-fit: cover;
 }
 
 .fotos-collage img {
