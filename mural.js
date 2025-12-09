@@ -1,6 +1,6 @@
 // PON AQUÍ LA URL DE TU WEB APP DE APPS SCRIPT
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbxVvqJGcSLUbWDWxzdOdcdv4AJhKCXNoGjVaxE3Xkq3DM9z7xy7xQ5lS76bjEP997bE9Q/exec";
+  "https://script.google.com/macros/s/AKfycbyhU8DWt3Q0nS2jeToaz6D0ITuLzcEfHiR-4A-XVMwQlfkQqbnDF-MKb95FjjNkebvvJg/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
   const btnCamara = document.getElementById("btnCamara");
@@ -112,7 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const res = await fetch(API_URL, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        // Usamos text/plain para evitar el preflight CORS
+        "Content-Type": "text/plain;charset=utf-8",
       },
       body: JSON.stringify(body),
     });
