@@ -1,6 +1,6 @@
 // PON AQUÍ LA URL DE TU WEB APP DE APPS SCRIPT
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbwCHnR33F8vFbmxuoLyrX0jFm1cuXwCmYLSCMUIRl8S5fABxN-iFyycw535YjiuOiVYPQ/exec";
+  "https://script.google.com/macros/s/AKfycbzenTjw6glvSV9VJFMqxm7GuHdp3W_Hw0iZ1V9oM8Br0jafDC_K7WH8SLPJeTIj4kSOIg/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
   const btnCamara = document.getElementById("btnCamara");
