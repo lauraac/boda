@@ -1,119 +1,135 @@
-// === CONFIG: URL de tu Apps Script ===
-const SCRIPT_URL =
+// PON AQUÍ LA URL DE TU WEB APP DE APPS SCRIPT
+const API_URL =
   "https://script.google.com/macros/s/AKfycbxVvqJGcSLUbWDWxzdOdcdv4AJhKCXNoGjVaxE3Xkq3DM9z7xy7xQ5lS76bjEP997bE9Q/exec";
 
-// === Referencias a elementos del DOM ===
-const camaraBtn = document.getElementById("btnCamara");
-const galeriaBtn = document.getElementById("btnGaleria");
-const inputCamara = document.getElementById("archivoCamara");
-const inputGaleria = document.getElementById("archivoGaleria");
-const estado = document.getElementById("estado");
-const grid = document.getElementById("galeriaGrid");
-const emptyMsg = document.getElementById("galeriaEmpty");
+document.addEventListener("DOMContentLoaded", () => {
+  const btnCamara = document.getElementById("btnCamara");
+  const btnGaleria = document.getElementById("btnGaleria");
+  const inputCamara = document.getElementById("archivoCamara");
+  const inputGaleria = document.getElementById("archivoGaleria");
+  const estado = document.getElementById("estado");
 
-// === Listeners de botones ===
-if (camaraBtn && inputCamara) {
-  camaraBtn.addEventListener("click", () => inputCamara.click());
-}
-if (galeriaBtn && inputGaleria) {
-  galeriaBtn.addEventListener("click", () => inputGaleria.click());
-}
+  // Cargar mural al entrar
+  cargarGaleria();
 
-if (inputCamara) {
-  inputCamara.addEventListener("change", () => {
-    if (!inputCamara.files.length) return;
-    subirFotos(inputCamara.files);
+  // BOTÓN CÁMARA (toma foto)
+  btnCamara.addEventListener("click", () => {
+    inputCamara.click();
   });
-}
 
-if (inputGaleria) {
-  inputGaleria.addEventListener("change", () => {
-    if (!inputGaleria.files.length) return;
-    subirFotos(inputGaleria.files);
+  inputCamara.addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    estado.textContent = "Subiendo foto de cámara...";
+    try {
+      await subirImagen(file);
+      estado.textContent = "📸 Foto subida correctamente";
+      inputCamara.value = "";
+      await cargarGaleria();
+    } catch (err) {
+      console.error(err);
+      estado.textContent = "Ocurrió un error al subir la foto 😢";
+    }
   });
-}
 
-// === Subir foto al Apps Script ===
-function subirFotos(files) {
-  const file = files[0];
-  if (!file) return;
+  // BOTÓN GALERÍA (múltiples fotos)
+  btnGaleria.addEventListener("click", () => {
+    inputGaleria.click();
+  });
 
-  if (estado) estado.textContent = "Subiendo foto...";
+  inputGaleria.addEventListener("change", async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
 
-  const reader = new FileReader();
+    estado.textContent = "Subiendo fotos de galería...";
+    try {
+      for (const file of files) {
+        await subirImagen(file);
+      }
+      estado.textContent = "🖼️ Fotos subidas correctamente";
+      inputGaleria.value = "";
+      await cargarGaleria();
+    } catch (err) {
+      console.error(err);
+      estado.textContent = "Ocurrió un error al subir las fotos 😢";
+    }
+  });
 
-  reader.onloadend = () => {
-    const base64 = reader.result.split(",")[1];
+  // Función: carga lista de imágenes desde Apps Script
+  async function cargarGaleria() {
+    const grid = document.getElementById("galeriaGrid");
+    const emptyMsg = document.getElementById("galeriaEmpty");
 
-    fetch(SCRIPT_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        action: "save",
-        image: base64,
-        name: file.name,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data.ok) {
-          console.error(data.error);
-          if (estado)
-            estado.textContent = "Error al subir la foto 😔 intenta de nuevo.";
-          return;
-        }
+    grid.innerHTML = "";
+    emptyMsg.hidden = true;
+    estado.textContent = "Cargando mural...";
 
-        if (estado)
-          estado.textContent = data.message || "¡Foto subida al mural! 🥰";
-        cargarGaleria();
-      })
-      .catch((err) => {
-        console.error(err);
-        if (estado)
-          estado.textContent = "Error al subir la foto 😔 intenta de nuevo.";
-      });
-  };
+    try {
+      const res = await fetch(`${API_URL}?action=list`);
+      const data = await res.json();
 
-  reader.readAsDataURL(file);
-}
+      if (!data.ok) throw new Error(data.error || "Error en la respuesta");
 
-// === Cargar galería desde Apps Script ===
-function cargarGaleria() {
-  if (estado) estado.textContent = "Cargando galería...";
+      const fotos = data.images || [];
 
-  fetch(SCRIPT_URL + "?action=list")
-    .then((res) => res.json())
-    .then((data) => {
-      grid.innerHTML = "";
-
-      if (!data.ok || !data.files || data.files.length === 0) {
-        if (emptyMsg) emptyMsg.hidden = false;
-        if (estado) estado.textContent = "";
+      if (!fotos.length) {
+        emptyMsg.hidden = false;
+        estado.textContent = "";
         return;
       }
 
-      if (emptyMsg) emptyMsg.hidden = true;
-      if (estado) estado.textContent = "";
-
-      data.files.forEach((f) => {
+      fotos.forEach((url) => {
         const div = document.createElement("div");
         div.className = "mural-item";
 
         const img = document.createElement("img");
-        img.src = f.url;
-        img.alt = f.name || "Foto del evento";
-
+        img.src = url;
+        img.alt = "Foto del evento";
         div.appendChild(img);
+
         grid.appendChild(div);
       });
-    })
-    .catch((err) => {
-      console.error(err);
-      if (estado) estado.textContent = "No se pudo cargar la galería 😔";
-    });
-}
 
-// Cargar fotos al entrar a la página
-document.addEventListener("DOMContentLoaded", cargarGaleria);
+      estado.textContent = "";
+    } catch (err) {
+      console.error(err);
+      estado.textContent = "No se pudieron cargar las fotos 😢";
+    }
+  }
+
+  // Función: convierte archivo en base64 y lo manda a Apps Script
+  async function subirImagen(file) {
+    const base64 = await fileToBase64(file); // data:image/...;base64,XXXX
+    const soloBase64 = base64.split(",")[1]; // Quitamos "data:image/..."
+
+    const body = {
+      image: soloBase64,
+      filename: file.name || "foto_evento.jpg",
+      type: file.type || "image/jpeg",
+    };
+
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await res.json();
+    if (!data.ok) {
+      throw new Error(data.error || "Error al subir imagen");
+    }
+  }
+
+  // Helper: archivo → base64
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (err) => reject(err);
+      reader.readAsDataURL(file);
+    });
+  }
+});
