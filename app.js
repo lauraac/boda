@@ -49,34 +49,26 @@ if (intro && video) {
   let justUnlocked = false;
 
   // Autoplay; si falla por políticas, desbloquear al primer toque/click
-  const intro = document.getElementById("intro-video-container");
-  const video = document.getElementById("intro-video");
-
-  if (intro && video) {
-    // iOS-friendly
-    video.setAttribute("playsinline", "");
-    video.playsInline = true;
-
-    // arranca SIEMPRE mudo para que el autoplay funcione
-    video.muted = true;
-
-    // intentamos autoplay silencioso (si falla, no pasa nada grave)
-    video.play().catch(() => {});
-
-    // 👉 PRIMER TOQUE: activar sonido
-    const enableSoundOnce = () => {
-      video.muted = false; // ya hay interacción del usuario
+  video.play().catch(() => {
+    const unlock = () => {
+      justUnlocked = true;
+      // 👉 aquí SÍ lo puedes desmutear porque ya hubo toque del usuario
+      video.muted = false;
       video.play().catch(() => {});
-      intro.removeEventListener("click", enableSoundOnce);
-      intro.removeEventListener("touchend", enableSoundOnce);
+      window.removeEventListener("touchstart", unlock, { once: true });
+      window.removeEventListener("click", unlock, { once: true });
+      window.removeEventListener("keydown", unlock, { once: true });
+      setTimeout(() => {
+        justUnlocked = false;
+      }, 200);
     };
-
-    intro.addEventListener("click", enableSoundOnce, { once: true });
-    intro.addEventListener("touchend", enableSoundOnce, {
+    window.addEventListener("touchstart", unlock, {
       once: true,
       passive: true,
     });
-  }
+    window.addEventListener("click", unlock, { once: true });
+    window.addEventListener("keydown", unlock, { once: true });
+  });
 
   const finishIntro = () => {
     intro.classList.add("fade-out");
