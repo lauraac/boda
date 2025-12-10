@@ -977,8 +977,8 @@ a.btn img,
 /* Botón “Saltar video” encima del intro */
 .skip-btn {
   position: absolute;
-  bottom: 40px;
-  right: 24px;
+  top: 16px; /* 👈 arriba */
+  right: 16px; /* 👈 a la derecha */
   padding: 10px 18px;
   background: rgba(0, 0, 0, 0.35);
   color: #fff;
@@ -1757,9 +1757,8 @@ a.btn:hover,
 
 /* Sube un poquito el z-index del botón para que quede encima del velo */
 .skip-btn {
-  position: absolute;
-  bottom: 40px;
-  right: 24px;
+  top: 16px; /* 👈 arriba */
+  right: 16px; /* 👈 a la derecha */
   padding: 10px 18px;
   background: rgba(0, 0, 0, 0.35);
   color: #fff;
