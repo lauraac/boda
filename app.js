@@ -1,10 +1,10 @@
 // ===== Intro: video fullscreen, sin overlays ni textos =====
 const intro = document.getElementById("intro-video-container");
 const video = document.getElementById("intro-video");
-const hint = document.getElementById("tapToUnmute"); // 🔔 Mensaje "Toca la pantalla..."
+const hint = document.getElementById("tapToUnmute");
 let soundEnabled = false; // para que solo se active 1 vez
 
-// Crea el botón "Saltar" si no existe
+// Crea el botón "Saltar" si no existe (por si acaso)
 let skipBtn = document.getElementById("skip-intro");
 if (!skipBtn && intro) {
   skipBtn = document.createElement("button");
@@ -27,7 +27,11 @@ const enableSoundOnce = () => {
 };
 
 if (intro && video) {
-  // Ocupa pantalla completa
+  // Evitar scroll de la página mientras está el intro
+  document.documentElement.style.overflow = "hidden";
+  document.body.style.overflow = "hidden";
+
+  // Ocupa pantalla completa (por si el CSS tarda en cargar)
   Object.assign(intro.style, {
     position: "fixed",
     inset: "0",
@@ -66,6 +70,9 @@ if (intro && video) {
     intro.classList.add("fade-out");
     setTimeout(() => {
       intro.style.display = "none";
+      // restaurar scroll del body
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
       document.dispatchEvent(new Event("intro:ended"));
     }, 1000);
   };
@@ -84,8 +91,7 @@ if (intro && video) {
     });
   }
 
-  // Toques en el intro:
-  //  - La PRIMERA vez: activa sonido y quita el mensaje
+  // Toques en el intro: PRIMER toque => activa sonido y quita mensaje
   const onTap = (e) => {
     if (e.target === skipBtn) return; // no chocar con el botón
     enableSoundOnce();
