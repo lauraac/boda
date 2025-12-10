@@ -1,6 +1,17 @@
 // ===== Intro: video fullscreen, sin overlays ni textos =====
 const intro = document.getElementById("intro-video-container");
 const video = document.getElementById("intro-video");
+const hint = document.getElementById("tapToUnmute");
+
+const enableSoundOnce = () => {
+  if (soundEnabled) return;
+  soundEnabled = true;
+
+  video.muted = false;
+  video.play().catch(() => {});
+
+  if (hint) hint.style.display = "none"; // 👈 Ocultar mensaje
+};
 
 // Crea el botón "Saltar" si no existe
 let skipBtn = document.getElementById("skip-intro");
