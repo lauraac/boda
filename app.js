@@ -42,42 +42,22 @@ if (intro && video) {
   video.setAttribute("playsinline", "");
   video.playsInline = true;
 
-  // 👇 aseguramos que arranque silenciado para que el autoplay funcione
+  // Arranca SIEMPRE mudo para que el autoplay funcione
   video.muted = true;
 
-  // Evitar que el primer toque (para desbloquear audio) también pause
-  let justUnlocked = false;
+  // Intentamos autoplay silencioso (si falla, no pasa nada grave)
+  video.play().catch(() => {});
 
-  // Autoplay; si falla por políticas, desbloquear al primer toque/click
-  const intro = document.getElementById("intro-video-container");
-  const video = document.getElementById("intro-video");
-
-  if (intro && video) {
-    // iOS-friendly
-    video.setAttribute("playsinline", "");
-    video.playsInline = true;
-
-    // arranca SIEMPRE mudo para que el autoplay funcione
-    video.muted = true;
-
-    // intentamos autoplay silencioso (si falla, no pasa nada grave)
+  // 👉 Primer toque: activar sonido UNA sola vez
+  let soundEnabled = false;
+  const enableSoundOnce = () => {
+    if (soundEnabled) return;
+    soundEnabled = true;
+    video.muted = false; // ya hay interacción del usuario
     video.play().catch(() => {});
+  };
 
-    // 👉 PRIMER TOQUE: activar sonido
-    const enableSoundOnce = () => {
-      video.muted = false; // ya hay interacción del usuario
-      video.play().catch(() => {});
-      intro.removeEventListener("click", enableSoundOnce);
-      intro.removeEventListener("touchend", enableSoundOnce);
-    };
-
-    intro.addEventListener("click", enableSoundOnce, { once: true });
-    intro.addEventListener("touchend", enableSoundOnce, {
-      once: true,
-      passive: true,
-    });
-  }
-
+  // Cerrar intro con fade
   const finishIntro = () => {
     intro.classList.add("fade-out");
     setTimeout(() => {
@@ -86,11 +66,13 @@ if (intro && video) {
     }, 1000);
   };
 
+  // Cuando termine el video, cerramos intro
   video.addEventListener("ended", finishIntro);
 
+  // Botón "Saltar video"
   if (skipBtn) {
     skipBtn.addEventListener("click", (e) => {
-      e.stopPropagation(); // que no dispare el toggle
+      e.stopPropagation();
       try {
         video.pause();
       } catch {}
@@ -98,54 +80,15 @@ if (intro && video) {
     });
   }
 
-  // Tocar la pantalla = pausar/reanudar (sin mostrar nada)
-  const toggle = () => {
-    if (justUnlocked) return;
-    if (video.paused) {
-      video.play().catch(() => {});
-    } else {
-      video.pause();
-    }
+  // Toques en el intro:
+  //  - La PRIMERA vez: activa sonido
+  const onTap = (e) => {
+    if (e.target === skipBtn) return; // no chocar con el botón
+    enableSoundOnce();
   };
 
-  ["pointerup", "touchend", "click"].forEach((ev) => {
-    intro.addEventListener(
-      ev,
-      (e) => {
-        if (e.target === skipBtn) return;
-        toggle();
-      },
-      { passive: true }
-    );
-  });
-}
-
-// Tocar la pantalla pausa/reanuda el video
-function togglePlayPause() {
-  if (!video) return;
-  if (video.paused) {
-    // reanudar (iOS: esto cuenta como interacción válida)
-    video.play().catch(() => {});
-    pauseOverlay.hidden = true;
-  } else {
-    video.pause();
-    pauseOverlay.hidden = false;
-  }
-}
-
-// Escuchar toques/clicks en TODO el contenedor del intro
-if (intro) {
-  ["click", "pointerup", "touchend"].forEach((ev) =>
-    intro.addEventListener(
-      ev,
-      (e) => {
-        // si tocaron el botón "Saltar", no togglear
-        if (e.target === skipBtn) return;
-        togglePlayPause();
-      },
-      { passive: true }
-    )
-  );
+  intro.addEventListener("click", onTap);
+  intro.addEventListener("touchend", onTap, { passive: true });
 }
 
 // ========= CONFIG =========
@@ -342,7 +285,7 @@ function waitForMetadata(audio) {
     setPauseIcon(false);
   }
 
-  // === Cambiado: esperar a que termine el intro antes de reproducir la música ===
+  // === Esperar a que termine el intro antes de reproducir la música ===
   async function tryAutoplay() {
     const introC = document.getElementById("intro-video-container");
     const introVisible = introC && introC.style.display !== "none";
@@ -407,6 +350,8 @@ function waitForMetadata(audio) {
     document.addEventListener("DOMContentLoaded", tryAutoplay, { once: true });
   }
 })();
+
+// ==== Animación del timeline de programa ====
 (() => {
   const icons = Array.from(
     document.querySelectorAll(".prog-timeline .prog-ico")
@@ -544,6 +489,7 @@ function waitForMetadata(audio) {
     });
   }
 })();
+
 // ==== Modal: ¿Hasta qué hora es la fiesta? ====
 (function () {
   const modal = document.getElementById("horaModal");
