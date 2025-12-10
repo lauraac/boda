@@ -1702,36 +1702,37 @@ a.btn:hover,
   margin: 6px 0 0;
 }
 
-.tap-unmute {
+.tap-unmute-center {
   position: absolute;
-  bottom: 80px; /* lo sube para que no toque botones */
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.55);
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.65);
   color: #fff;
-  padding: 12px 22px;
+  padding: 14px 26px;
   border-radius: 999px;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-family: "Merriweather", serif;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   text-align: center;
-  z-index: 10050; /* ENCIMA del video */
-  backdrop-filter: blur(4px);
-  animation: tapHint 1.6s ease-in-out infinite;
+  z-index: 10050;
+  backdrop-filter: blur(6px);
+  animation: tapPulse 1.6s ease-in-out infinite;
+  pointer-events: none; /* 👈 NO bloquea el toque al video */
 }
 
-/* Animación de latido suave */
-@keyframes tapHint {
+/* Animación suave */
+@keyframes tapPulse {
   0% {
-    transform: translateX(-50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
     opacity: 0.8;
   }
   50% {
-    transform: translateX(-50%) scale(1.06);
+    transform: translate(-50%, -50%) scale(1.08);
     opacity: 1;
   }
   100% {
-    transform: translateX(-50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
     opacity: 0.8;
   }
 }

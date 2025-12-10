@@ -1,17 +1,8 @@
 // ===== Intro: video fullscreen, sin overlays ni textos =====
 const intro = document.getElementById("intro-video-container");
 const video = document.getElementById("intro-video");
-const hint = document.getElementById("tapToUnmute");
-
-const enableSoundOnce = () => {
-  if (soundEnabled) return;
-  soundEnabled = true;
-
-  video.muted = false;
-  video.play().catch(() => {});
-
-  if (hint) hint.style.display = "none"; // 👈 Ocultar mensaje
-};
+const hint = document.getElementById("tapToUnmute"); // 🔔 Mensaje "Toca la pantalla..."
+let soundEnabled = false; // para que solo se active 1 vez
 
 // Crea el botón "Saltar" si no existe
 let skipBtn = document.getElementById("skip-intro");
@@ -23,6 +14,17 @@ if (!skipBtn && intro) {
   skipBtn.textContent = "Saltar video";
   intro.appendChild(skipBtn);
 }
+
+// 👉 función que activa el sonido UNA sola vez y oculta el mensaje
+const enableSoundOnce = () => {
+  if (soundEnabled || !video) return;
+  soundEnabled = true;
+
+  video.muted = false; // ya hay interacción del usuario
+  video.play().catch(() => {}); // por si acaso
+
+  if (hint) hint.style.display = "none"; // 👈 Ocultar "Toca la pantalla..."
+};
 
 if (intro && video) {
   // Ocupa pantalla completa
@@ -59,15 +61,6 @@ if (intro && video) {
   // Intentamos autoplay silencioso (si falla, no pasa nada grave)
   video.play().catch(() => {});
 
-  // 👉 Primer toque: activar sonido UNA sola vez
-  let soundEnabled = false;
-  const enableSoundOnce = () => {
-    if (soundEnabled) return;
-    soundEnabled = true;
-    video.muted = false; // ya hay interacción del usuario
-    video.play().catch(() => {});
-  };
-
   // Cerrar intro con fade
   const finishIntro = () => {
     intro.classList.add("fade-out");
@@ -83,7 +76,7 @@ if (intro && video) {
   // Botón "Saltar video"
   if (skipBtn) {
     skipBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
+      e.stopPropagation(); // que no cuente como toque para audio
       try {
         video.pause();
       } catch {}
@@ -92,7 +85,7 @@ if (intro && video) {
   }
 
   // Toques en el intro:
-  //  - La PRIMERA vez: activa sonido
+  //  - La PRIMERA vez: activa sonido y quita el mensaje
   const onTap = (e) => {
     if (e.target === skipBtn) return; // no chocar con el botón
     enableSoundOnce();
