@@ -41,7 +41,9 @@ if (intro && video) {
   // iOS-friendly
   video.setAttribute("playsinline", "");
   video.playsInline = true;
-  video.muted = false;
+
+  // 👇 aseguramos que arranque silenciado para que el autoplay funcione
+  video.muted = true;
 
   // Evitar que el primer toque (para desbloquear audio) también pause
   let justUnlocked = false;
@@ -50,6 +52,7 @@ if (intro && video) {
   video.play().catch(() => {
     const unlock = () => {
       justUnlocked = true;
+      // 👉 aquí SÍ lo puedes desmutear porque ya hubo toque del usuario
       video.muted = false;
       video.play().catch(() => {});
       window.removeEventListener("touchstart", unlock, { once: true });
